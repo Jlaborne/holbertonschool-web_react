@@ -1,7 +1,5 @@
 import $ from "jquery";
 
-$(document).ready(function () {
-  $("body").append("<p>Paragraph 1 - Hello from Webpack!</p>");
-  $("body").append("<p>Paragraph 2 - Webpack is cool!</p>");
-  $("body").append("<p>Paragraph 3 - jQuery works!</p>");
-});
+$("body").append("<p>Holberton Dashboard</p>");
+$("body").append("<p>Dashboard data for the students</p>");
+$("body").append("<p>Copyright - Holberton School</p>");
