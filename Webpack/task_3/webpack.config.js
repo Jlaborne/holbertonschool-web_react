@@ -11,7 +11,7 @@ module.exports = {
     footer: "./modules/footer/footer.js",
   },
   output: {
-    filename: "[name].bundle.js",
+    filename: "bundle.js",
     path: path.resolve(__dirname, "public"),
     assetModuleFilename: "assets/[name][ext]",
   },
