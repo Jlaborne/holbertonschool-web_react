@@ -13,7 +13,17 @@ module.exports = {
   output: {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "public"),
-    assetModuleFilename: "assets/[name][ext]",
+  },
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: "./templates/index.html",
+    }),
+  ],
+  devServer: {
+    static: "./public",
+    port: 8564,
+    open: true,
   },
   module: {
     rules: [
@@ -26,17 +36,6 @@ module.exports = {
         type: "asset/resource",
       },
     ],
-  },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      title: "Holberton Dashboard",
-    }),
-  ],
-  devServer: {
-    static: "./public",
-    port: 8564,
-    open: true,
   },
   optimization: {
     splitChunks: {
