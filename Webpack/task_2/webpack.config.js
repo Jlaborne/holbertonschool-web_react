@@ -6,7 +6,6 @@ module.exports = {
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "public"),
-    assetModuleFilename: "assets/[name][ext]",
   },
   module: {
     rules: [
@@ -19,16 +18,14 @@ module.exports = {
         use: [
           {
             loader: "file-loader",
-            options: {
-              name: "[name].[ext]",
-              outputPath: "assets",
-              esModule: false,
-            },
           },
           {
             loader: "image-webpack-loader",
             options: {
-              disable: true,
+              mozjpeg: {
+                progressive: true,
+                quality: 65,
+              },
             },
           },
         ],
