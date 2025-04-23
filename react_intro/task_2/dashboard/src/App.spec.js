@@ -42,15 +42,12 @@ describe("App component", () => {
   test("renders 2 label elements with text Email and Password", () => {
     const emailLabel = screen.getByText(/email/i);
     const passwordLabel = screen.getByText(/password/i);
-
     expect(emailLabel).toBeInTheDocument();
     expect(passwordLabel).toBeInTheDocument();
   });
 
   test("renders a button with the text OK", () => {
-    render(<App />);
     const button = screen.getByRole("button", { name: /ok/i });
-
     expect(button).toBeInTheDocument();
   });
 });
