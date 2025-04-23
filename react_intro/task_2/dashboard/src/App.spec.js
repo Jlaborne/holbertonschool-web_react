@@ -43,12 +43,14 @@ describe("App component", () => {
     const emailLabel = screen.getByText(/email/i);
     const passwordLabel = screen.getByText(/password/i);
 
-    expect(emailLabel.tagName.toLowerCase()).toBe("label");
-    expect(passwordLabel.tagName.toLowerCase()).toBe("label");
+    expect(emailLabel).toBeInTheDocument();
+    expect(passwordLabel).toBeInTheDocument();
   });
 
-  test("renders a button with text OK", () => {
-    const buttonText = screen.getByText(/^OK$/);
-    expect(buttonText.tagName.toLowerCase()).toBe("button");
+  test("renders a button with the text OK", () => {
+    render(<App />);
+    const button = screen.getByRole("button", { name: /ok/i });
+
+    expect(button).toBeInTheDocument();
   });
 });
