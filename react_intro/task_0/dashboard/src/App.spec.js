@@ -6,17 +6,20 @@ describe("App component", () => {
     render(<App />);
   });
 
-  test('renders the h1 element with text "School dashboard"', () => {
+  test('renders an h1 with text "School dashboard"', () => {
     const heading = screen.getByRole("heading", { name: /school dashboard/i });
     expect(heading).toBeInTheDocument();
   });
 
-  test("renders the correct paragraph texts", () => {
+  test("renders two paragraphs with specific text", () => {
     const loginText = screen.getByText(/login to access the full dashboard/i);
-    const copyright = screen.getByText(/copyright \d{4} - holberton school/i);
-
     expect(loginText).toBeInTheDocument();
-    expect(copyright).toBeInTheDocument();
+
+    const currentYear = new Date().getFullYear();
+    const footerText = screen.getByText(
+      new RegExp(`^copyright 2025 - holberton school$`, "i")
+    );
+    expect(footerText).toBeInTheDocument();
   });
 
   test('renders an image with alt text "holberton logo"', () => {
