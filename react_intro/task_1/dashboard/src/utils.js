@@ -1,5 +1,5 @@
 export function getFooterCopy(isIndex) {
-  if (isIndex) {
+  if (isIndex === true) {
     return "Holberton School";
   }
   return "Holberton School main dashboard";
