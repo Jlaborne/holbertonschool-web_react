@@ -12,19 +12,14 @@ describe("App component", () => {
     expect(heading).toBeInTheDocument();
   });
 
-  test("renders correct text in body and footer", () => {
-    expect(
-      screen.getByText(/login to access the full dashboard/i)
-    ).toBeInTheDocument();
+  test("renders two paragraphs with specific text", () => {
+    const loginText = screen.getByText(/login to access the full dashboard/i);
+    expect(loginText).toBeInTheDocument();
 
-    const footerText = screen.getByText((content, element) => {
-      return (
-        element.tagName.toLowerCase() === "p" &&
-        content.includes(
-          `Copyright ${new Date().getFullYear()} - Holberton School`
-        )
-      );
-    });
+    const currentYear = new Date().getFullYear();
+    const footerText = screen.getByText(
+      new RegExp(`^copyright 2025 - holberton school$`, "i")
+    );
     expect(footerText).toBeInTheDocument();
   });
 
