@@ -48,7 +48,7 @@ describe("App component", () => {
   });
 
   test("renders a button with text OK", () => {
-    const button = screen.getByRole("button", { name: /ok/i });
-    expect(button).toBeInTheDocument();
+    const buttonText = screen.getByText(/^OK$/);
+    expect(buttonText.tagName.toLowerCase()).toBe("button");
   });
 });
