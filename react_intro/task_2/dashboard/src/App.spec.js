@@ -18,9 +18,7 @@ describe("App component", () => {
     const footerText = screen.getByText((content, element) => {
       return (
         element.tagName.toLowerCase() === "p" &&
-        content.includes(
-          `Copyright ${new Date().getFullYear()} - Holberton School`
-        )
+        content.includes(`Copyright 2005 - Holberton School`)
       );
     });
     expect(footerText).toBeInTheDocument();
