@@ -39,8 +39,10 @@ describe("App component", () => {
 
   test("renders 2 label elements with correct text", () => {
     render(<App />);
-    expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
+    const emailLabel = screen.getByText(/email/i);
+    const passwordLabel = screen.getByText(/password/i);
+    expect(emailLabel.tagName.toLowerCase()).toBe("label");
+    expect(passwordLabel.tagName.toLowerCase()).toBe("label");
   });
 
   test("renders a button with text OK", () => {
