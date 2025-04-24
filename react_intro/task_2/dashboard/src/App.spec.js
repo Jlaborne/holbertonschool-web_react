@@ -33,7 +33,6 @@ describe("App component", () => {
   });
 
   test("renders 2 input elements", () => {
-    const { container } = render(<App />);
     const inputs = container.querySelectorAll("input");
     expect(inputs.length).toBe(2);
   });
