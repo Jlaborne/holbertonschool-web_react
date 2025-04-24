@@ -47,7 +47,6 @@ describe("App component", () => {
   });
 
   test("renders a button with the text OK", () => {
-    const button = screen.getByRole("button", { name: /ok/i });
-    expect(button).toBeInTheDocument();
+    expect(screen.getByRole("button")).toHaveTextContent("OK");
   });
 });
