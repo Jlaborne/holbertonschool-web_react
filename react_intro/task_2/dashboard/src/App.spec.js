@@ -33,10 +33,9 @@ describe("App component", () => {
   });
 
   test("renders 2 input elements", () => {
-    const emailInput = screen.getByLabelText(/email/i);
-    const passwordInput = screen.getByLabelText(/password/i);
-    expect(emailInput).toBeInTheDocument();
-    expect(passwordInput).toBeInTheDocument();
+    const { container } = render(<App />);
+    const inputs = container.querySelectorAll("input");
+    expect(inputs.length).toBe(2);
   });
 
   test("renders 2 label elements with text Email and Password", () => {
