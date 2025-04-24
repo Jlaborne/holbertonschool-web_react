@@ -33,7 +33,7 @@ describe("App component", () => {
   });
 
   test("renders 2 input elements", () => {
-    const inputs = document.querySelectorAll("input");
+    const inputs = screen.getAllByLabelText(/./);
     expect(inputs.length).toBe(2);
   });
 
