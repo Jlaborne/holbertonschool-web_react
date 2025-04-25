@@ -1,4 +1,3 @@
-import React from "react";
 import "./App.css";
 import logo from "../assets/holberton-logo.jpg";
 import { getCurrentYear, getFooterCopy } from "../utils/utils";
