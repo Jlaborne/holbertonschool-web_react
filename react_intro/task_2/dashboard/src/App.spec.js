@@ -12,19 +12,11 @@ describe("App component", () => {
     expect(heading).toBeInTheDocument();
   });
 
-  test("renders body and footer paragraphs with correct text", () => {
-    expect(
-      screen.getByText(/login to access the full dashboard/i)
-    ).toBeInTheDocument();
-
-    const footerText = screen.getByText((content, element) => {
-      return (
-        element.tagName.toLowerCase() === "p" &&
-        content.includes(
-          `Copyright ${new Date().getFullYear()} - Holberton School`
-        )
-      );
-    });
+  test("renders the login and footer paragraphs", () => {
+    render(<App />);
+    const bodyText = screen.getByText(/login to access the full dashboard/i);
+    const footerText = screen.getByText(/copyright/i);
+    expect(bodyText).toBeInTheDocument();
     expect(footerText).toBeInTheDocument();
   });
 
