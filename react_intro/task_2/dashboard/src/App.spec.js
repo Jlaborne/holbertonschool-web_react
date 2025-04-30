@@ -37,11 +37,11 @@ describe("App component", () => {
     expect(inputs.length).toBe(2);
   });
 
-  test("renders labels for email and password", () => {
-    const labels = document.querySelectorAll("label");
-    expect(labels.length).toBe(2);
-    expect(labels[0].textContent.toLowerCase()).toContain("email");
-    expect(labels[1].textContent.toLowerCase()).toContain("password");
+  test("renders two label elements with text Email and Password", () => {
+    const emailLabel = screen.getByLabelText(/email/i);
+    const passwordLabel = screen.getByLabelText(/password/i);
+    expect(emailLabel).toBeInTheDocument();
+    expect(passwordLabel).toBeInTheDocument();
   });
 
   test("renders a button with the text OK", () => {
