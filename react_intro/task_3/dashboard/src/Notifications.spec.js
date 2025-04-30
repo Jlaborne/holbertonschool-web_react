@@ -16,9 +16,16 @@ describe("Notifications component", () => {
     expect(button).toBeInTheDocument();
   });
 
-  test("renders 3 list items", () => {
-    const listItems = screen.getAllByRole("listitem");
-    expect(listItems.length).toBe(3);
+  test("renders expected notification list items", () => {
+    expect(screen.getByText("New course available")).toBeInTheDocument();
+    expect(screen.getByText("New resume available")).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        (content, element) =>
+          element?.tagName.toLowerCase() === "li" &&
+          content.includes("Latest notification")
+      )
+    ).toBeInTheDocument();
   });
 
   test("clicking the close button logs to console", () => {
