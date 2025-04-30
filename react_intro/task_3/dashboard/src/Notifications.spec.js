@@ -22,6 +22,11 @@ describe("Notifications component", () => {
     expect(screen.getByText(/urgent requirement/i)).toBeInTheDocument();
   });
 
+  test("renders three notification items", () => {
+    const items = screen.getAllByRole("listitem");
+    expect(items.length).toBe(3);
+  });
+
   test("clicking the close button logs to console", () => {
     const consoleSpy = jest.spyOn(console, "log");
     const button = screen.getByRole("button", { name: /close/i });
