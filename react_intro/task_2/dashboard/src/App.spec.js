@@ -13,7 +13,6 @@ describe("App component", () => {
   });
 
   test("renders the login and footer paragraphs", () => {
-    render(<App />);
     const bodyText = screen.getByText(/login to access the full dashboard/i);
     const footerText = screen.getByText(/copyright/i);
     expect(bodyText).toBeInTheDocument();
@@ -25,7 +24,6 @@ describe("App component", () => {
   });
 
   test("renders two input elements", () => {
-    render(<App />);
     const emailInput = screen.getByLabelText(/email/i);
     const passwordInput = screen.getByLabelText(/password/i);
     expect(emailInput).toBeInTheDocument();
@@ -33,7 +31,6 @@ describe("App component", () => {
   });
 
   test("renders two label elements with text Email and Password", () => {
-    render(<App />);
     const emailLabel = screen.getByLabelText(/email/i);
     const passwordLabel = screen.getByLabelText(/password/i);
     expect(emailLabel).toBeInTheDocument();
