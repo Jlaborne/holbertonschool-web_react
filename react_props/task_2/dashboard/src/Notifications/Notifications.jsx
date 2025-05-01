@@ -1,9 +1,9 @@
 import React from "react";
 import "./Notifications.css";
 import closeIcon from "../assets/close-icon.png";
-import { getLatestNotification } from "../utils/utils";
+import NotificationItem from "./NotificationItem";
 
-function Notifications() {
+function Notifications({ notifications = [] }) {
   const handleClick = () => console.log("Close button has been clicked");
 
   return (
@@ -29,12 +29,14 @@ function Notifications() {
 
       <p>Here is the list of notifications</p>
       <ul>
-        <li data-priority="default">New course available</li>
-        <li data-priority="urgent">New resume available</li>
-        <li
-          data-priority="urgent"
-          dangerouslySetInnerHTML={{ __html: getLatestNotification() }}
-        />
+        {notifications.map((notif) => (
+          <NotificationItem
+            key={notif.id}
+            type={notif.type}
+            value={notif.value}
+            html={notif.html}
+          />
+        ))}
       </ul>
     </div>
   );
