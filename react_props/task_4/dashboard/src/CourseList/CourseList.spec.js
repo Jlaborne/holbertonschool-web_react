@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import CourseList from "./CourseList";
 
 describe("CourseList component", () => {
@@ -10,14 +10,14 @@ describe("CourseList component", () => {
       { id: 3, name: "React", credit: 40 },
     ];
 
-    const { container } = render(<CourseList courses={courses} />);
-    const rows = container.querySelectorAll("tr");
-    expect(rows.length).toBe(5); // 2 header rows + 3 course rows
+    render(<CourseList courses={courses} />);
+    const rows = screen.getAllByRole("row");
+    expect(rows.length).toBe(5);
   });
 
   test("renders 1 row when given an empty array", () => {
-    const { container } = render(<CourseList courses={[]} />);
-    const rows = container.querySelectorAll("tr");
-    expect(rows.length).toBe(3); // 2 headers + 1 "no course available" row
+    render(<CourseList courses={[]} />);
+    const rows = screen.getAllByRole("row");
+    expect(rows.length).toBe(3);
   });
 });
