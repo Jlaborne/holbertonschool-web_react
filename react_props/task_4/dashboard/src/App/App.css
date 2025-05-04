@@ -16,7 +16,9 @@
 }
 
 .App-body {
-  padding: 2rem;
+  padding: 40px;
+  font-family: Arial, sans-serif;
+  min-height: 300px;
 }
 
 .App-footer {
