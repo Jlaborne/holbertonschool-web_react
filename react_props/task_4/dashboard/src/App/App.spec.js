@@ -1,5 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import App from "./App";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+import CourseList from "../CourseList/CourseList";
 
 describe("App component", () => {
   test("renders Header component", () => {
