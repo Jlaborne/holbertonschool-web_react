@@ -22,14 +22,10 @@ describe("Notifications component", () => {
   test("renders urgent HTML content correctly", () => {
     const { container } = render(<Notifications />);
     const items = container.querySelectorAll("li");
+    const lastItem = items[2];
 
-    const htmlItem = Array.from(items).find(
-      (item) =>
-        item.textContent.includes("Urgent requirement") &&
-        item.textContent.includes("complete by EOD")
-    );
-
-    expect(htmlItem).toBeTruthy();
+    expect(lastItem.innerHTML).toContain("Urgent requirement");
+    expect(lastItem.innerHTML).toContain("complete by EOD");
   });
 
   test("logs on close button click", () => {
