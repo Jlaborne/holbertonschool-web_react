@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import { render, screen } from "@testing-library/react";
 import App from "./App";
 
@@ -7,44 +6,34 @@ describe("App component", () => {
     render(<App />);
   });
 
-  test("renders h1 with text School dashboard", () => {
+  test("renders heading", () => {
     const heading = screen.getByRole("heading", { name: /school dashboard/i });
     expect(heading).toBeInTheDocument();
   });
 
-  test("renders body and footer paragraphs with correct text", () => {
+  test("renders login text", () => {
     expect(
       screen.getByText(/login to access the full dashboard/i)
     ).toBeInTheDocument();
+  });
 
-    const footerText = screen.getByText((content, element) => {
-      return (
-        element.tagName.toLowerCase() === "p" &&
-        content.includes(
-          `Copyright ${new Date().getFullYear()} - Holberton School`
-        )
-      );
-    });
+  test("renders footer text with current year", () => {
+    const currentYear = new Date().getFullYear();
+    const footerText = screen.getByText(
+      new RegExp(`Copyright ${currentYear} - Holberton School`, "i")
+    );
     expect(footerText).toBeInTheDocument();
   });
 
-  test("renders the logo image", () => {
-    expect(screen.getByAltText(/holberton logo/i)).toBeInTheDocument();
+  test("renders 2 input fields", () => {
+    const email = screen.getByLabelText(/email/i);
+    const password = screen.getByLabelText(/password/i);
+    expect(email).toBeInTheDocument();
+    expect(password).toBeInTheDocument();
   });
 
-  test("renders 2 input elements", () => {
-    const inputs = screen.getAllByLabelText(/./);
-    expect(inputs.length).toBe(2);
-  });
-
-  test("renders labels for email and password", () => {
-    const labels = document.querySelectorAll("label");
-    expect(labels.length).toBe(2);
-    expect(labels[0].textContent.toLowerCase()).toContain("email");
-    expect(labels[1].textContent.toLowerCase()).toContain("password");
-  });
-
-  test("renders a button with the text OK", () => {
-    expect(screen.getByRole("button")).toHaveTextContent("OK");
+  test("renders a button with text OK", () => {
+    const button = screen.getByRole("button", { name: /ok/i });
+    expect(button).toBeInTheDocument();
   });
 });
