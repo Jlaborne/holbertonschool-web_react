@@ -25,9 +25,7 @@ describe("App component", () => {
 
   test("renders Notifications component", () => {
     render(<App />);
-    expect(
-      screen.getByText(/here is the list of notifications/i)
-    ).toBeInTheDocument();
+    expect(screen.getByText(/your notifications/i)).toBeInTheDocument();
   });
 
   test("renders Login component when isLoggedIn is false", () => {
