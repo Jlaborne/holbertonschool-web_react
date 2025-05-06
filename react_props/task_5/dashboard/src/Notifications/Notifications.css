@@ -4,13 +4,21 @@
   margin: 20px;
   position: relative;
 }
+
 .notifications ul {
   margin: 0;
   padding: 0 20px;
 }
+
 .notifications li[data-priority="default"] {
   color: blue;
 }
+
 .notifications li[data-priority="urgent"] {
   color: red;
+}
+
+.notifications-title {
+  text-align: right;
+  margin-right: 20px;
 }
