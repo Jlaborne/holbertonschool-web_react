@@ -7,7 +7,7 @@ import { getLatestNotification } from "../utils/utils";
 import CourseList from "../CourseList/CourseList";
 
 function App() {
-  const isLoggedIn = false;
+  const isLoggedIn = true;
 
   const coursesList = [
     { id: 1, name: "ES6", credit: 60 },
