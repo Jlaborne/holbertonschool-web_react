@@ -24,7 +24,7 @@ function App() {
   return (
     <>
       <div className="root-notifications">
-        <Notifications notifications={notificationsList} />
+        <Notifications displayDrawer={true} notifications={notificationsList} />
       </div>
       <Header />
       {isLoggedIn ? <CourseList courses={coursesList} /> : <Login />}
