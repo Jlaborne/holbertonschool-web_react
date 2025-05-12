@@ -7,8 +7,9 @@ class BodySectionWithMarginBottom extends React.Component {
   render() {
     return (
       <div className="bodySectionWithMargin">
-        <BodySection>{this.props.title}</BodySection>
-        {this.props.children}
+        <BodySection title={this.props.title}>
+          {this.props.children}
+        </BodySection>
       </div>
     );
   }

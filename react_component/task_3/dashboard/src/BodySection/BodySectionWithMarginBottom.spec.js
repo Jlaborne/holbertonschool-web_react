@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import BodySectionWithMarginBottom from "./BodySectionWithMarginBottom";
 
 describe("BodySectionWithMarginBottom", () => {
@@ -15,15 +15,15 @@ describe("BodySectionWithMarginBottom", () => {
     ).toBeInTheDocument();
   });
 
-  test("renders the BodySection component inside", () => {
-    const { getByText } = render(
-      <BodySectionWithMarginBottom title="Section Title">
-        <p>Test content</p>
+  test("renders the BodySection component with the correct title", () => {
+    render(
+      <BodySectionWithMarginBottom title="Test title">
+        <p>Some content</p>
       </BodySectionWithMarginBottom>
     );
 
-    expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent(
-      "Test title"
-    );
+    // Check that the h2 from BodySection is present
+    const heading = screen.getByRole("heading", { level: 2 });
+    expect(heading).toHaveTextContent("Test title");
   });
 });
