@@ -36,27 +36,18 @@ describe("App component", () => {
     ).toBeInTheDocument();
   });
 
-  test("renders CourseList component when isLoggedIn is true", () => {
-    // Simuler isLoggedIn = true
-    const AppWithCourses = () => {
-      const isLoggedIn = true;
-      const coursesList = [
-        { id: 1, name: "ES6", credit: 60 },
-        { id: 2, name: "Webpack", credit: 20 },
-        { id: 3, name: "React", credit: 40 },
-      ];
-      return (
-        <>
-          <Header />
-          <CourseList courses={coursesList} />
-          <Footer />
-        </>
-      );
-    };
+  test("displays 'Course list' title when isLoggedIn is true", () => {
+    render(<App isLoggedIn={true} />);
+    expect(
+      screen.getByRole("heading", { level: 2, name: /course list/i })
+    ).toBeInTheDocument();
+  });
 
-    const { container } = render(<AppWithCourses />);
-    const rows = container.querySelectorAll("tr");
-    expect(rows.length).toBe(5);
+  test("displays 'Log in to continue' title when isLoggedIn is false", () => {
+    render(<App isLoggedIn={false} />);
+    expect(
+      screen.getByRole("heading", { level: 2, name: /log in to continue/i })
+    ).toBeInTheDocument();
   });
 
   test("calls logOut when Ctrl+H is pressed", () => {
@@ -80,5 +71,15 @@ describe("App component", () => {
     expect(alertMock).toHaveBeenCalledWith("Logging you out");
 
     alertMock.mockRestore();
+  });
+
+  test("displays news section with title and paragraph", () => {
+    render(<App />);
+    expect(
+      screen.getByRole("heading", { level: 2, name: /news from the school/i })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/holberton school news goes here/i)
+    ).toBeInTheDocument();
   });
 });
