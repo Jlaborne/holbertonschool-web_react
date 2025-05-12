@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import NotificationItem from "./NotificationItem";
 
 describe("NotificationItem component", () => {
@@ -16,5 +16,21 @@ describe("NotificationItem component", () => {
 
     expect(listItem).toHaveAttribute("data-notification-type", "urgent");
     expect(listItem).toHaveStyle({ color: "red" });
+  });
+
+  test("calls markAsRead with the right id on click", () => {
+    const mockFn = jest.fn();
+    render(
+      <NotificationItem
+        id={3}
+        type="default"
+        value="Test notification"
+        markAsRead={mockFn}
+      />
+    );
+
+    const item = screen.getByText(/test notification/i);
+    fireEvent.click(item);
+    expect(mockFn).toHaveBeenCalledWith(3);
   });
 });
