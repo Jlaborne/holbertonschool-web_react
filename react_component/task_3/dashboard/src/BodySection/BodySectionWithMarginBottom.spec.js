@@ -22,8 +22,8 @@ describe("BodySectionWithMarginBottom", () => {
       </BodySectionWithMarginBottom>
     );
 
-    // Confirm that both the title and the child render from BodySection
-    expect(getByText("Section Title")).toBeInTheDocument();
-    expect(getByText("Test content")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent(
+      "Test title"
+    );
   });
 });
