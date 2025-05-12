@@ -1,4 +1,5 @@
-import { render, screen } from "@testing-library/react";
+import React from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import App from "./App";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -59,12 +60,14 @@ describe("App component", () => {
   });
 
   test("calls logOut when Ctrl+H is pressed", () => {
+    const alertMock = jest.spyOn(window, "alert").mockImplementation(() => {});
     const logOutMock = jest.fn();
     render(<App logOut={logOutMock} />);
 
-    userEvent.keyboard("{Control>}{h}");
+    fireEvent.keyDown(document, { key: "h", ctrlKey: true });
 
     expect(logOutMock).toHaveBeenCalledTimes(1);
+    alertMock.mockRestore();
   });
 
   test('displays alert with "Logging you out" when Ctrl+H is pressed', () => {
@@ -72,7 +75,7 @@ describe("App component", () => {
     const logOutMock = jest.fn();
 
     render(<App logOut={logOutMock} />);
-    userEvent.keyboard("{Control>}{h}");
+    fireEvent.keyDown(document, { key: "h", ctrlKey: true });
 
     expect(alertMock).toHaveBeenCalledWith("Logging you out");
 
