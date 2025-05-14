@@ -82,4 +82,39 @@ describe("Notifications component", () => {
 
     logSpy.mockRestore();
   });
+
+  test("does not re-render if notifications length stays the same", () => {
+    const initialList = [
+      { id: 1, type: "default", value: "New course available" },
+    ];
+
+    const { rerender } = render(
+      <Notifications displayDrawer={true} notifications={initialList} />
+    );
+
+    const oldItem = screen.getByText(/new course available/i);
+    rerender(
+      <Notifications displayDrawer={true} notifications={[...initialList]} />
+    );
+
+    expect(screen.getByText(/new course available/i)).toBe(oldItem);
+  });
+
+  test("re-renders if notifications length changes", () => {
+    const initialList = [
+      { id: 1, type: "default", value: "New course available" },
+    ];
+
+    const { rerender } = render(
+      <Notifications displayDrawer={true} notifications={initialList} />
+    );
+
+    const newList = [
+      ...initialList,
+      { id: 2, type: "urgent", value: "New resume available" },
+    ];
+    rerender(<Notifications displayDrawer={true} notifications={newList} />);
+
+    expect(screen.getByText(/new resume available/i)).toBeInTheDocument();
+  });
 });
