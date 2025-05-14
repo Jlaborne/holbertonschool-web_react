@@ -5,10 +5,6 @@ import closeIcon from "../assets/close-icon.png";
 import NotificationItem from "./NotificationItem";
 
 class Notifications extends React.Component {
-  shouldComponentUpdate(nextProps) {
-    return nextProps.notifications.length !== this.props.notifications.length;
-  }
-
   handleClick = () => console.log("Close button has been clicked");
 
   markAsRead = (id) => {
