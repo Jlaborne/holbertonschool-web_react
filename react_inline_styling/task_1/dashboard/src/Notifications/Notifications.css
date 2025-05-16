@@ -1,6 +1,12 @@
+.notifications ul {
+  margin: 0;
+  padding: 0 20px;
+}
+
 .notifications li[data-priority="default"] {
   color: blue;
 }
+
 .notifications li[data-priority="urgent"] {
   color: red;
 }
