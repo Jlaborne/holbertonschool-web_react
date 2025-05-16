@@ -2,6 +2,16 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import CourseList from "./CourseList";
 
+import { StyleSheetTestUtils } from "aphrodite";
+
+beforeEach(() => {
+  StyleSheetTestUtils.suppressStyleInjection();
+});
+
+afterEach(() => {
+  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+});
+
 describe("CourseList component", () => {
   test("renders 5 rows when given a list of courses", () => {
     const courses = [

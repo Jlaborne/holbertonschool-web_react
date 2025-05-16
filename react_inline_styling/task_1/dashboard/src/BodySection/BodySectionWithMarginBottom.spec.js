@@ -2,6 +2,16 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import BodySectionWithMarginBottom from "./BodySectionWithMarginBottom";
 
+import { StyleSheetTestUtils } from "aphrodite";
+
+beforeEach(() => {
+  StyleSheetTestUtils.suppressStyleInjection();
+});
+
+afterEach(() => {
+  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+});
+
 describe("BodySectionWithMarginBottom", () => {
   test("renders a div with class bodySectionWithMargin", () => {
     const { container } = render(
@@ -10,9 +20,8 @@ describe("BodySectionWithMarginBottom", () => {
       </BodySectionWithMarginBottom>
     );
 
-    expect(
-      container.querySelector(".bodySectionWithMargin")
-    ).toBeInTheDocument();
+    expect(screen.getByText("Section Title")).toBeInTheDocument();
+    expect(screen.getByText("Test content")).toBeInTheDocument();
   });
 
   test("renders the BodySection component with the correct title", () => {
