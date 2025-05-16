@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./Notifications.css";
 import closeIcon from "../assets/close-icon.png";
 import NotificationItem from "./NotificationItem";
+import { StyleSheet, css } from "aphrodite";
 
 class Notifications extends React.Component {
   shouldComponentUpdate(nextProps) {
@@ -16,14 +16,16 @@ class Notifications extends React.Component {
   };
 
   render() {
+    const { displayDrawer, notifications } = this.props;
+
     return (
       <>
-        <div className="notifications-title">
+        <div className={css(styles.title)}>
           <p>Your notifications</p>
         </div>
 
-        {this.props.displayDrawer && (
-          <div className="notifications">
+        {displayDrawer && (
+          <div className={css(styles.notifications)}>
             <button
               style={{
                 position: "absolute",
@@ -43,13 +45,13 @@ class Notifications extends React.Component {
               />
             </button>
 
-            {this.props.notifications.length === 0 ? (
+            {notifications.length === 0 ? (
               <p>No new notification for now</p>
             ) : (
               <>
                 <p>Here is the list of notifications</p>
-                <ul>
-                  {this.props.notifications.map((notif) => (
+                <ul className={css(styles.ul)}>
+                  {notifications.map((notif) => (
                     <NotificationItem
                       key={notif.id}
                       id={notif.id}
@@ -80,5 +82,26 @@ Notifications.propTypes = {
     })
   ),
 };
+
+Notifications.defaultProps = {
+  displayDrawer: false,
+  notifications: [],
+};
+
+const styles = StyleSheet.create({
+  title: {
+    padding: "10px 0 0 20px",
+  },
+  notifications: {
+    border: "2px dashed red",
+    padding: "10px",
+    margin: "20px",
+    position: "relative",
+  },
+  ul: {
+    margin: 0,
+    padding: "0 20px",
+  },
+});
 
 export default Notifications;
