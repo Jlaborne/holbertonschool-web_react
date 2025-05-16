@@ -1,27 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyleSheet, css } from "aphrodite";
 import closeIcon from "../assets/close-icon.png";
 import NotificationItem from "./NotificationItem";
-import "./Notifications.css";
-
-const styles = StyleSheet.create({
-  notifications: {
-    border: "2px dashed red",
-    padding: "10px",
-    margin: "20px",
-    position: "relative",
-  },
-});
+import { StyleSheet, css } from "aphrodite";
 
 class Notifications extends React.Component {
   shouldComponentUpdate(nextProps) {
     return nextProps.notifications.length !== this.props.notifications.length;
   }
 
-  handleClick = () => {
-    console.log("Close button has been clicked");
-  };
+  handleClick = () => console.log("Close button has been clicked");
 
   markAsRead = (id) => {
     console.log(`Notification ${id} has been marked as read`);
@@ -32,7 +20,7 @@ class Notifications extends React.Component {
 
     return (
       <>
-        <div className="notifications-title">
+        <div className={css(styles.title)}>
           <p>Your notifications</p>
         </div>
 
@@ -62,7 +50,7 @@ class Notifications extends React.Component {
             ) : (
               <>
                 <p>Here is the list of notifications</p>
-                <ul>
+                <ul className={css(styles.ul)}>
                   {notifications.map((notif) => (
                     <NotificationItem
                       key={notif.id}
@@ -99,5 +87,21 @@ Notifications.defaultProps = {
   displayDrawer: false,
   notifications: [],
 };
+
+const styles = StyleSheet.create({
+  title: {
+    padding: "10px 0 0 20px",
+  },
+  notifications: {
+    border: "2px dashed red",
+    padding: "10px",
+    margin: "20px",
+    position: "relative",
+  },
+  ul: {
+    margin: 0,
+    padding: "0 20px",
+  },
+});
 
 export default Notifications;
