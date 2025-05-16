@@ -1,14 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import NotificationItem from "./NotificationItem";
-import { StyleSheetTestUtils } from "aphrodite";
-
-beforeEach(() => {
-  StyleSheetTestUtils.suppressStyleInjection();
-});
-
-afterEach(() => {
-  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
-});
 
 describe("NotificationItem component", () => {
   test('renders with type="default" with blue color and correct attribute', () => {

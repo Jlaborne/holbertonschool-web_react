@@ -1,15 +1,6 @@
 import { getCurrentYear, getFooterCopy } from "../utils/utils";
 import { render, screen } from "@testing-library/react";
 import Footer from "./Footer";
-import { StyleSheetTestUtils } from "aphrodite";
-
-beforeEach(() => {
-  StyleSheetTestUtils.suppressStyleInjection();
-});
-
-afterEach(() => {
-  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
-});
 
 describe("Footer", () => {
   test("renders correct footer text", () => {

@@ -1,10 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "./Notifications.css";
 import closeIcon from "../assets/close-icon.png";
 import NotificationItem from "./NotificationItem";
-import { StyleSheet, css } from "aphrodite";
 
 class Notifications extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    return nextProps.notifications.length !== this.props.notifications.length;
+  }
+
   handleClick = () => console.log("Close button has been clicked");
 
   markAsRead = (id) => {
@@ -12,16 +16,14 @@ class Notifications extends React.Component {
   };
 
   render() {
-    const { displayDrawer, notifications } = this.props;
-
     return (
       <>
-        <div className={css(styles.notificationsTitle)}>
+        <div className="notifications-title">
           <p>Your notifications</p>
         </div>
 
-        {displayDrawer && (
-          <div className={css(styles.notificationsPanel)}>
+        {this.props.displayDrawer && (
+          <div className="notifications">
             <button
               style={{
                 position: "absolute",
@@ -41,13 +43,13 @@ class Notifications extends React.Component {
               />
             </button>
 
-            {notifications.length === 0 ? (
+            {this.props.notifications.length === 0 ? (
               <p>No new notification for now</p>
             ) : (
               <>
                 <p>Here is the list of notifications</p>
                 <ul>
-                  {notifications.map((notif) => (
+                  {this.props.notifications.map((notif) => (
                     <NotificationItem
                       key={notif.id}
                       id={notif.id}
@@ -67,17 +69,6 @@ class Notifications extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  notificationsTitle: {
-    padding: "10px",
-  },
-  notificationsPanel: {
-    border: "2px dashed red",
-    padding: "10px",
-    position: "relative",
-  },
-});
-
 Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
   notifications: PropTypes.arrayOf(
@@ -88,11 +79,6 @@ Notifications.propTypes = {
       html: PropTypes.shape({ __html: PropTypes.string }),
     })
   ),
-};
-
-Notifications.defaultProps = {
-  displayDrawer: false,
-  notifications: [],
 };
 
 export default Notifications;

@@ -1,36 +1,29 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import BodySectionWithMarginBottom from "./BodySectionWithMarginBottom";
-import { StyleSheetTestUtils } from "aphrodite";
-
-beforeEach(() => {
-  StyleSheetTestUtils.suppressStyleInjection();
-});
-
-afterEach(() => {
-  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
-});
 
 describe("BodySectionWithMarginBottom", () => {
-  test("renders a div with the correct title", () => {
-    render(
-      <BodySectionWithMarginBottom title="Test Title">
-        <p>Child content</p>
+  test("renders a div with class bodySectionWithMargin", () => {
+    const { container } = render(
+      <BodySectionWithMarginBottom title="Section Title">
+        <p>Test content</p>
       </BodySectionWithMarginBottom>
     );
 
-    expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent(
-      "Test Title"
-    );
+    expect(
+      container.querySelector(".bodySectionWithMargin")
+    ).toBeInTheDocument();
   });
 
-  test("renders the children content correctly", () => {
+  test("renders the BodySection component with the correct title", () => {
     render(
-      <BodySectionWithMarginBottom title="Another Title">
-        <p>Child content</p>
+      <BodySectionWithMarginBottom title="Test title">
+        <p>Some content</p>
       </BodySectionWithMarginBottom>
     );
 
-    expect(screen.getByText("Child content")).toBeInTheDocument();
+    // Check that the h2 from BodySection is present
+    const heading = screen.getByRole("heading", { level: 2 });
+    expect(heading).toHaveTextContent("Test title");
   });
 });

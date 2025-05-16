@@ -1,14 +1,5 @@
 import { render, screen } from "@testing-library/react";
 import Header from "./Header";
-import { StyleSheetTestUtils } from "aphrodite";
-
-beforeEach(() => {
-  StyleSheetTestUtils.suppressStyleInjection();
-});
-
-afterEach(() => {
-  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
-});
 
 describe("Header", () => {
   test("renders logo image", () => {

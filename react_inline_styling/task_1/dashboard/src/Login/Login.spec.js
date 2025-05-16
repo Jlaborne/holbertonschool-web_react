@@ -1,14 +1,5 @@
 import { render, screen } from "@testing-library/react";
 import Login from "./Login";
-import { StyleSheetTestUtils } from "aphrodite";
-
-beforeEach(() => {
-  StyleSheetTestUtils.suppressStyleInjection();
-});
-
-afterEach(() => {
-  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
-});
 
 describe("Login component", () => {
   test("renders 2 input elements", () => {

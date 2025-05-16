@@ -4,15 +4,6 @@ import App from "./App";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import CourseList from "../CourseList/CourseList";
-import { StyleSheetTestUtils } from "aphrodite";
-
-beforeEach(() => {
-  StyleSheetTestUtils.suppressStyleInjection();
-});
-
-afterEach(() => {
-  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
-});
 
 describe("App component", () => {
   test("renders Header component", () => {
