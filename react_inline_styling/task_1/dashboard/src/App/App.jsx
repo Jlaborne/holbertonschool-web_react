@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./App.css";
 import Notifications from "../Notifications/Notifications";
 import Header from "../Header/Header";
 import Login from "../Login/Login";
@@ -9,6 +8,7 @@ import CourseList from "../CourseList/CourseList";
 import BodySection from "../BodySection/BodySection";
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
 import WithLogging from "../HOC/WithLogging";
+import { StyleSheet, css } from "aphrodite"; // 👈 Aphrodite import
 
 class App extends Component {
   static defaultProps = {
@@ -47,7 +47,6 @@ class App extends Component {
     ];
 
     const LoginWithLogging = WithLogging(Login);
-
     const CourseListWithLogging = WithLogging(CourseList);
 
     return (
@@ -56,23 +55,46 @@ class App extends Component {
           <Notifications notifications={notificationsList} />
         </div>
         <Header />
-        {isLoggedIn ? (
-          <BodySectionWithMarginBottom title="Course list">
-            <CourseListWithLogging courses={coursesList} />
-          </BodySectionWithMarginBottom>
-        ) : (
-          <BodySectionWithMarginBottom title="Log in to continue">
-            <LoginWithLogging />
-          </BodySectionWithMarginBottom>
-        )}
-
-        <BodySection title="News from the School">
-          <p>Holberton School News goes here</p>
-        </BodySection>
-        <Footer />
+        <div className={css(styles.body)}>
+          {" "}
+          {/* 👈 body style */}
+          {isLoggedIn ? (
+            <BodySectionWithMarginBottom title="Course list">
+              <CourseListWithLogging courses={coursesList} />
+            </BodySectionWithMarginBottom>
+          ) : (
+            <BodySectionWithMarginBottom title="Log in to continue">
+              <LoginWithLogging />
+            </BodySectionWithMarginBottom>
+          )}
+          <BodySection title="News from the School">
+            <p>Holberton School News goes here</p>
+          </BodySection>
+        </div>
+        <footer className={css(styles.footer)}>
+          {" "}
+          {/* 👈 footer style */}
+          <p>Copyright 2025 - Holberton School</p>
+        </footer>
       </>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  body: {
+    padding: "40px",
+    fontFamily: "Arial, sans-serif",
+    minHeight: "300px",
+  },
+  footer: {
+    position: "fixed",
+    bottom: 0,
+    width: "100%",
+    borderTop: "3px solid #e1003c",
+    textAlign: "center",
+    padding: "1rem 0",
+  },
+});
 
 export default App;
