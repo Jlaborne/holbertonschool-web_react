@@ -92,4 +92,27 @@ describe("App component", () => {
       screen.getByText(/holberton school news goes here/i)
     ).toBeInTheDocument();
   });
+
+  test("clicking on 'Your notifications' shows the notifications panel", () => {
+    render(<App />);
+    const menuItem = screen.getByText(/your notifications/i);
+    fireEvent.click(menuItem);
+
+    expect(
+      screen.getByText(/here is the list of notifications/i)
+    ).toBeInTheDocument();
+  });
+
+  test("clicking on close button hides the notifications panel", () => {
+    render(<App />);
+    const menuItem = screen.getByText(/your notifications/i);
+    fireEvent.click(menuItem); // open
+
+    const closeButton = screen.getByRole("button", { name: /close/i });
+    fireEvent.click(closeButton); // close
+
+    expect(
+      screen.queryByText(/here is the list of notifications/i)
+    ).not.toBeInTheDocument();
+  });
 });
