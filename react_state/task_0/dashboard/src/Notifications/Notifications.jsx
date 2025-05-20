@@ -12,12 +12,12 @@ class Notifications extends React.Component {
     );
   }
 
-  handleClick = () => console.log("Close button has been clicked");
+  //handleClick = () => console.log("Close button has been clicked");
 
-  handleClose = () => {
+  /*handleClose = () => {
     this.handleClick();
     this.props.handleHideDrawer();
-  };
+  };*/
 
   markAsRead = (id) => {
     console.log(`Notification ${id} has been marked as read`);
@@ -44,7 +44,8 @@ class Notifications extends React.Component {
             <button
               className={css(styles.closeButton)}
               aria-label="Close"
-              onClick={this.handleClose}
+              onClick={this.props.handleHideDrawer}
+              //onClick={this.handleClose}
             >
               <img
                 src={closeIcon}
