@@ -137,7 +137,6 @@ const styles = StyleSheet.create({
     padding: "20px",
     fontSize: "20px",
     overflowY: "auto",
-    border: "5px solid green",
   },
   closeButton: {
     position: "absolute",
