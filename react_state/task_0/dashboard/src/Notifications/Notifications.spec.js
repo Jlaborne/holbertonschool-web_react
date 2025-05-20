@@ -134,6 +134,7 @@ describe("Notifications component", () => {
     render(
       <Notifications
         displayDrawer={false}
+        notifications={notificationsList}
         handleDisplayDrawer={handleDisplayDrawer}
       />
     );
