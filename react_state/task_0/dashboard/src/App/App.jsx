@@ -24,12 +24,10 @@ class App extends Component {
   };
 
   handleDisplayDrawer = () => {
-    console.log("Clicked on notification menu");
     this.setState({ displayDrawer: true });
   };
 
   handleHideDrawer = () => {
-    console.log("Clicked on notification menu");
     this.setState({ displayDrawer: false });
   };
 

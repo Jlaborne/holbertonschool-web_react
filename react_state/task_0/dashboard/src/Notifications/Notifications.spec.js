@@ -127,4 +127,37 @@ describe("Notifications component", () => {
 
     expect(screen.getByText(/new resume available/i)).toBeInTheDocument();
   });
+
+  test("Clicking on menu item calls handleDisplayDrawer", () => {
+    const handleDisplayDrawer = jest.fn();
+
+    render(
+      <Notifications
+        displayDrawer={false}
+        handleDisplayDrawer={handleDisplayDrawer}
+      />
+    );
+
+    const menuItem = screen.getByText(/your notifications/i);
+    fireEvent.click(menuItem);
+
+    expect(handleDisplayDrawer).toHaveBeenCalled();
+  });
+
+  test("Clicking close button calls handleHideDrawer", () => {
+    const handleHideDrawer = jest.fn();
+
+    render(
+      <Notifications
+        displayDrawer={true}
+        notifications={notificationsList}
+        handleHideDrawer={handleHideDrawer}
+      />
+    );
+
+    const closeButton = screen.getByRole("button", { name: /close/i });
+    fireEvent.click(closeButton);
+
+    expect(handleHideDrawer).toHaveBeenCalled();
+  });
 });
