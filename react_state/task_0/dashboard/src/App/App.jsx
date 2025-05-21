@@ -9,6 +9,7 @@ import BodySection from "../BodySection/BodySection";
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
 import WithLogging from "../HOC/WithLogging";
 import { StyleSheet, css } from "aphrodite";
+import PropTypes from "prop-types";
 
 class App extends Component {
   constructor(props) {
@@ -20,7 +21,11 @@ class App extends Component {
 
   static defaultProps = {
     logOut: () => {},
-    isLoggedIn: false,
+  };
+
+  static propTypes = {
+    logOut: PropTypes.func,
+    isLoggedIn: PropTypes.bool,
   };
 
   handleDisplayDrawer = () => {
