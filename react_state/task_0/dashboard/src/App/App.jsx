@@ -9,7 +9,6 @@ import BodySection from "../BodySection/BodySection";
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
 import WithLogging from "../HOC/WithLogging";
 import { StyleSheet, css } from "aphrodite";
-import PropTypes from "prop-types";
 
 class App extends Component {
   constructor(props) {
@@ -21,11 +20,7 @@ class App extends Component {
 
   static defaultProps = {
     logOut: () => {},
-  };
-
-  static propTypes = {
-    logOut: PropTypes.func,
-    isLoggedIn: PropTypes.bool,
+    isLoggedIn: false,
   };
 
   handleDisplayDrawer = () => {
@@ -72,32 +67,34 @@ class App extends Component {
 
     return (
       <>
-        <div className="root-notifications">
-          <Notifications
-            notifications={notificationsList}
-            displayDrawer={displayDrawer}
-            handleDisplayDrawer={this.handleDisplayDrawer}
-            handleHideDrawer={this.handleHideDrawer}
-          />
+        <div className={css(styles.app)}>
+          <div className="root-notifications">
+            <Notifications
+              notifications={notificationsList}
+              displayDrawer={displayDrawer}
+              handleDisplayDrawer={this.handleDisplayDrawer}
+              handleHideDrawer={this.handleHideDrawer}
+            />
+          </div>
+          <Header />
+          <div className={css(styles.body)}>
+            {isLoggedIn ? (
+              <BodySectionWithMarginBottom title="Course list">
+                <CourseListWithLogging courses={coursesList} />
+              </BodySectionWithMarginBottom>
+            ) : (
+              <BodySectionWithMarginBottom title="Log in to continue">
+                <LoginWithLogging />
+              </BodySectionWithMarginBottom>
+            )}
+            <BodySection title="News from the School">
+              <p>Holberton School News goes here</p>
+            </BodySection>
+          </div>
+          <footer className={css(styles.footer)}>
+            <p>Copyright 2025 - Holberton School</p>
+          </footer>
         </div>
-        <Header />
-        <div className={css(styles.body)}>
-          {isLoggedIn ? (
-            <BodySectionWithMarginBottom title="Course list">
-              <CourseListWithLogging courses={coursesList} />
-            </BodySectionWithMarginBottom>
-          ) : (
-            <BodySectionWithMarginBottom title="Log in to continue">
-              <LoginWithLogging />
-            </BodySectionWithMarginBottom>
-          )}
-          <BodySection title="News from the School">
-            <p>Holberton School News goes here</p>
-          </BodySection>
-        </div>
-        <footer className={css(styles.footer)}>
-          <p>Copyright 2025 - Holberton School</p>
-        </footer>
       </>
     );
   }
