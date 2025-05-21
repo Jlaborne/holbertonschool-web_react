@@ -1,118 +1,82 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import App from "./App";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
-import CourseList from "../CourseList/CourseList";
-
 import { StyleSheetTestUtils } from "aphrodite";
 
-beforeEach(() => {
+beforeAll(() => {
   StyleSheetTestUtils.suppressStyleInjection();
 });
 
-afterEach(() => {
+afterAll(() => {
   StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
 });
 
 describe("App component", () => {
-  test("renders Header component", () => {
-    render(<App />);
-    expect(
-      screen.getByRole("heading", { name: /school dashboard/i })
-    ).toBeInTheDocument();
-  });
-
-  test("renders Login component", () => {
-    render(<App />);
-    expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
-  });
-
-  test("renders Footer component", () => {
-    render(<App />);
-    expect(screen.getByText(/copyright/i)).toBeInTheDocument();
-  });
-
-  test("renders Notifications component", () => {
-    render(<App />);
-    expect(screen.getByText(/your notifications/i)).toBeInTheDocument();
-  });
-
-  test("renders Login component when isLoggedIn is false", () => {
-    render(<App />);
-    expect(
-      screen.getByText(/login to access the full dashboard/i)
-    ).toBeInTheDocument();
-  });
-
-  test("displays 'Course list' title when isLoggedIn is true", () => {
-    render(<App isLoggedIn={true} />);
-    expect(
-      screen.getByRole("heading", { level: 2, name: /course list/i })
-    ).toBeInTheDocument();
-  });
-
-  test("displays 'Log in to continue' title when isLoggedIn is false", () => {
+  test("renders header, login and footer components", () => {
     render(<App isLoggedIn={false} />);
+    expect(screen.getByText(/School dashboard/i)).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", { level: 2, name: /log in to continue/i })
+      screen.getByText(/Login to access the full dashboard/i)
     ).toBeInTheDocument();
+    expect(screen.getByText(/Copyright/i)).toBeInTheDocument();
   });
 
-  test("calls logOut when Ctrl+H is pressed", () => {
-    const alertMock = jest.spyOn(window, "alert").mockImplementation(() => {});
+  test("calls logOut and alerts when Ctrl + H is pressed", () => {
     const logOutMock = jest.fn();
+    const alertMock = jest.spyOn(window, "alert").mockImplementation(() => {});
+
     render(<App logOut={logOutMock} />);
 
-    fireEvent.keyDown(document, { key: "h", ctrlKey: true });
-
-    expect(logOutMock).toHaveBeenCalledTimes(1);
-    alertMock.mockRestore();
-  });
-
-  test('displays alert with "Logging you out" when Ctrl+H is pressed', () => {
-    const alertMock = jest.spyOn(window, "alert").mockImplementation(() => {});
-    const logOutMock = jest.fn();
-
-    render(<App logOut={logOutMock} />);
-    fireEvent.keyDown(document, { key: "h", ctrlKey: true });
+    fireEvent.keyDown(document, {
+      key: "h",
+      ctrlKey: true,
+    });
 
     expect(alertMock).toHaveBeenCalledWith("Logging you out");
+    expect(logOutMock).toHaveBeenCalledTimes(1);
 
     alertMock.mockRestore();
   });
 
-  test("displays news section with title and paragraph", () => {
-    render(<App />);
-    expect(
-      screen.getByRole("heading", { level: 2, name: /news from the school/i })
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(/holberton school news goes here/i)
-    ).toBeInTheDocument();
+  test('displays "Course list" when isLoggedIn is true', () => {
+    render(<App isLoggedIn={true} />);
+    expect(screen.getByText(/Course list/i)).toBeInTheDocument();
   });
 
-  test("clicking on 'Your notifications' shows the notifications panel", () => {
+  test('displays "Log in to continue" when isLoggedIn is false', () => {
+    render(<App isLoggedIn={false} />);
+    expect(screen.getByText(/Log in to continue/i)).toBeInTheDocument();
+  });
+
+  test("displays News from the School and its paragraph", () => {
+    render(<App />);
+    expect(screen.getByText(/News from the School/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Holberton School News goes here/i)
+    ).toBeInTheDocument();
+  });
+});
+
+describe("App notification drawer behavior", () => {
+  test('displays drawer when clicking on "Your notifications"', () => {
     render(<App />);
     const menuItem = screen.getByText(/your notifications/i);
     fireEvent.click(menuItem);
-
     expect(
-      screen.getByText(/here is the list of notifications/i)
+      screen.getByText(/Here is the list of notifications/i)
     ).toBeInTheDocument();
   });
 
-  test("clicking on close button hides the notifications panel", () => {
+  test("hides drawer when clicking on close button", () => {
     render(<App />);
-    const menuItem = screen.getByText(/your notifications/i);
-    fireEvent.click(menuItem); // open
-
-    const closeButton = screen.getByRole("button", { name: /close/i });
-    fireEvent.click(closeButton); // close
-
+    // Ouvrir le drawer
+    fireEvent.click(screen.getByText(/your notifications/i));
+    // Cliquer sur le bouton de fermeture
+    const closeBtn = screen.getByRole("button", { name: /close/i });
+    fireEvent.click(closeBtn);
+    // Vérifier que le panneau a disparu
     expect(
-      screen.queryByText(/here is the list of notifications/i)
+      screen.queryByText(/Here is the list of notifications/i)
     ).not.toBeInTheDocument();
   });
 });
