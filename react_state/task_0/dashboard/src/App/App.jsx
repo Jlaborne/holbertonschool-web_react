@@ -101,6 +101,7 @@ class App extends Component {
 }
 
 const styles = StyleSheet.create({
+  app: {},
   body: {
     padding: "40px",
     minHeight: "300px",
