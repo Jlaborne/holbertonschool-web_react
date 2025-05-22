@@ -4,11 +4,16 @@ import { StyleSheet, css } from "aphrodite";
 
 const styles = StyleSheet.create({
   item: {
-    width: "100%",
-    fontSize: "20px",
-    padding: "10px 8px",
-    borderBottom: "1px solid black",
+    width: "auto",
+    fontSize: "inherit",
+    padding: "0",
     boxSizing: "border-box",
+    "@media (max-width: 900px)": {
+      width: "100%",
+      fontSize: "20px",
+      padding: "10px 8px",
+      borderBottom: "1px solid black",
+    },
   },
   default: {
     color: "blue",
