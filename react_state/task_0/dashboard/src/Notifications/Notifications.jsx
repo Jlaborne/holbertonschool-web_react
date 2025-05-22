@@ -117,8 +117,11 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   menuItem: {
-    float: "right",
+    position: "fixed", // Stay fixed to the screen
+    top: "10px",
+    right: "10px",
     backgroundColor: "#fff8f8",
+    zIndex: 2000, // Make sure it's above other elements
     padding: "10px 20px",
     cursor: "pointer",
     ":hover": {
