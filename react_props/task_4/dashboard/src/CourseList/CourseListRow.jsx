@@ -18,27 +18,28 @@ function CourseListRow({
     }
     return (
       <tr>
-        <th>{textFirstCell}</th>
+        <th style={{ width: "70%" }}>{textFirstCell}</th>
         <th>{textSecondCell}</th>
       </tr>
     );
-  } else {
-    if (textSecondCell === null) {
-      return (
-        <tr>
-          <th colSpan="2" style={{ textAlign: "center", fontWeight: "bold" }}>
-            {textFirstCell}
-          </th>
-        </tr>
-      );
-    }
+  }
+
+  if (textSecondCell === null) {
     return (
       <tr>
-        <td>{textFirstCell}</td>
-        <td>{textSecondCell}</td>
+        <td colSpan="2" style={{ textAlign: "center", fontWeight: "bold" }}>
+          {textFirstCell}
+        </td>
       </tr>
     );
   }
+
+  return (
+    <tr>
+      <td>{textFirstCell}</td>
+      <td>{textSecondCell}</td>
+    </tr>
+  );
 }
 
 CourseListRow.propTypes = {
