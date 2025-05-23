@@ -10,18 +10,28 @@ function CourseListRow({
     if (textSecondCell === null) {
       return (
         <tr>
-          <th colSpan="2">{textFirstCell}</th>
-        </tr>
-      );
-    } else {
-      return (
-        <tr>
-          <th>{textFirstCell}</th>
-          <th>{textSecondCell}</th>
+          <th colSpan="2" style={{ textAlign: "center" }}>
+            {textFirstCell}
+          </th>
         </tr>
       );
     }
+    return (
+      <tr>
+        <th>{textFirstCell}</th>
+        <th>{textSecondCell}</th>
+      </tr>
+    );
   } else {
+    if (textSecondCell === null) {
+      return (
+        <tr>
+          <td colSpan="2" style={{ textAlign: "center", fontWeight: "bold" }}>
+            {textFirstCell}
+          </td>
+        </tr>
+      );
+    }
     return (
       <tr>
         <td>{textFirstCell}</td>
