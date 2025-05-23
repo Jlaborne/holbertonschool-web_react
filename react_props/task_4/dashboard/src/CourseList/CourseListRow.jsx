@@ -10,7 +10,7 @@ function CourseListRow({
     if (textSecondCell === null) {
       return (
         <tr>
-          <td colSpan="2">{textFirstCell}</td>
+          <th colSpan="2">{textFirstCell}</th>
         </tr>
       );
     } else {
