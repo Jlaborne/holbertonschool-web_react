@@ -26,9 +26,9 @@ function CourseListRow({
     if (textSecondCell === null) {
       return (
         <tr>
-          <td colSpan="2" style={{ textAlign: "center", fontWeight: "bold" }}>
+          <th colSpan="2" style={{ textAlign: "center", fontWeight: "bold" }}>
             {textFirstCell}
-          </td>
+          </th>
         </tr>
       );
     }
