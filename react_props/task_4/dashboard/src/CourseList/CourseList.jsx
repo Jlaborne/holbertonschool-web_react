@@ -7,14 +7,13 @@ function CourseList({ courses = [] }) {
   if (courses.length === 0) {
     return (
       <table id="CourseList">
-        <thead></thead>
-        <tbody>
+        <thead>
           <CourseListRow
             isHeader={false}
             textFirstCell="No course available yet"
             textSecondCell={null}
           />
-        </tbody>
+        </thead>
       </table>
     );
   }
