@@ -8,7 +8,11 @@ function CourseListRow({
 }) {
   if (isHeader) {
     if (textSecondCell === null) {
-      return <td colSpan="2">{textFirstCell}</td>;
+      return (
+        <tr>
+          <td colSpan="2">{textFirstCell}</td>
+        </tr>
+      );
     } else {
       return (
         <tr>
