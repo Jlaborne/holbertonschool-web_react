@@ -18,6 +18,7 @@ function CourseList({ courses = [] }) {
         {courses.length === 0 ? (
           <CourseListRow
             textFirstCell="No course available yet"
+            textSecondCell={null}
             isHeader={false}
           />
         ) : (
