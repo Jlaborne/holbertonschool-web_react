@@ -25,7 +25,7 @@ function CourseList({ courses = [] }) {
       <tbody>
         {isEmpty ? (
           <CourseListRow
-            isHeader={false}
+            isHeader={true}
             textFirstCell="No course available yet"
             textSecondCell={null}
           />

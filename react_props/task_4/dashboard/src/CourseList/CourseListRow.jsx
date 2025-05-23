@@ -10,36 +10,25 @@ function CourseListRow({
     if (textSecondCell === null) {
       return (
         <tr>
-          <th colSpan="2" style={{ textAlign: "center" }}>
-            {textFirstCell}
-          </th>
+          <th colSpan="2">{textFirstCell}</th>
+        </tr>
+      );
+    } else {
+      return (
+        <tr>
+          <th>{textFirstCell}</th>
+          <th>{textSecondCell}</th>
         </tr>
       );
     }
+  } else {
     return (
       <tr>
-        <th style={{ width: "70%" }}>{textFirstCell}</th>
-        <th>{textSecondCell}</th>
+        <td>{textFirstCell}</td>
+        <td>{textSecondCell}</td>
       </tr>
     );
   }
-
-  if (textSecondCell === null) {
-    return (
-      <tr>
-        <td colSpan="2" style={{ textAlign: "center", fontWeight: "bold" }}>
-          {textFirstCell}
-        </td>
-      </tr>
-    );
-  }
-
-  return (
-    <tr>
-      <td>{textFirstCell}</td>
-      <td>{textSecondCell}</td>
-    </tr>
-  );
 }
 
 CourseListRow.propTypes = {
