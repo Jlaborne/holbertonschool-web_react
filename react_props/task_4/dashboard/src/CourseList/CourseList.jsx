@@ -9,7 +9,7 @@ function CourseList({ courses = [] }) {
       <table id="CourseList">
         <tbody>
           <CourseListRow
-            isHeader={false}
+            isHeader={true}
             textFirstCell="No course available yet"
           />
         </tbody>
