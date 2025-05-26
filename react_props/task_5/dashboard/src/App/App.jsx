@@ -5,6 +5,7 @@ import Login from "../Login/Login";
 import Footer from "../Footer/Footer";
 import { getLatestNotification } from "../utils/utils";
 import CourseList from "../CourseList/CourseList";
+import PropTypes from "prop-types";
 
 function App({ isLoggedIn = false }) {
   const coursesList = [
@@ -30,5 +31,9 @@ function App({ isLoggedIn = false }) {
     </>
   );
 }
+
+App.propTypes = {
+  isLoggedIn: PropTypes.bool,
+};
 
 export default App;
