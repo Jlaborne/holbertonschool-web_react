@@ -14,7 +14,7 @@ function Notifications({ displayDrawer = false, notifications = [] }) {
       </div>
 
       {displayDrawer && (
-        <div className="notifications">
+        <div className="Notifications">
           <button
             style={{
               position: "absolute",
