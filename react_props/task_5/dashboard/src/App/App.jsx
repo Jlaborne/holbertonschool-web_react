@@ -8,9 +8,9 @@ import CourseList from "../CourseList/CourseList";
 
 function App({ isLoggedIn = false }) {
   const coursesList = [
-    { id: 1, name: "ES6", credit: 60 },
-    { id: 2, name: "Webpack", credit: 20 },
-    { id: 3, name: "React", credit: 40 },
+    { id: 1, name: "ES6", credit: "60" },
+    { id: 2, name: "Webpack", credit: "20" },
+    { id: 3, name: "React", credit: "40" },
   ];
 
   const notificationsList = [
@@ -20,14 +20,14 @@ function App({ isLoggedIn = false }) {
   ];
 
   return (
-    <div className="App">
+    <>
       <div className="root-notifications">
         <Notifications displayDrawer={true} notifications={notificationsList} />
       </div>
       <Header />
       {isLoggedIn ? <CourseList courses={coursesList} /> : <Login />}
       <Footer />
-    </div>
+    </>
   );
 }
 
