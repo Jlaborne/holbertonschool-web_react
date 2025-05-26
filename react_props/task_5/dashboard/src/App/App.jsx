@@ -6,9 +6,7 @@ import Footer from "../Footer/Footer";
 import { getLatestNotification } from "../utils/utils";
 import CourseList from "../CourseList/CourseList";
 
-function App() {
-  const isLoggedIn = false;
-
+function App({ isLoggedIn = false }) {
   const coursesList = [
     { id: 1, name: "ES6", credit: 60 },
     { id: 2, name: "Webpack", credit: 20 },
