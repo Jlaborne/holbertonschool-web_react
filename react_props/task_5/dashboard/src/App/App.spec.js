@@ -1,60 +1,50 @@
+import React from "react";
 import { render, screen } from "@testing-library/react";
 import App from "./App";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
-import CourseList from "../CourseList/CourseList";
 
 describe("App component", () => {
-  test("renders Header component", () => {
+  test("renders the main heading", () => {
     render(<App />);
-    expect(
-      screen.getByRole("heading", { name: /school dashboard/i })
-    ).toBeInTheDocument();
+    const heading = screen.getByRole("heading", {
+      level: 1,
+      name: /school dashboard/i,
+    });
+    expect(heading).toBeInTheDocument();
   });
 
-  test("renders Login component", () => {
+  test("renders the login and footer paragraphs", () => {
     render(<App />);
-    expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
+    const bodyText = screen.getByText(/login to access the full dashboard/i);
+    const footerText = screen.getByText(/copyright/i);
+    expect(bodyText).toBeInTheDocument();
+    expect(footerText).toBeInTheDocument();
   });
 
-  test("renders Footer component", () => {
+  test("renders the Holberton logo image", () => {
     render(<App />);
-    expect(screen.getByText(/copyright/i)).toBeInTheDocument();
+    const image = screen.getByAltText(/holberton logo/i);
+    expect(image).toBeInTheDocument();
   });
 
-  test("renders Notifications component", () => {
+  test("renders two input elements", () => {
     render(<App />);
-    expect(screen.getByText(/your notifications/i)).toBeInTheDocument();
+    const emailInput = screen.getByLabelText(/email/i);
+    const passwordInput = screen.getByLabelText(/password/i);
+    expect(emailInput).toBeInTheDocument();
+    expect(passwordInput).toBeInTheDocument();
   });
 
-  test("renders Login component when isLoggedIn is false", () => {
+  test("renders two label elements with text Email and Password", () => {
     render(<App />);
-    expect(
-      screen.getByText(/login to access the full dashboard/i)
-    ).toBeInTheDocument();
+    const emailLabel = screen.getByLabelText(/email/i);
+    const passwordLabel = screen.getByLabelText(/password/i);
+    expect(emailLabel).toBeInTheDocument();
+    expect(passwordLabel).toBeInTheDocument();
   });
 
-  test("renders CourseList component when isLoggedIn is true", () => {
-    // Simuler isLoggedIn = true
-    const AppWithCourses = () => {
-      const isLoggedIn = true;
-      const coursesList = [
-        { id: 1, name: "ES6", credit: 60 },
-        { id: 2, name: "Webpack", credit: 20 },
-        { id: 3, name: "React", credit: 40 },
-      ];
-      return (
-        <>
-          <Header />
-          <CourseList courses={coursesList} />
-          <Footer />
-        </>
-      );
-    };
-
-    const { container } = render(<AppWithCourses />);
-    const rows = container.querySelectorAll("tr");
-    expect(rows.length).toBe(5);
+  test("renders a button with the text OK", () => {
+    render(<App />);
+    const button = screen.getByRole("button", { name: /ok/i });
+    expect(button).toBeInTheDocument();
   });
 });
