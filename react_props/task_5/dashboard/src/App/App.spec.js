@@ -47,4 +47,14 @@ describe("App component", () => {
     const button = screen.getByRole("button", { name: /ok/i });
     expect(button).toBeInTheDocument();
   });
+
+  test("renders Notifications component with only the menu item when displayDrawer is false", () => {
+    render(<App />);
+    const menuItem = screen.getByText(/your notifications/i);
+    expect(menuItem).toBeInTheDocument();
+
+    // Should NOT render the list title
+    const listTitle = screen.queryByText(/here is the list of notifications/i);
+    expect(listTitle).not.toBeInTheDocument();
+  });
 });
