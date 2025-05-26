@@ -5,8 +5,14 @@ import closeIcon from "../assets/close-icon.png";
 import NotificationItem from "./NotificationItem";
 
 class Notifications extends React.Component {
-  shouldComponentUpdate(nextProps) {
+  /*shouldComponentUpdate(nextProps) {
     return nextProps.notifications.length !== this.props.notifications.length;
+  }*/
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.notifications.length !== this.props.notifications.length) {
+      return true;
+    }
+    return false;
   }
 
   handleClick = () => console.log("Close button has been clicked");
@@ -16,6 +22,7 @@ class Notifications extends React.Component {
   };
 
   render() {
+    console.log("Rendering Notifications...");
     return (
       <>
         <div className="notifications-title">

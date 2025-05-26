@@ -111,10 +111,43 @@ describe("Notifications component", () => {
 
     const newList = [
       ...initialList,
-      { id: 2, type: "urgent", value: "New resume available" },
+      { id: 5, type: "urgent", value: "New resume available" },
     ];
     rerender(<Notifications displayDrawer={true} notifications={newList} />);
 
     expect(screen.getByText(/new resume available/i)).toBeInTheDocument();
+  });
+  describe("Notifications re-rendering", () => {
+    const initialNotifications = [
+      { id: 1, type: "default", value: "Notification 1" },
+      { id: 2, type: "urgent", value: "Notification 2" },
+    ];
+
+    const newNotification = {
+      id: 3,
+      type: "urgent",
+      value: "Notification 3",
+    };
+
+    test("re-renders when notifications length increases", () => {
+      const { rerender } = render(
+        <Notifications
+          displayDrawer={true}
+          notifications={initialNotifications}
+        />
+      );
+
+      // Update props with an added notification
+      const updatedNotifications = [...initialNotifications, newNotification];
+
+      rerender(
+        <Notifications
+          displayDrawer={true}
+          notifications={updatedNotifications}
+        />
+      );
+
+      expect(screen.getByText("Notification 3")).toBeInTheDocument();
+    });
   });
 });
