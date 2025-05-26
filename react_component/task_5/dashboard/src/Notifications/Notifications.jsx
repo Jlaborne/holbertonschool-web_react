@@ -1,60 +1,72 @@
+import React from "react";
+import PropTypes from "prop-types";
 import "./Notifications.css";
-import closebtn from "../assets/close-button.png";
+import closeIcon from "../assets/close-icon.png";
 import NotificationItem from "./NotificationItem";
-import React, { Component } from "react";
 
-class Notifications extends Component {
-  static defaultProps = {
-    notifications: [],
-    displayDrawer: false,
+class Notifications extends React.Component {
+  /*shouldComponentUpdate(nextProps) {
+    return nextProps.notifications.length !== this.props.notifications.length;
+  }*/
+  shouldComponentUpdate = (nextProps) => {
+    if (nextProps.notifications.length !== this.props.notifications.length) {
+      return true;
+    }
+    return false;
   };
+
+  handleClick = () => console.log("Close button has been clicked");
 
   markAsRead = (id) => {
     console.log(`Notification ${id} has been marked as read`);
   };
 
-  shouldComponentUpdate(nextProps) {
-    if (nextProps.notifications.length !== this.props.notifications.length)
-      return true;
-    return false;
-  }
-
   render() {
-    const { notifications = [], displayDrawer = false } = this.props;
-
     return (
       <>
         <div className="notifications-title">
           <p>Your notifications</p>
         </div>
-        {displayDrawer && (
+
+        {this.props.displayDrawer && (
           <div className="notifications">
-            {notifications.length > 0 ? (
+            <button
+              style={{
+                position: "absolute",
+                top: "10px",
+                right: "10px",
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+              }}
+              aria-label="Close"
+              onClick={this.handleClick}
+            >
+              <img
+                src={closeIcon}
+                alt="close icon"
+                style={{ height: "15px", width: "15px" }}
+              />
+            </button>
+
+            {this.props.notifications.length === 0 ? (
+              <p>No new notification for now</p>
+            ) : (
               <>
-                <div className="notifications-topContent">
-                  <p>Here is the list of notifications</p>
-                  <button
-                    onClick={() => console.log("Close button has been clicked")}
-                    aria-label="Close"
-                  >
-                    <img src={closebtn} alt="Close" />
-                  </button>
-                </div>
+                <p>Here is the list of notifications</p>
                 <ul>
-                  {notifications.map((notification) => (
+                  {this.props.notifications.map((notif) => (
                     <NotificationItem
-                      key={notification.id}
-                      id={notification.id}
-                      type={notification.type}
-                      value={notification.value}
-                      html={notification.html}
-                      markAsRead={() => this.markAsRead(notification.id)}
+                      key={notif.id}
+                      id={notif.id}
+                      type={notif.type}
+                      value={notif.value}
+                      html={notif.html}
+                      markAsRead={this.markAsRead}
                     />
                   ))}
                 </ul>
               </>
-            ) : (
-              <p>No new notification for now</p>
             )}
           </div>
         )}
@@ -62,5 +74,22 @@ class Notifications extends Component {
     );
   }
 }
+
+Notifications.propTypes = {
+  displayDrawer: PropTypes.bool,
+  notifications: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      type: PropTypes.string,
+      value: PropTypes.string,
+      html: PropTypes.shape({ __html: PropTypes.string }),
+    })
+  ),
+};
+
+Notifications.defaultProps = {
+  displayDrawer: false,
+  notifications: [],
+};
 
 export default Notifications;
