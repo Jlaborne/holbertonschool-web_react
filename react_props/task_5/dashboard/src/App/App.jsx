@@ -20,14 +20,14 @@ function App({ isLoggedIn = false }) {
   ];
 
   return (
-    <>
+    <div className="App">
       <div className="root-notifications">
         <Notifications displayDrawer={true} notifications={notificationsList} />
       </div>
       <Header />
       {isLoggedIn ? <CourseList courses={coursesList} /> : <Login />}
       <Footer />
-    </>
+    </div>
   );
 }
 
