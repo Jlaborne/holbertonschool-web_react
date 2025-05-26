@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     padding: "40px",
     fontFamily: "Arial, sans-serif",
     minHeight: "300px",
+    margin: "0",
   },
 });
 

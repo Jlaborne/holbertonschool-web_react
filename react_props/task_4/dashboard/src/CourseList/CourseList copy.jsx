@@ -4,36 +4,26 @@ import PropTypes from "prop-types";
 import "./CourseList.css";
 
 function CourseList({ courses = [] }) {
-  const isEmpty = courses.length === 0;
-
   return (
     <table id="CourseList">
-      {!isEmpty && (
-        <thead>
-          <CourseListRow
-            isHeader={true}
-            textFirstCell="Available courses"
-            textSecondCell={null}
-          />
-          <CourseListRow
-            isHeader={true}
-            textFirstCell="Course name"
-            textSecondCell="Credit"
-          />
-        </thead>
-      )}
+      <thead>
+        <CourseListRow isHeader={true} textFirstCell="Available courses" />
+        <CourseListRow
+          isHeader={true}
+          textFirstCell="Course name"
+          textSecondCell="Credit"
+        />
+      </thead>
       <tbody>
-        {isEmpty ? (
+        {courses.length === 0 ? (
           <CourseListRow
-            isHeader={true}
             textFirstCell="No course available yet"
-            textSecondCell={null}
+            isHeader={false}
           />
         ) : (
           courses.map((course) => (
             <CourseListRow
               key={course.id}
-              isHeader={false}
               textFirstCell={course.name}
               textSecondCell={course.credit}
             />

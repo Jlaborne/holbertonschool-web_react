@@ -18,6 +18,6 @@ describe("CourseList component", () => {
   test("renders 1 row when given an empty array", () => {
     render(<CourseList courses={[]} />);
     const rows = screen.getAllByRole("row");
-    expect(rows.length).toBe(3);
+    expect(rows.length).toBe(1);
   });
 });
