@@ -8,12 +8,12 @@ class Notifications extends React.Component {
   /*shouldComponentUpdate(nextProps) {
     return nextProps.notifications.length !== this.props.notifications.length;
   }*/
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate = (nextProps) => {
     if (nextProps.notifications.length !== this.props.notifications.length) {
       return true;
     }
     return false;
-  }
+  };
 
   handleClick = () => console.log("Close button has been clicked");
 
