@@ -1,34 +1,56 @@
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  --hbtn-red: #e1003c;
+}
+
 .App-header {
-  background-color: white;
   display: flex;
   align-items: center;
-  padding: 1rem;
-  border-bottom: 3px solid #e1003c;
+  justify-content: start;
+  border-bottom: 3px solid var(--hbtn-red);
+  min-height: 20vh;
 }
 
 .App-header img {
-  height: 200px;
+  max-width: 100%;
+  max-height: 250px;
 }
 
 .App-header h1 {
-  color: #e1003c;
-  margin-left: 1rem;
+  color: var(--hbtn-red);
+  font-family: sans-serif;
+  font-size: 3rem;
+  font-weight: bold;
 }
 
 .App-body {
-  padding: 40px;
-  font-family: Arial, sans-serif;
-  min-height: 300px;
+  min-height: 55vh;
+}
+
+.App-body p {
+  padding: 20px;
 }
 
 .App-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  border-top: 3px solid #e1003c;
-  text-align: center;
-  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 3px solid var(--hbtn-red);
+  min-height: 5vh;
 }
+
 .App-footer p {
-  margin: 0;
+  font-family: sans-serif;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+.root-notifications {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  max-width: 500px;
 }

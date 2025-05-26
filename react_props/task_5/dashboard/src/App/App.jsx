@@ -35,7 +35,7 @@ function App({ isLoggedIn = false }) {
   return (
     <>
       <div className="root-notifications">
-        <Notifications notifications={notificationsList} />
+        <Notifications notifications={notificationsList} displayDrawer={true} />
       </div>
       <Header />
       {isLoggedIn ? <CourseList courses={coursesList} /> : <Login />}
