@@ -15,9 +15,21 @@ function App({ isLoggedIn = false }) {
   ];
 
   const notificationsList = [
-    { id: 1, type: "default", value: "New course available" },
-    { id: 2, type: "urgent", value: "New resume available" },
-    { id: 3, type: "urgent", html: { __html: getLatestNotification() } },
+    {
+      id: Math.floor(Math.random() * Date.now()),
+      type: "default",
+      value: "New course available",
+    },
+    {
+      id: Math.floor(Math.random() * Date.now()),
+      type: "urgent",
+      value: "New resume available",
+    },
+    {
+      id: Math.floor(Math.random() * Date.now()),
+      type: "urgent",
+      html: { __html: getLatestNotification() },
+    },
   ];
 
   return (
