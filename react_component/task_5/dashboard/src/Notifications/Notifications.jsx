@@ -22,7 +22,6 @@ class Notifications extends React.Component {
   };
 
   render() {
-    console.log("Rendering Notifications...");
     return (
       <>
         <div className="notifications-title">
