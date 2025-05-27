@@ -144,31 +144,29 @@ describe("Notifications component", () => {
     expect(screen.getByText(/new resume available/i)).toBeInTheDocument();
   });
 
-  describe("Notifications component", () => {
-    test("calls handleDisplayDrawer when clicking on menu item", () => {
-      const handleDisplayDrawer = jest.fn();
+  test("calls handleDisplayDrawer when clicking on menu item", () => {
+    const handleDisplayDrawer = jest.fn();
 
-      render(<Notifications handleDisplayDrawer={handleDisplayDrawer} />);
-      const menuItem = screen.getByText(/your notifications/i);
-      fireEvent.click(menuItem);
+    render(<Notifications handleDisplayDrawer={handleDisplayDrawer} />);
+    const menuItem = screen.getByText(/your notifications/i);
+    fireEvent.click(menuItem);
 
-      expect(handleDisplayDrawer).toHaveBeenCalled();
-    });
+    expect(handleDisplayDrawer).toHaveBeenCalled();
+  });
 
-    test("calls handleHideDrawer when clicking on close button", () => {
-      const handleHideDrawer = jest.fn();
+  test("calls handleHideDrawer when clicking on close button", () => {
+    const handleHideDrawer = jest.fn();
 
-      render(
-        <Notifications
-          displayDrawer={true}
-          handleHideDrawer={handleHideDrawer}
-          notifications={[]} // pass empty array to simplify
-        />
-      );
-      const closeBtn = screen.getByRole("button", { name: /close/i });
-      fireEvent.click(closeBtn);
+    render(
+      <Notifications
+        displayDrawer={true}
+        handleHideDrawer={handleHideDrawer}
+        notifications={[]} // pass empty array to simplify
+      />
+    );
+    const closeBtn = screen.getByRole("button", { name: /close/i });
+    fireEvent.click(closeBtn);
 
-      expect(handleHideDrawer).toHaveBeenCalled();
-    });
+    expect(handleHideDrawer).toHaveBeenCalled();
   });
 });
