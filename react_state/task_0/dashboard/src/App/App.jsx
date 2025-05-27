@@ -63,8 +63,8 @@ class App extends Component {
       { id: 3, type: "urgent", html: { __html: getLatestNotification() } },
     ];
 
-    const LoginWithLogging = WithLogging(Login);
-    const CourseListWithLogging = WithLogging(CourseList);
+    //const LoginWithLogging = WithLogging(Login);
+    //const CourseListWithLogging = WithLogging(CourseList);
 
     return (
       <>
@@ -80,14 +80,11 @@ class App extends Component {
         <div className={css(styles.body)}>
           {isLoggedIn ? (
             <BodySectionWithMarginBottom>
-              <CourseListWithLogging
-                title="Course list"
-                courses={coursesList}
-              />
+              <CourseList title="Course list" courses={coursesList} />
             </BodySectionWithMarginBottom>
           ) : (
             <BodySectionWithMarginBottom title="Log in to continue">
-              <LoginWithLogging />
+              <Login />
             </BodySectionWithMarginBottom>
           )}
           <BodySection title="News from the School">
