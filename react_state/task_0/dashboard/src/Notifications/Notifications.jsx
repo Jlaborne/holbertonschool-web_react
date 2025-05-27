@@ -1,64 +1,125 @@
+// task_0/dashboard/src/Notifications/Notifications.jsx
 import React from "react";
-import { StyleSheet, css } from "aphrodite";
+import PropTypes from "prop-types";
 
-class Login extends React.Component {
-  render() {
+class Notifications extends React.Component {
+  shouldComponentUpdate(nextProps) {
     return (
-      <div className={css(styles.body)}>
-        <p>Login to access the full dashboard</p>
-        <div className={css(styles.inputGroup)}>
-          <label htmlFor="email">Email:</label>
-          <input id="email" type="email" className={css(styles.input)} />
+      nextProps.notifications.length !== this.props.notifications.length ||
+      nextProps.displayDrawer !== this.props.displayDrawer
+    );
+  }
+
+  markAsRead(id) {
+    console.log(`Notification ${id} has been marked as read`);
+  }
+
+  render() {
+    const {
+      displayDrawer,
+      notifications,
+      handleDisplayDrawer,
+      handleHideDrawer,
+    } = this.props;
+
+    return (
+      <>
+        <div
+          data-testid="menu-item"
+          onClick={handleDisplayDrawer}
+          style={{
+            cursor: "pointer",
+            position: "fixed",
+            top: 0,
+            right: 0,
+            margin: "1rem",
+          }}
+        >
+          Your notifications
         </div>
-        <div className={css(styles.inputGroup)}>
-          <label htmlFor="password">Password:</label>
-          <input id="password" type="password" className={css(styles.input)} />
-        </div>
-        <div className={css(styles.buttonWrapper)}>
-          <button className={css(styles.button)}>OK</button>
-        </div>
-      </div>
+
+        {displayDrawer && (
+          <div
+            style={{
+              border: "2px dashed red",
+              padding: "10px",
+              width: "400px",
+              backgroundColor: "#fff8f8",
+              position: "absolute",
+              right: 0,
+              top: "2.5rem",
+              zIndex: 1,
+            }}
+            data-testid="notifications-panel"
+          >
+            {notifications.length > 0 ? (
+              <>
+                <p>Here is the list of notifications</p>
+                <button
+                  aria-label="Close"
+                  onClick={() => {
+                    console.log("Close button has been clicked");
+                    handleHideDrawer();
+                  }}
+                  style={{
+                    position: "absolute",
+                    top: "10px",
+                    right: "10px",
+                    border: "none",
+                    background: "transparent",
+                    cursor: "pointer",
+                    zIndex: 1001,
+                  }}
+                >
+                  Close
+                </button>
+                <ul style={{ listStyle: "none", padding: 0 }}>
+                  {notifications.map((notification) => (
+                    <li
+                      key={notification.id}
+                      onClick={() => this.markAsRead(notification.id)}
+                      style={{ cursor: "pointer" }}
+                    >
+                      {notification.value ? (
+                        notification.value
+                      ) : (
+                        <span dangerouslySetInnerHTML={notification.html} />
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ) : (
+              <p>No new notification for now</p>
+            )}
+          </div>
+        )}
+      </>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  body: {
-    padding: "30px",
-    "@media (max-width: 900px)": {
-      padding: "20px",
-    },
-  },
-  inputGroup: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: "1em",
-    "@media (max-width: 900px)": {
-      flexDirection: "column",
-      alignItems: "flex-start",
-    },
-  },
-  input: {
-    marginLeft: "10px",
-    "@media (max-width: 900px)": {
-      marginLeft: "0",
-      marginTop: "5px",
-      width: "100%",
-    },
-  },
-  buttonWrapper: {
-    "@media (max-width: 900px)": {
-      display: "flex",
-      justifyContent: "flex-start",
-    },
-  },
-  button: {
-    marginLeft: "10px",
-    "@media (max-width: 900px)": {
-      marginLeft: "0",
-    },
-  },
-});
+Notifications.propTypes = {
+  displayDrawer: PropTypes.bool,
+  notifications: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      type: PropTypes.string,
+      value: PropTypes.string,
+      html: PropTypes.shape({
+        __html: PropTypes.string,
+      }),
+    })
+  ),
+  handleDisplayDrawer: PropTypes.func,
+  handleHideDrawer: PropTypes.func,
+};
 
-export default Login;
+Notifications.defaultProps = {
+  displayDrawer: false,
+  notifications: [],
+  handleDisplayDrawer: () => {},
+  handleHideDrawer: () => {},
+};
+
+export default Notifications;
