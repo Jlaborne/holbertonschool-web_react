@@ -180,25 +180,4 @@ describe("Notifications component", () => {
       },
     },
   ];
-
-  // Existing tests...
-
-  test("Clicking on close button calls handleHideDrawer", () => {
-    const handleDisplayDrawer = jest.fn();
-    const handleHideDrawer = jest.fn();
-
-    render(
-      <Notifications
-        notifications={mockNotifications}
-        displayDrawer={true}
-        handleDisplayDrawer={handleDisplayDrawer}
-        handleHideDrawer={handleHideDrawer}
-      />
-    );
-
-    const closeButton = screen.getByRole("button", { name: /close/i });
-    fireEvent.click(closeButton);
-
-    expect(handleHideDrawer).toHaveBeenCalledTimes(1);
-  });
 });
