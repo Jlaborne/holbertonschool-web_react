@@ -70,7 +70,7 @@ class App extends Component {
         <div className="root-notifications">
           <Notifications
             notifications={notificationsList}
-            displayDrawer={displayDrawer}
+            displayDrawer={this.state.displayDrawer}
             handleDisplayDrawer={this.handleDisplayDrawer}
             handleHideDrawer={this.handleHideDrawer}
           />
