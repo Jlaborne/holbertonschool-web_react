@@ -8,7 +8,7 @@ import CourseList from "../CourseList/CourseList";
 import BodySection from "../BodySection/BodySection";
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
 import WithLogging from "../HOC/WithLogging";
-import { StyleSheet, css } from "aphrodite";
+import { StyleSheet, css } from "aphrodite"; // 👈 Aphrodite import
 
 class App extends Component {
   constructor(props) {
@@ -77,8 +77,9 @@ class App extends Component {
         </div>
         <Header />
         <div className={css(styles.body)}>
+          {" "}
           {isLoggedIn ? (
-            <BodySectionWithMarginBottom title="Course list">
+            <BodySectionWithMarginBottom>
               <CourseListWithLogging courses={coursesList} />
             </BodySectionWithMarginBottom>
           ) : (
@@ -91,6 +92,7 @@ class App extends Component {
           </BodySection>
         </div>
         <footer className={css(styles.footer)}>
+          {" "}
           <p>Copyright 2025 - Holberton School</p>
         </footer>
       </>

@@ -1,7 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import Notifications from "./Notifications";
 import { getLatestNotification } from "../utils/utils";
-
 import { StyleSheetTestUtils } from "aphrodite";
 
 beforeEach(() => {
@@ -19,11 +18,11 @@ describe("Notifications component", () => {
     { id: 3, type: "urgent", html: { __html: getLatestNotification() } },
   ];
 
-  /*test("Always renders 'Your notifications' title", () => {
+  test("Always renders 'Your notifications' title", () => {
     render(<Notifications />);
     const title = screen.getByText(/your notifications/i);
     expect(title).toBeInTheDocument();
-  });*/
+  });
 
   test("Does not display notifications list when displayDrawer is false", () => {
     render(
@@ -71,6 +70,23 @@ describe("Notifications component", () => {
 
     consoleSpy.mockRestore(); // cleanup
   });*/
+
+  test("calls handleHideDrawer when close button is clicked", () => {
+    const handleHideDrawer = jest.fn();
+
+    render(
+      <Notifications
+        displayDrawer={true}
+        notifications={[]}
+        handleHideDrawer={handleHideDrawer}
+      />
+    );
+
+    const closeButton = screen.getByRole("button", { name: /close/i });
+    fireEvent.click(closeButton);
+
+    expect(handleHideDrawer).toHaveBeenCalled();
+  });
 
   test("logs correct message when a notification is clicked", () => {
     const logSpy = jest.spyOn(console, "log").mockImplementation(() => {});
@@ -126,39 +142,5 @@ describe("Notifications component", () => {
     rerender(<Notifications displayDrawer={true} notifications={newList} />);
 
     expect(screen.getByText(/new resume available/i)).toBeInTheDocument();
-  });
-
-  test("Clicking on menu item calls handleDisplayDrawer", () => {
-    const handleDisplayDrawer = jest.fn();
-
-    render(
-      <Notifications
-        displayDrawer={false}
-        notifications={notificationsList}
-        handleDisplayDrawer={handleDisplayDrawer}
-      />
-    );
-
-    const menuItem = screen.getByText(/your notifications/i);
-    fireEvent.click(menuItem);
-
-    expect(handleDisplayDrawer).toHaveBeenCalled();
-  });
-
-  test("Clicking close button calls handleHideDrawer", () => {
-    const handleHideDrawer = jest.fn();
-
-    render(
-      <Notifications
-        displayDrawer={true}
-        notifications={notificationsList}
-        handleHideDrawer={handleHideDrawer}
-      />
-    );
-
-    const closeButton = screen.getByRole("button", { name: /close/i });
-    fireEvent.click(closeButton);
-
-    expect(handleHideDrawer).toHaveBeenCalled();
   });
 });

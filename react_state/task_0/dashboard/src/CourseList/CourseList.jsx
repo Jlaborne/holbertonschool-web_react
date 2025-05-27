@@ -1,29 +1,34 @@
 import React from "react";
-import CourseListRow from "./CourseListRow";
 import PropTypes from "prop-types";
+import CourseListRow from "./CourseListRow";
 import { StyleSheet, css } from "aphrodite";
 
 function CourseList({ courses = [] }) {
+  const isEmpty = courses.length === 0;
+
   return (
     <table className={css(styles.courseList)}>
-      <thead>
-        <CourseListRow isHeader={true} textFirstCell="Available courses" />
-        <CourseListRow
-          isHeader={true}
-          textFirstCell="Course name"
-          textSecondCell="Credit"
-        />
-      </thead>
-      <tbody>
-        {courses.length === 0 ? (
+      {!isEmpty && (
+        <thead>
+          <CourseListRow isHeader={true} textFirstCell="Available courses" />
           <CourseListRow
+            isHeader={true}
+            textFirstCell="Course name"
+            textSecondCell="Credit"
+          />
+        </thead>
+      )}
+      <tbody>
+        {isEmpty ? (
+          <CourseListRow
+            isHeader={true}
             textFirstCell="No course available yet"
-            isHeader={false}
           />
         ) : (
           courses.map((course) => (
             <CourseListRow
               key={course.id}
+              isHeader={false}
               textFirstCell={course.name}
               textSecondCell={course.credit}
             />
@@ -34,15 +39,6 @@ function CourseList({ courses = [] }) {
   );
 }
 
-const styles = StyleSheet.create({
-  courseList: {
-    width: "100%",
-    borderCollapse: "collapse",
-    marginTop: "20px",
-    fontFamily: "Arial, sans-serif",
-  },
-});
-
 CourseList.propTypes = {
   courses: PropTypes.arrayOf(
     PropTypes.shape({
@@ -52,5 +48,14 @@ CourseList.propTypes = {
     })
   ),
 };
+
+const styles = StyleSheet.create({
+  courseList: {
+    border: "1px solid #ddd",
+    borderCollapse: "collapse",
+    width: "90%",
+    margin: "40px auto",
+  },
+});
 
 export default CourseList;

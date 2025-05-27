@@ -14,11 +14,6 @@ class Notifications extends React.Component {
 
   //handleClick = () => console.log("Close button has been clicked");
 
-  /*handleClose = () => {
-    this.handleClick();
-    this.props.handleHideDrawer();
-  };*/
-
   markAsRead = (id) => {
     console.log(`Notification ${id} has been marked as read`);
   };
@@ -35,43 +30,46 @@ class Notifications extends React.Component {
       <div className={css(styles.container)}>
         {!displayDrawer && (
           <div className={css(styles.menuItem)} onClick={handleDisplayDrawer}>
-            <p>Your notifications</p>
+            Your notifications
           </div>
         )}
 
         {displayDrawer && (
           <div className={css(styles.notifications)}>
-            <button
-              className={css(styles.closeButton)}
-              aria-label="Close"
-              onClick={this.props.handleHideDrawer}
-              //onClick={this.handleClose}
-            >
-              <img
-                src={closeIcon}
-                alt="close icon"
-                className={css(styles.icon)}
-              />
-            </button>
+            <div className={css(styles.panelHeader)}>
+              {notifications.length > 0 && (
+                <p className={css(styles.title)}>
+                  Here is the list of notifications
+                </p>
+              )}
+              <button
+                className={css(styles.closeButton)}
+                aria-label="Close"
+                onClick={handleHideDrawer}
+              >
+                <img
+                  src={closeIcon}
+                  alt="close icon"
+                  className={css(styles.icon)}
+                />
+              </button>
+            </div>
 
             {notifications.length === 0 ? (
-              <p>No new notification for now</p>
+              <p className={css(styles.noNotif)}>No new notification for now</p>
             ) : (
-              <>
-                <p>Here is the list of notifications</p>
-                <ul className={css(styles.ul)}>
-                  {notifications.map((notif) => (
-                    <NotificationItem
-                      key={notif.id}
-                      id={notif.id}
-                      type={notif.type}
-                      value={notif.value}
-                      html={notif.html}
-                      markAsRead={this.markAsRead}
-                    />
-                  ))}
-                </ul>
-              </>
+              <ul className={css(styles.ul)}>
+                {notifications.map((notif) => (
+                  <NotificationItem
+                    key={notif.id}
+                    id={notif.id}
+                    type={notif.type}
+                    value={notif.value}
+                    html={notif.html}
+                    markAsRead={this.markAsRead}
+                  />
+                ))}
+              </ul>
             )}
           </div>
         )}
@@ -101,15 +99,15 @@ Notifications.defaultProps = {
   handleHideDrawer: () => {},
 };
 
-const opacityKeyframes = {
-  "0%": { opacity: 0.5 },
-  "100%": { opacity: 1 },
+const opacityAnim = {
+  from: { opacity: 0.5 },
+  to: { opacity: 1 },
 };
 
-const bounceKeyframes = {
+const bounceAnim = {
   "0%": { transform: "translateY(0px)" },
   "50%": { transform: "translateY(-5px)" },
-  "100%": { transform: "translateY(5px)" },
+  "100%": { transform: "translateY(0px)" },
 };
 
 const styles = StyleSheet.create({
@@ -117,39 +115,71 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   menuItem: {
-    position: "fixed", // Stay fixed to the screen
-    top: "10px",
-    right: "10px",
-    backgroundColor: "#fff8f8",
-    zIndex: 2000, // Make sure it's above other elements
-    padding: "10px 20px",
+    textAlign: "right",
+    padding: "10px",
     cursor: "pointer",
     ":hover": {
-      animationName: [opacityKeyframes, bounceKeyframes],
+      animationName: [opacityAnim, bounceAnim],
       animationDuration: "1s, 0.5s",
       animationIterationCount: "3",
     },
   },
   notifications: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100vw",
-    height: "100vh",
-    backgroundColor: "white",
+    position: "absolute",
+    top: "40px",
+    right: "10px",
+    width: "350px",
+    border: "2px dashed red",
+    fontSize: "15px",
+    backgroundColor: "#fff",
     zIndex: 1000,
-    padding: "20px",
-    fontSize: "20px",
-    overflowY: "auto",
+    padding: "10px",
+    boxSizing: "border-box",
+
+    "@media (max-width: 900px)": {
+      position: "fixed",
+      top: 0,
+      right: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      padding: "20px",
+      fontSize: "20px",
+      border: "none",
+      overflowY: "auto",
+      boxSizing: "border-box",
+    },
+  },
+  panelHeader: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    paddingRight: "10px",
+    marginBottom: "10px",
+    "@media (max-width: 900px)": {
+      paddingRight: "0",
+    },
+  },
+  title: {
+    fontWeight: "bold",
+    margin: 0,
   },
   closeButton: {
-    position: "absolute",
-    top: "10px",
-    right: "50px",
     background: "none",
     border: "none",
     cursor: "pointer",
-    zIndex: 1100,
+    padding: 0,
+    margin: 0,
+    zIndex: 10,
+
+    "@media (max-width: 900px)": {
+      alignSelf: "flex-start",
+      marginLeft: "auto",
+      marginTop: "-10px",
+      marginRight: "-10px",
+      padding: "5px",
+    },
   },
   icon: {
     width: "15px",
@@ -159,6 +189,9 @@ const styles = StyleSheet.create({
     margin: 0,
     padding: 0,
     listStyle: "none",
+  },
+  noNotif: {
+    marginTop: "10px",
   },
 });
 

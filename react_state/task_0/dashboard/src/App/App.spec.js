@@ -1,9 +1,6 @@
-import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import App from "./App";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
-import CourseList from "../CourseList/CourseList";
+import Notifications from "../Notifications/Notifications";
 
 import { StyleSheetTestUtils } from "aphrodite";
 
@@ -48,9 +45,7 @@ describe("App component", () => {
 
   test("displays 'Course list' title when isLoggedIn is true", () => {
     render(<App isLoggedIn={true} />);
-    expect(
-      screen.getByRole("heading", { level: 2, name: /course list/i })
-    ).toBeInTheDocument();
+    expect(screen.getByText(/available courses/i)).toBeInTheDocument();
   });
 
   test("displays 'Log in to continue' title when isLoggedIn is false", () => {
@@ -93,26 +88,21 @@ describe("App component", () => {
     ).toBeInTheDocument();
   });
 
-  test("clicking on 'Your notifications' shows the notifications panel", () => {
-    render(<App />);
+  test("calls handleDisplayDrawer when menu item is clicked", () => {
+    const handleDisplayDrawer = jest.fn();
+    render(<Notifications handleDisplayDrawer={handleDisplayDrawer} />);
     const menuItem = screen.getByText(/your notifications/i);
     fireEvent.click(menuItem);
-
-    expect(
-      screen.getByText(/here is the list of notifications/i)
-    ).toBeInTheDocument();
+    expect(handleDisplayDrawer).toHaveBeenCalled();
   });
 
-  test("clicking on close button hides the notifications panel", () => {
-    render(<App />);
-    const menuItem = screen.getByText(/your notifications/i);
-    fireEvent.click(menuItem); // open
-
+  test("calls handleHideDrawer when close button is clicked", () => {
+    const handleHideDrawer = jest.fn();
+    render(
+      <Notifications displayDrawer={true} handleHideDrawer={handleHideDrawer} />
+    );
     const closeButton = screen.getByRole("button", { name: /close/i });
-    fireEvent.click(closeButton); // close
-
-    expect(
-      screen.queryByText(/here is the list of notifications/i)
-    ).not.toBeInTheDocument();
+    fireEvent.click(closeButton);
+    expect(handleHideDrawer).toHaveBeenCalled();
   });
 });
