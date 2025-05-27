@@ -70,7 +70,7 @@ class App extends Component {
         <div className="root-notifications">
           <Notifications
             notifications={notificationsList}
-            displayDrawer={this.state.displayDrawer}
+            displayDrawer={displayDrawer}
             handleDisplayDrawer={this.handleDisplayDrawer}
             handleHideDrawer={this.handleHideDrawer}
           />
@@ -80,7 +80,10 @@ class App extends Component {
           {" "}
           {isLoggedIn ? (
             <BodySectionWithMarginBottom>
-              <CourseListWithLogging courses={coursesList} />
+              <CourseListWithLogging
+                title="Course list"
+                courses={coursesList}
+              />
             </BodySectionWithMarginBottom>
           ) : (
             <BodySectionWithMarginBottom title="Log in to continue">
