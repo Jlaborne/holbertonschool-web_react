@@ -9,7 +9,6 @@ import BodySection from "../BodySection/BodySection";
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
 import WithLogging from "../HOC/WithLogging";
 import { StyleSheet, css } from "aphrodite";
-import PropTypes from "prop-types";
 
 class App extends Component {
   constructor(props) {
@@ -63,8 +62,8 @@ class App extends Component {
       { id: 3, type: "urgent", html: { __html: getLatestNotification() } },
     ];
 
-    //const LoginWithLogging = WithLogging(Login);
-    //const CourseListWithLogging = WithLogging(CourseList);
+    const LoginWithLogging = WithLogging(Login);
+    const CourseListWithLogging = WithLogging(CourseList);
 
     return (
       <>
@@ -78,13 +77,14 @@ class App extends Component {
         </div>
         <Header />
         <div className={css(styles.body)}>
+          {" "}
           {isLoggedIn ? (
             <BodySectionWithMarginBottom>
-              <CourseList title="Course list" courses={coursesList} />
+              <CourseListWithLogging courses={coursesList} />
             </BodySectionWithMarginBottom>
           ) : (
             <BodySectionWithMarginBottom title="Log in to continue">
-              <Login />
+              <LoginWithLogging />
             </BodySectionWithMarginBottom>
           )}
           <BodySection title="News from the School">
@@ -92,6 +92,7 @@ class App extends Component {
           </BodySection>
         </div>
         <footer className={css(styles.footer)}>
+          {" "}
           <p>Copyright 2025 - Holberton School</p>
         </footer>
       </>
