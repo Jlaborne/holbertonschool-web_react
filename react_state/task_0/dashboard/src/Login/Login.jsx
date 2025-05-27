@@ -5,14 +5,14 @@ function Login() {
   return (
     <div className={css(styles.login)}>
       <p>Login to access the full dashboard</p>
-      <label htmlFor="email">Email</label>
+      <label htmlFor="email">Email:</label>
       <input
         type="email"
         id="email"
         name="email"
         className={css(styles.input)}
       />
-      <label htmlFor="password">Password</label>
+      <label htmlFor="password">Password:</label>
       <input
         type="password"
         id="password"
