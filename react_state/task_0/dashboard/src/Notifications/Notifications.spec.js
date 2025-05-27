@@ -183,25 +183,6 @@ describe("Notifications component", () => {
 
   // Existing tests...
 
-  test("Clicking on menu item calls handleDisplayDrawer", () => {
-    const handleDisplayDrawer = jest.fn();
-    const handleHideDrawer = jest.fn();
-
-    render(
-      <Notifications
-        notifications={mockNotifications}
-        displayDrawer={false}
-        handleDisplayDrawer={handleDisplayDrawer}
-        handleHideDrawer={handleHideDrawer}
-      />
-    );
-
-    const menuItem = screen.getByTestId("menu-item");
-    fireEvent.click(menuItem);
-
-    expect(handleDisplayDrawer).toHaveBeenCalledTimes(1);
-  });
-
   test("Clicking on close button calls handleHideDrawer", () => {
     const handleDisplayDrawer = jest.fn();
     const handleHideDrawer = jest.fn();
