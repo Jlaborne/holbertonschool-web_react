@@ -23,6 +23,11 @@ class App extends Component {
     isLoggedIn: false,
   };
 
+  static propTypes = {
+    logOut: PropTypes.func,
+    isLoggedIn: PropTypes.bool,
+  };
+
   handleDisplayDrawer = () => {
     this.setState({ displayDrawer: true });
   };
