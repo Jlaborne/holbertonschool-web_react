@@ -9,6 +9,7 @@ import BodySection from "../BodySection/BodySection";
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
 import WithLogging from "../HOC/WithLogging";
 import { StyleSheet, css } from "aphrodite";
+import PropTypes from "prop-types";
 
 class App extends Component {
   constructor(props) {
