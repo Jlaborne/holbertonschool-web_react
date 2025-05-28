@@ -28,7 +28,17 @@ class Notifications extends React.Component {
 
     return (
       <>
-        <div className={css(styles.menuItem)} onClick={handleDisplayDrawer}>
+        <div
+          data-testid="menu-item"
+          onClick={handleDisplayDrawer}
+          style={{
+            cursor: "pointer",
+            position: "fixed",
+            top: 0,
+            right: 0,
+            margin: "1rem",
+          }}
+        >
           Your notifications
         </div>
 
