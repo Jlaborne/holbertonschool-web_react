@@ -26,17 +26,6 @@ class Notifications extends React.Component {
       handleHideDrawer,
     } = this.props;
 
-    const opacityAnim = {
-      from: { opacity: 0.5 },
-      to: { opacity: 1 },
-    };
-
-    const bounceAnim = {
-      "0%": { transform: "translateY(0px)" },
-      "50%": { transform: "translateY(-5px)" },
-      "100%": { transform: "translateY(0px)" },
-    };
-
     return (
       <>
         {!displayDrawer && (
