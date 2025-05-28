@@ -29,7 +29,16 @@ class Notifications extends React.Component {
     return (
       <>
         {!displayDrawer && (
-          <div className={css(styles.menuItem)} onClick={handleDisplayDrawer}>
+          <div
+            style={{
+              cursor: "pointer",
+              position: "fixed",
+              top: 0,
+              right: 0,
+              margin: "1rem",
+            }}
+            onClick={handleDisplayDrawer}
+          >
             Your notifications
           </div>
         )}
@@ -49,16 +58,17 @@ class Notifications extends React.Component {
                   <img src={closeIcon} alt="Close" />
                 </button>
                 <ul style={{ listStyle: "none", padding: 0 }}>
-                  {notifications.map((notification) => (
+                  {notifications.map((notif) => (
                     <li
-                      key={notification.id}
-                      onClick={() => this.markAsRead(notification.id)}
+                      key={notif.id}
+                      data-notification-type={notif.type}
+                      onClick={() => this.markAsRead(notif.id)}
                       style={{ cursor: "pointer" }}
                     >
-                      {notification.value ? (
-                        notification.value
+                      {notif.html ? (
+                        <span dangerouslySetInnerHTML={notif.html} />
                       ) : (
-                        <span dangerouslySetInnerHTML={notification.html} />
+                        notif.value
                       )}
                     </li>
                   ))}
