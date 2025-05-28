@@ -56,24 +56,24 @@ class Notifications extends React.Component {
                     handleHideDrawer();
                   }}
                 >
-                  Close
+                  <img
+                    src="../assets/close-icon.png"
+                    alt="Close"
+                    className={css(styles.icon)}
+                  />
                 </button>
-                <ul className={css(styles.ul)}>
+                <ul style={{ listStyle: "none", padding: 0 }}>
                   {notifications.map((notification) => (
                     <li
                       key={notification.id}
                       onClick={() => this.markAsRead(notification.id)}
-                      data-notification-type={notification.type}
-                      className={css(
-                        notification.type === "urgent"
-                          ? styles.urgent
-                          : styles.default
-                      )}
-                      dangerouslySetInnerHTML={
-                        notification.html ? notification.html : undefined
-                      }
+                      style={{ cursor: "pointer" }}
                     >
-                      {!notification.html && notification.value}
+                      {notification.value ? (
+                        notification.value
+                      ) : (
+                        <span dangerouslySetInnerHTML={notification.html} />
+                      )}
                     </li>
                   ))}
                 </ul>
