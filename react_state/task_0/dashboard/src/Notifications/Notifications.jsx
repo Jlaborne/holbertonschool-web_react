@@ -28,11 +28,9 @@ class Notifications extends React.Component {
 
     return (
       <>
-        {displayDrawer && (
-          <div data-testid="menu-item" onClick={handleDisplayDrawer}>
-            Your notifications
-          </div>
-        )}
+        <div data-testid="menu-item" onClick={handleDisplayDrawer}>
+          Your notifications
+        </div>
 
         {displayDrawer && (
           <div data-testid="notifications-panel">
@@ -48,19 +46,16 @@ class Notifications extends React.Component {
                 >
                   Close
                 </button>
-                <ul>
-                  {notifications.map((notification) => (
-                    <li
-                      key={notification.id}
-                      onClick={() => this.markAsRead(notification.id)}
-                      style={{ cursor: "pointer" }}
-                    >
-                      {notification.value ? (
-                        notification.value
-                      ) : (
-                        <span dangerouslySetInnerHTML={notification.html} />
-                      )}
-                    </li>
+                <ul className={css(styles.ul)}>
+                  {notifications.map((notif) => (
+                    <NotificationItem
+                      key={notif.id}
+                      id={notif.id}
+                      type={notif.type}
+                      value={notif.value}
+                      html={notif.html}
+                      markAsRead={this.markAsRead}
+                    />
                   ))}
                 </ul>
               </>
