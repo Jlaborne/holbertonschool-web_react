@@ -1,32 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyleSheet, css } from "aphrodite";
-
-const styles = StyleSheet.create({
-  item: {
-    width: "100%",
-    fontSize: "20px",
-    padding: "10px 8px",
-    borderBottom: "1px solid black",
-    boxSizing: "border-box",
-  },
-  default: {
-    color: "blue",
-  },
-  urgent: {
-    color: "red",
-  },
-});
 
 class NotificationItem extends React.PureComponent {
   render() {
-    const { type, value, html, id, markAsRead } = this.props;
-    const style = type === "urgent" ? styles.urgent : styles.default;
+    const { id, type, value, html, markAsRead } = this.props;
+
+    const itemStyle = {
+      cursor: "pointer",
+      color: type === "urgent" ? "red" : "blue",
+      fontSize: "20px",
+      padding: "10px 8px",
+      borderBottom: "1px solid black",
+    };
 
     if (html) {
       return (
         <li
-          className={css(style)}
+          style={itemStyle}
           data-notification-type={type}
           dangerouslySetInnerHTML={html}
           onClick={() => markAsRead(id)}
@@ -36,7 +26,7 @@ class NotificationItem extends React.PureComponent {
 
     return (
       <li
-        className={css(style)}
+        style={itemStyle}
         data-notification-type={type}
         onClick={() => markAsRead(id)}
       >
