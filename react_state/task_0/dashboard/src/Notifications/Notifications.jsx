@@ -50,18 +50,13 @@ class Notifications extends React.Component {
               <>
                 <p>Here is the list of notifications</p>
                 <button
-                  className={css(styles.closeButton)}
                   aria-label="Close"
                   onClick={() => {
                     console.log("Close button has been clicked");
                     handleHideDrawer();
                   }}
                 >
-                  <img
-                    src={closeIcon}
-                    alt="close icon"
-                    className={css(styles.icon)}
-                  />
+                  Close
                 </button>
                 <ul style={{ listStyle: "none", padding: 0 }}>
                   {notifications.map((notification) => (
