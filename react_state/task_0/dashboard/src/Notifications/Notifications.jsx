@@ -43,19 +43,7 @@ class Notifications extends React.Component {
         </div>
 
         {displayDrawer && (
-          <div
-            style={{
-              border: "2px dashed red",
-              padding: "10px",
-              width: "400px",
-              backgroundColor: "#fff8f8",
-              position: "absolute",
-              right: 0,
-              top: "2.5rem",
-              zIndex: 1,
-            }}
-            data-testid="notifications-panel"
-          >
+          <div data-testid="notifications-panel">
             {notifications.length > 0 ? (
               <>
                 <p>Here is the list of notifications</p>
@@ -68,7 +56,7 @@ class Notifications extends React.Component {
                 >
                   Close
                 </button>
-                <ul style={{ listStyle: "none", padding: 0 }}>
+                <ul>
                   {notifications.map((notification) => (
                     <li
                       key={notification.id}
