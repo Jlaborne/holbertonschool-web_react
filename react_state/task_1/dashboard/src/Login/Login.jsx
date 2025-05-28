@@ -54,7 +54,7 @@ class Login extends React.Component {
             id="email"
             name="email"
             value={email}
-            className={css(styles.input)}
+            //className={css(styles.input)}
             onChange={this.handleChangeEmail}
           />
           <label htmlFor="password">Password</label>
@@ -63,12 +63,12 @@ class Login extends React.Component {
             id="password"
             name="password"
             value={password}
-            className={css(styles.input)}
+            //className={css(styles.input)}
             onChange={this.handleChangePassword}
           />
           <input
             type="submit"
-            className={css(styles.button)}
+            //className={css(styles.button)}
             disabled={!this.state.enableSubmit}
             value="OK"
           />
