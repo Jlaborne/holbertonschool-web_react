@@ -58,7 +58,7 @@ class Notifications extends React.Component {
               padding: "10px",
               boxSizing: "border-box",
 
-              "@media (max-width: 900px)": {
+              /*</>"@media (max-width: 900px)": {
                 position: "fixed",
                 top: 0,
                 right: 0,
@@ -70,7 +70,7 @@ class Notifications extends React.Component {
                 border: "none",
                 overflowY: "auto",
                 boxSizing: "border-box",
-              },
+              },*/
             }}
           >
             {notifications.length > 0 ? (

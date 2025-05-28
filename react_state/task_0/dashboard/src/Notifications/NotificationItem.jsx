@@ -30,7 +30,7 @@ class NotificationItem extends React.PureComponent {
         dangerouslySetInnerHTML={
           type === "urgent" && html !== undefined ? html : undefined
         }
-        onClick={markAsRead}
+        onClick={() => markAsRead(id)}
       >
         {type === "urgent" && html !== undefined ? null : value}
       </li>

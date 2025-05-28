@@ -77,7 +77,7 @@ describe("Notifications component", () => {
     render(
       <Notifications
         displayDrawer={true}
-        notifications={[]}
+        notifications={notificationsList}
         handleHideDrawer={handleHideDrawer}
       />
     );
@@ -161,7 +161,7 @@ describe("Notifications component", () => {
       <Notifications
         displayDrawer={true}
         handleHideDrawer={handleHideDrawer}
-        notifications={[]} // pass empty array to simplify
+        notifications={notificationsList}
       />
     );
     const closeBtn = screen.getByRole("button", { name: /close/i });
