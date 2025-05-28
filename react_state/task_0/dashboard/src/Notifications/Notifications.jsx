@@ -56,7 +56,11 @@ class Notifications extends React.Component {
                     handleHideDrawer();
                   }}
                 >
-                  Close
+                  <img
+                    src={closeIcon}
+                    alt="Close"
+                    className={css(styles.icon)}
+                  />
                 </button>
                 <ul style={{ listStyle: "none", padding: 0 }}>
                   {notifications.map((notification) => (
