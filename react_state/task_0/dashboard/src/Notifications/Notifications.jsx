@@ -111,11 +111,9 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   menuItem: {
+    textAlign: "right",
+    padding: "10px",
     cursor: "pointer",
-    position: "fixed",
-    top: 0,
-    right: 0,
-    margin: "1rem",
     ":hover": {
       animationName: [opacityAnim, bounceAnim],
       animationDuration: "1s, 0.5s",
