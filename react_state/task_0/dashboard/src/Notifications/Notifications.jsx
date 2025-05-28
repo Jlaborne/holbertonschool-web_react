@@ -116,11 +116,6 @@ const styles = StyleSheet.create({
     top: 0,
     right: 0,
     margin: "1rem",
-    ":hover": {
-      animationName: [opacityAnim, bounceAnim],
-      animationDuration: "1s, 0.5s",
-      animationIterationCount: "3",
-    },
   },
   notifications: {
     position: "absolute",
