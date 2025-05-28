@@ -28,11 +28,9 @@ class Notifications extends React.Component {
 
     return (
       <>
-        {!displayDrawer && (
-          <div className={css(styles.menuItem)} onClick={handleDisplayDrawer}>
-            Your notifications
-          </div>
-        )}
+        <div className={css(styles.menuItem)} onClick={handleDisplayDrawer}>
+          Your notifications
+        </div>
 
         {displayDrawer && (
           <div data-testid="notifications-panel">
