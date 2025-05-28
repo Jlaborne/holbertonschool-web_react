@@ -31,8 +31,8 @@ class Notifications extends React.Component {
         {!displayDrawer && (
           <div
             data-testid="menu-item"
-            className={css(styles.menuItem)}
             onClick={handleDisplayDrawer}
+            className={css(styles.menuItem)}
           >
             Your notifications
           </div>
@@ -65,7 +65,7 @@ class Notifications extends React.Component {
             </button>
 
             {notifications.length > 0 && (
-              <ul className={css(styles.ul)}>
+              <ul /*className={css(styles.ul)}*/>
                 {notifications.map((notif) => (
                   <NotificationItem
                     key={notif.id}
