@@ -12,8 +12,6 @@ class Notifications extends React.Component {
     );
   }
 
-  //handleClick = () => console.log("Close button has been clicked");
-
   markAsRead = (id) => {
     console.log(`Notification ${id} has been marked as read`);
   };
