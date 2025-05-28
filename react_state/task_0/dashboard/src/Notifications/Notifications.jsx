@@ -31,11 +31,14 @@ class Notifications extends React.Component {
             data-testid="menu-item"
             onClick={handleDisplayDrawer}
             style={{
+              textAlign: "right",
+              padding: "10px",
               cursor: "pointer",
-              position: "fixed",
-              top: 0,
-              right: 0,
-              margin: "1rem",
+              ":hover": {
+                animationName: [opacityAnim, bounceAnim],
+                animationDuration: "1s, 0.5s",
+                animationIterationCount: "3",
+              },
             }}
           >
             Your notifications
@@ -46,14 +49,30 @@ class Notifications extends React.Component {
           <div
             data-testid="notifications-panel"
             style={{
-              border: "2px dashed red",
-              padding: "10px",
-              width: "400px",
-              backgroundColor: "#fff8f8",
               position: "absolute",
-              right: 0,
-              top: "2.5rem",
-              zIndex: 1,
+              top: "40px",
+              right: "10px",
+              width: "350px",
+              border: "2px dashed red",
+              fontSize: "15px",
+              backgroundColor: "#fff",
+              zIndex: 1000,
+              padding: "10px",
+              boxSizing: "border-box",
+
+              "@media (max-width: 900px)": {
+                position: "fixed",
+                top: 0,
+                right: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                padding: "20px",
+                fontSize: "20px",
+                border: "none",
+                overflowY: "auto",
+                boxSizing: "border-box",
+              },
             }}
           >
             {notifications.length > 0 ? (
@@ -81,26 +100,22 @@ class Notifications extends React.Component {
                     style={{ width: "15px", height: "15px" }}
                   />
                 </button>
-                <ul style={{ listStyle: "none", padding: 0 }}>
+                <ul
+                  style={{
+                    margin: 0,
+                    padding: 0,
+                    listStyle: "none",
+                  }}
+                >
                   {notifications.map((notif) => (
-                    <li
+                    <NotificationItem
                       key={notif.id}
-                      data-notification-type={notif.type}
-                      onClick={() => this.markAsRead(notif.id)}
-                      style={{
-                        cursor: "pointer",
-                        color: notif.type === "urgent" ? "red" : "blue",
-                        fontSize: "20px",
-                        padding: "10px 8px",
-                        borderBottom: "1px solid black",
-                      }}
-                    >
-                      {notif.html ? (
-                        <span dangerouslySetInnerHTML={notif.html} />
-                      ) : (
-                        notif.value
-                      )}
-                    </li>
+                      id={notif.id}
+                      type={notif.type}
+                      value={notif.value}
+                      html={notif.html}
+                      markAsRead={this.markAsRead}
+                    />
                   ))}
                 </ul>
               </>
