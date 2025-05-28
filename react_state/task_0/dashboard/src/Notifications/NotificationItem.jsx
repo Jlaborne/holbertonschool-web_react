@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 class NotificationItem extends React.PureComponent {
   render() {
-    const { id, type, value, html, markAsRead } = this.props;
+    const { id, type, value, html, markAsRead, notification } = this.props;
 
     const itemStyle = {
       cursor: "pointer",
@@ -12,25 +12,17 @@ class NotificationItem extends React.PureComponent {
       padding: "10px 8px",
       borderBottom: "1px solid black",
     };
-
-    if (html) {
-      return (
-        <li
-          style={itemStyle}
-          data-notification-type={type}
-          dangerouslySetInnerHTML={html}
-          onClick={() => markAsRead(id)}
-        />
-      );
-    }
-
     return (
       <li
-        style={itemStyle}
-        data-notification-type={type}
-        onClick={() => markAsRead(id)}
+        key={notification.id}
+        onClick={() => this.markAsRead(notification.id)}
+        style={{ cursor: "pointer" }}
       >
-        {value}
+        {notification.value ? (
+          notification.value
+        ) : (
+          <span dangerouslySetInnerHTML={notification.html} />
+        )}
       </li>
     );
   }
