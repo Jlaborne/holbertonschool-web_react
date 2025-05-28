@@ -28,13 +28,11 @@ class Notifications extends React.Component {
 
     return (
       <div className={css(styles.container)}>
-        <div
-          data-testid="menuItem"
-          className={css(styles.menuItem)}
-          onClick={handleDisplayDrawer}
-        >
-          Your notifications
-        </div>
+        {!displayDrawer && (
+          <div className={css(styles.menuItem)} onClick={handleDisplayDrawer}>
+            Your notifications
+          </div>
+        )}
 
         {displayDrawer && (
           <div className={css(styles.notifications)}>
@@ -65,14 +63,17 @@ class Notifications extends React.Component {
             ) : (
               <ul className={css(styles.ul)}>
                 {notifications.map((notif) => (
-                  <NotificationItem
+                  <li
                     key={notif.id}
-                    id={notif.id}
-                    type={notif.type}
-                    value={notif.value}
-                    html={notif.html}
-                    markAsRead={this.markAsRead}
-                  />
+                    onClick={() => this.markAsRead(notif.id)}
+                    className={css(styles.notificationItem)}
+                  >
+                    {notif.value ? (
+                      notif.value
+                    ) : (
+                      <span dangerouslySetInnerHTML={notif.html} />
+                    )}
+                  </li>
                 ))}
               </ul>
             )}
