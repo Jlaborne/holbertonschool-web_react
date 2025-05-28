@@ -65,15 +65,6 @@ class Notifications extends React.Component {
                     console.log("Close button has been clicked");
                     handleHideDrawer();
                   }}
-                  style={{
-                    position: "absolute",
-                    top: "10px",
-                    right: "10px",
-                    border: "none",
-                    background: "transparent",
-                    cursor: "pointer",
-                    zIndex: 1001,
-                  }}
                 >
                   Close
                 </button>
