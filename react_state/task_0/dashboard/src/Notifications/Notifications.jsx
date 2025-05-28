@@ -44,30 +44,18 @@ class Notifications extends React.Component {
 
         {displayDrawer && (
           <div
+            style={{
+              border: "2px dashed red",
+              padding: "10px",
+              width: "400px",
+              backgroundColor: "#fff8f8",
+              position: "absolute",
+              right: 0,
+              top: "2.5rem",
+              zIndex: 1,
+            }}
             data-testid="notifications-panel"
-            className={css(styles.notifications)}
           >
-            <p className={css(styles.title)}>
-              {notifications.length > 0
-                ? "Here is the list of notifications"
-                : "No new notification for now"}
-            </p>
-
-            <button
-              className={css(styles.closeButton)}
-              aria-label="Close"
-              onClick={() => {
-                console.log("Close button has been clicked");
-                handleHideDrawer();
-              }}
-            >
-              <img
-                src={closeIcon}
-                alt="close icon"
-                className={css(styles.icon)}
-              />
-            </button>
-
             {notifications.length > 0 ? (
               <>
                 <p>Here is the list of notifications</p>
