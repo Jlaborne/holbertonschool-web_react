@@ -145,6 +145,7 @@ const styles = StyleSheet.create({
     zIndex: 1000,
     padding: "10px",
     boxSizing: "border-box",
+    cursor: "pointer",
 
     "@media (max-width: 900px)": {
       position: "fixed",
@@ -199,6 +200,7 @@ const styles = StyleSheet.create({
     margin: 0,
     padding: 0,
     listStyle: "none",
+    cursor: "pointer",
   },
   noNotif: {
     marginTop: "10px",
