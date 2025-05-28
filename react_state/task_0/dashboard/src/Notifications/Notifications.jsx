@@ -12,8 +12,6 @@ class Notifications extends React.Component {
     );
   }
 
-  //handleClick = () => console.log("Close button has been clicked");
-
   markAsRead = (id) => {
     console.log(`Notification ${id} has been marked as read`);
   };
@@ -28,14 +26,34 @@ class Notifications extends React.Component {
 
     return (
       <>
-        {!displayDrawer && (
-          <div style={css(styles.menuItem)} onClick={handleDisplayDrawer}>
-            Your notifications
-          </div>
-        )}
+        <div
+          data-testid="menu-item"
+          onClick={handleDisplayDrawer}
+          style={{
+            cursor: "pointer",
+            position: "fixed",
+            top: 0,
+            right: 0,
+            margin: "1rem",
+          }}
+        >
+          Your notifications
+        </div>
 
         {displayDrawer && (
-          <div data-testid="notifications-panel">
+          <div
+            data-testid="notifications-panel"
+            style={{
+              border: "2px dashed red",
+              padding: "10px",
+              width: "400px",
+              backgroundColor: "#fff8f8",
+              position: "absolute",
+              right: 0,
+              top: "2.5rem",
+              zIndex: 1,
+            }}
+          >
             {notifications.length > 0 ? (
               <>
                 <p>Here is the list of notifications</p>
@@ -45,8 +63,21 @@ class Notifications extends React.Component {
                     console.log("Close button has been clicked");
                     handleHideDrawer();
                   }}
+                  style={{
+                    position: "absolute",
+                    top: "10px",
+                    right: "10px",
+                    border: "none",
+                    background: "transparent",
+                    cursor: "pointer",
+                    zIndex: 1001,
+                  }}
                 >
-                  <img src={closeIcon} alt="Close" />
+                  <img
+                    src={closeIcon}
+                    alt="Close"
+                    style={{ width: "15px", height: "15px" }}
+                  />
                 </button>
                 <ul style={{ listStyle: "none", padding: 0 }}>
                   {notifications.map((notif) => (
@@ -54,7 +85,13 @@ class Notifications extends React.Component {
                       key={notif.id}
                       data-notification-type={notif.type}
                       onClick={() => this.markAsRead(notif.id)}
-                      style={{ cursor: "pointer" }}
+                      style={{
+                        cursor: "pointer",
+                        color: notif.type === "urgent" ? "red" : "blue",
+                        fontSize: "20px",
+                        padding: "10px 8px",
+                        borderBottom: "1px solid black",
+                      }}
                     >
                       {notif.html ? (
                         <span dangerouslySetInnerHTML={notif.html} />
@@ -79,7 +116,7 @@ Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
   notifications: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number,
+      id: PropTypes.number.isRequired,
       type: PropTypes.string,
       value: PropTypes.string,
       html: PropTypes.shape({ __html: PropTypes.string }),
