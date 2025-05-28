@@ -28,13 +28,15 @@ class Notifications extends React.Component {
 
     return (
       <div className={css(styles.container)}>
-        <div
-          data-testid="menu-item"
-          className={css(styles.menuItem)}
-          onClick={handleDisplayDrawer}
-        >
-          Your notifications
-        </div>
+        {!displayDrawer && (
+          <div
+            data-testid="menu-item"
+            className={css(styles.menuItem)}
+            onClick={handleDisplayDrawer}
+          >
+            Your notifications
+          </div>
+        )}
 
         {displayDrawer && (
           <div
