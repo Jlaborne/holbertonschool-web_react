@@ -28,19 +28,21 @@ class Notifications extends React.Component {
 
     return (
       <>
-        <div
-          data-testid="menu-item"
-          onClick={handleDisplayDrawer}
-          style={{
-            cursor: "pointer",
-            position: "fixed",
-            top: 0,
-            right: 0,
-            margin: "1rem",
-          }}
-        >
-          Your notifications
-        </div>
+        {!displayDrawer && (
+          <div
+            data-testid="menu-item"
+            onClick={handleDisplayDrawer}
+            style={{
+              cursor: "pointer",
+              position: "fixed",
+              top: 0,
+              right: 0,
+              margin: "1rem",
+            }}
+          >
+            Your notifications
+          </div>
+        )}
 
         {displayDrawer && (
           <div data-testid="notifications-panel">
