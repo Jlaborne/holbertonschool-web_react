@@ -100,22 +100,26 @@ class Notifications extends React.Component {
                     style={{ width: "15px", height: "15px" }}
                   />
                 </button>
-                <ul
-                  style={{
-                    margin: 0,
-                    padding: 0,
-                    listStyle: "none",
-                  }}
-                >
+                <ul style={{ listStyle: "none", padding: 0 }}>
                   {notifications.map((notif) => (
-                    <NotificationItem
+                    <li
                       key={notif.id}
-                      id={notif.id}
-                      type={notif.type}
-                      value={notif.value}
-                      html={notif.html}
-                      markAsRead={this.markAsRead}
-                    />
+                      data-notification-type={notif.type}
+                      onClick={() => this.markAsRead(notif.id)}
+                      style={{
+                        cursor: "pointer",
+                        color: notif.type === "urgent" ? "red" : "blue",
+                        fontSize: "20px",
+                        padding: "10px 8px",
+                        borderBottom: "1px solid black",
+                      }}
+                    >
+                      {notif.html ? (
+                        <span dangerouslySetInnerHTML={notif.html} />
+                      ) : (
+                        notif.value
+                      )}
+                    </li>
                   ))}
                 </ul>
               </>
