@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import closeIcon from "../assets/close-icon.png";
+import closeIcon from "../assets/close-button.png";
 import NotificationItem from "./NotificationItem";
 import { StyleSheet, css } from "aphrodite";
 
