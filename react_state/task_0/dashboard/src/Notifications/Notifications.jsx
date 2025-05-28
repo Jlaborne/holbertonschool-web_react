@@ -29,17 +29,7 @@ class Notifications extends React.Component {
     return (
       <>
         {!displayDrawer && (
-          <div
-            data-testid="menu-item"
-            onClick={handleDisplayDrawer}
-            style={{
-              cursor: "pointer",
-              position: "fixed",
-              top: 0,
-              right: 0,
-              margin: "1rem",
-            }}
-          >
+          <div className={css(styles.menuItem)} onClick={handleDisplayDrawer}>
             Your notifications
           </div>
         )}
@@ -186,10 +176,6 @@ const styles = StyleSheet.create({
       marginRight: "-10px",
       padding: "5px",
     },
-  },
-  icon: {
-    width: "15px",
-    height: "15px",
   },
   ul: {
     margin: 0,
