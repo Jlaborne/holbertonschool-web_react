@@ -68,22 +68,45 @@ class Notifications extends React.Component {
               />
             </button>
 
-            {notifications.length > 0 && (
-              <ul className={css(styles.ul)}>
-                {notifications.map((notification) => (
-                  <li
-                    key={notification.id}
-                    onClick={() => this.markAsRead(notification.id)}
-                    style={{ cursor: "pointer" }}
-                  >
-                    {notification.value ? (
-                      notification.value
-                    ) : (
-                      <span dangerouslySetInnerHTML={notification.html} />
-                    )}
-                  </li>
-                ))}
-              </ul>
+            {notifications.length > 0 ? (
+              <>
+                <p>Here is the list of notifications</p>
+                <button
+                  aria-label="Close"
+                  onClick={() => {
+                    console.log("Close button has been clicked");
+                    handleHideDrawer();
+                  }}
+                  style={{
+                    position: "absolute",
+                    top: "10px",
+                    right: "10px",
+                    border: "none",
+                    background: "transparent",
+                    cursor: "pointer",
+                    zIndex: 1001,
+                  }}
+                >
+                  Close
+                </button>
+                <ul style={{ listStyle: "none", padding: 0 }}>
+                  {notifications.map((notification) => (
+                    <li
+                      key={notification.id}
+                      onClick={() => this.markAsRead(notification.id)}
+                      style={{ cursor: "pointer" }}
+                    >
+                      {notification.value ? (
+                        notification.value
+                      ) : (
+                        <span dangerouslySetInnerHTML={notification.html} />
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ) : (
+              <p>No new notification for now</p>
             )}
           </div>
         )}
