@@ -44,7 +44,8 @@ class Login extends React.Component {
     const { email, password, enableSubmit } = this.state;
 
     return (
-      <div className={css(styles.login)}>
+      //<div className={css(styles.login)}>
+      <div>
         <p>Login to access the full dashboard</p>
         <form onSubmit={this.handleLoginSubmit}>
           <label htmlFor="email">Email</label>
