@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     width: "350px",
     border: "2px dashed red",
     fontSize: "15px",
-    backgroundColor: "#fff",
+    backgroundColor: "#fff8f8",
     zIndex: 1000,
     padding: "10px",
     boxSizing: "border-box",
