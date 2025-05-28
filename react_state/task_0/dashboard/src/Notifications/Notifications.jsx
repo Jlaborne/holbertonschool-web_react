@@ -29,19 +29,7 @@ class Notifications extends React.Component {
     return (
       <>
         {!displayDrawer && (
-          <div
-            style={{
-              textAlign: "right",
-              padding: "10px",
-              cursor: "pointer",
-              ":hover": {
-                animationName: [opacityAnim, bounceAnim],
-                animationDuration: "1s, 0.5s",
-                animationIterationCount: "3",
-              },
-            }}
-            onClick={handleDisplayDrawer}
-          >
+          <div style={css(styles.menuItem)} onClick={handleDisplayDrawer}>
             Your notifications
           </div>
         )}
