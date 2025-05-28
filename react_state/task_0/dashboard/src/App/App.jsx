@@ -77,7 +77,6 @@ class App extends Component {
         </div>
         <Header />
         <div className={css(styles.body)}>
-          {" "}
           {isLoggedIn ? (
             <BodySectionWithMarginBottom>
               <CourseListWithLogging courses={coursesList} />
@@ -92,7 +91,6 @@ class App extends Component {
           </BodySection>
         </div>
         <footer className={css(styles.footer)}>
-          {" "}
           <p>Copyright 2025 - Holberton School</p>
         </footer>
       </>

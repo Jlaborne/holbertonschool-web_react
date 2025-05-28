@@ -27,7 +27,7 @@ class Notifications extends React.Component {
     } = this.props;
 
     return (
-      <div className={css(styles.container)}>
+      <>
         {!displayDrawer && (
           <div
             data-testid="menu-item"
@@ -43,50 +43,44 @@ class Notifications extends React.Component {
             data-testid="notifications-panel"
             className={css(styles.notifications)}
           >
-            <div className={css(styles.panelHeader)}>
-              {notifications.length > 0 && (
-                <p className={css(styles.title)}>
-                  Here is the list of notifications
-                </p>
-              )}
-              <button
-                className={css(styles.closeButton)}
-                aria-label="Close"
-                onClick={() => {
-                  console.log("Close button has been clicked");
-                  handleHideDrawer();
-                }}
-              >
-                <img
-                  src={closeIcon}
-                  alt="close icon"
-                  className={css(styles.icon)}
-                />
-              </button>
-            </div>
+            <p className={css(styles.title)}>
+              {notifications.length > 0
+                ? "Here is the list of notifications"
+                : "No new notification for now"}
+            </p>
 
-            {notifications.length === 0 ? (
-              <p className={css(styles.noNotif)}>No new notification for now</p>
-            ) : (
+            <button
+              className={css(styles.closeButton)}
+              aria-label="Close"
+              onClick={() => {
+                console.log("Close button has been clicked");
+                handleHideDrawer();
+              }}
+            >
+              <img
+                src={closeIcon}
+                alt="close icon"
+                className={css(styles.icon)}
+              />
+            </button>
+
+            {notifications.length > 0 && (
               <ul className={css(styles.ul)}>
                 {notifications.map((notif) => (
-                  <li
+                  <NotificationItem
                     key={notif.id}
-                    onClick={() => this.markAsRead(notif.id)}
-                    className={css(styles.notifications)}
-                  >
-                    {notif.value ? (
-                      notif.value
-                    ) : (
-                      <span dangerouslySetInnerHTML={notif.html} />
-                    )}
-                  </li>
+                    id={notif.id}
+                    type={notif.type}
+                    value={notif.value}
+                    html={notif.html}
+                    markAsRead={this.markAsRead}
+                  />
                 ))}
               </ul>
             )}
           </div>
         )}
-      </div>
+      </>
     );
   }
 }
@@ -144,11 +138,10 @@ const styles = StyleSheet.create({
     width: "350px",
     border: "2px dashed red",
     fontSize: "15px",
-    backgroundColor: "#fff8f8",
+    backgroundColor: "#fff",
     zIndex: 1000,
     padding: "10px",
     boxSizing: "border-box",
-    cursor: "pointer",
 
     "@media (max-width: 900px)": {
       position: "fixed",
@@ -203,7 +196,6 @@ const styles = StyleSheet.create({
     margin: 0,
     padding: 0,
     listStyle: "none",
-    cursor: "pointer",
   },
   noNotif: {
     marginTop: "10px",
