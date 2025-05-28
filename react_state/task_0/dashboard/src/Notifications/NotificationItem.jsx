@@ -1,22 +1,42 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { StyleSheet, css } from "aphrodite";
+
+const styles = StyleSheet.create({
+  item: {
+    width: "100%",
+    fontSize: "20px",
+    padding: "10px 8px",
+    borderBottom: "1px solid black",
+    boxSizing: "border-box",
+  },
+  default: {
+    color: "blue",
+  },
+  urgent: {
+    color: "red",
+  },
+});
 
 class NotificationItem extends React.PureComponent {
   render() {
-    const { id, type, value, html, markAsRead } = this.props;
+    const { type, value, html, id, markAsRead } = this.props;
+    const style = type === "urgent" ? styles.urgent : styles.default;
 
     return (
       <li
-        onClick={() => markAsRead(id)}
-        style={{ cursor: "pointer" }}
+        style={{ color: type === "default" ? "blue" : "red" }}
         data-notification-type={type}
+        dangerouslySetInnerHTML={
+          type === "urgent" && html !== undefined ? html : undefined
+        }
+        onClick={markAsRead}
       >
-        {value ? value : <span dangerouslySetInnerHTML={html} />}
+        {type === "urgent" && html !== undefined ? null : value}
       </li>
     );
   }
 }
-
 NotificationItem.propTypes = {
   id: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
