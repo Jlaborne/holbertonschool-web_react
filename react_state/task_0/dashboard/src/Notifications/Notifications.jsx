@@ -65,16 +65,19 @@ class Notifications extends React.Component {
             </button>
 
             {notifications.length > 0 && (
-              <ul /*className={css(styles.ul)}*/>
-                {notifications.map((notif) => (
-                  <NotificationItem
-                    key={notif.id}
-                    id={notif.id}
-                    type={notif.type}
-                    value={notif.value}
-                    html={notif.html}
-                    markAsRead={this.markAsRead}
-                  />
+              <ul className={css(styles.ul)}>
+                {notifications.map((notification) => (
+                  <li
+                    key={notification.id}
+                    onClick={() => this.markAsRead(notification.id)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    {notification.value ? (
+                      notification.value
+                    ) : (
+                      <span dangerouslySetInnerHTML={notification.html} />
+                    )}
+                  </li>
                 ))}
               </ul>
             )}
