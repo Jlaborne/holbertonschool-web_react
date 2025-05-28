@@ -100,7 +100,7 @@ class Notifications extends React.Component {
                     style={{ width: "15px", height: "15px" }}
                   />
                 </button>
-                <ul className={css(styles.ul)}>
+                <ul style={{ listStyle: "none", padding: 0 }}>
                   {notifications.map((notif) => (
                     <NotificationItem
                       key={notif.id}
