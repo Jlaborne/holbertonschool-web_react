@@ -21,6 +21,7 @@ class App extends Component {
         password: "",
         isLoggedIn: false,
       },
+      logOut: this.logOut,
     };
   }
 
