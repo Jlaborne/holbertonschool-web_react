@@ -63,11 +63,12 @@ class App extends Component {
   }
 
   render() {
+    const { displayDrawer, user } = this.state;
+
     const contextValue = {
       user,
       logOut: this.logOut,
     };
-    const { displayDrawer, user } = this.state;
 
     const coursesList = [
       { id: 1, name: "ES6", credit: 60 },
