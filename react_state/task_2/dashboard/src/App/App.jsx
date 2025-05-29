@@ -65,13 +65,10 @@ class App extends Component {
   render() {
     const { displayDrawer, user } = this.state;
 
-    const contextValue = React.useMemo(
-      () => ({
-        user,
-        logOut: this.logOut,
-      }),
-      [user]
-    );
+    const contextValue = {
+      user: user,
+      logOut: this.logOut,
+    };
 
     const coursesList = [
       { id: 1, name: "ES6", credit: 60 },
