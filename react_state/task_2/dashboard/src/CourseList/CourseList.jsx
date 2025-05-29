@@ -7,7 +7,9 @@ function CourseList({ courses = [] }) {
   const isEmpty = courses.length === 0;
 
   return (
-    <table className={css(styles.courseList)}>
+    <table
+    //className={css(styles.courseList)}
+    >
       {!isEmpty && (
         <thead>
           <CourseListRow isHeader={true} textFirstCell="Available courses" />
