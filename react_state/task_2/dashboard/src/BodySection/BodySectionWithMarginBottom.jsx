@@ -6,7 +6,9 @@ import { StyleSheet, css } from "aphrodite";
 class BodySectionWithMarginBottom extends React.Component {
   render() {
     return (
-      <div className={css(styles.bodySectionWithMargin)}>
+      <div
+      //className={css(styles.bodySectionWithMargin)}
+      >
         <BodySection title={this.props.title}>
           {this.props.children}
         </BodySection>

@@ -72,4 +72,19 @@ describe("Login component", () => {
 
     expect(submitBtn).toBeDisabled();
   });
+
+  test("calls logIn with email and password on form submit", () => {
+    const logInMock = jest.fn();
+    const { getByLabelText, getByText } = render(<Login logIn={logInMock} />);
+
+    const emailInput = getByLabelText(/email/i);
+    const passwordInput = getByLabelText(/password/i);
+    const submitButton = getByText(/ok/i);
+
+    fireEvent.change(emailInput, { target: { value: "test@example.com" } });
+    fireEvent.change(passwordInput, { target: { value: "password123" } });
+    fireEvent.click(submitButton);
+
+    expect(logInMock).toHaveBeenCalledWith("test@example.com", "password123");
+  });
 });
