@@ -21,17 +21,11 @@ class App extends Component {
         password: "",
         isLoggedIn: false,
       },
-      logOut: this.logOut,
     };
   }
 
-  handleDisplayDrawer = () => {
-    this.setState({ displayDrawer: true });
-  };
-
-  handleHideDrawer = () => {
-    this.setState({ displayDrawer: false });
-  };
+  handleDisplayDrawer = () => this.setState({ displayDrawer: true });
+  handleHideDrawer = () => this.setState({ displayDrawer: false });
 
   handleKeyDown = (e) => {
     if (e.ctrlKey && e.key === "h") {
