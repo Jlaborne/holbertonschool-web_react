@@ -11,10 +11,7 @@ function CourseListRow({
     if (textSecondCell === null) {
       return (
         <tr>
-          <th
-            colSpan="2"
-            //className={css(styles.th)}
-          >
+          <th colSpan="2" className={css(styles.th)}>
             {textFirstCell}
           </th>
         </tr>
@@ -22,16 +19,8 @@ function CourseListRow({
     } else {
       return (
         <tr>
-          <th
-          //className={css(styles.th)}
-          >
-            {textFirstCell}
-          </th>
-          <th
-          //className={css(styles.th)}
-          >
-            {textSecondCell}
-          </th>
+          <th className={css(styles.th)}>{textFirstCell}</th>
+          <th className={css(styles.th)}>{textSecondCell}</th>
         </tr>
       );
     }
@@ -39,16 +28,8 @@ function CourseListRow({
 
   return (
     <tr>
-      <td
-      //className={css(styles.td)}
-      >
-        {textFirstCell}
-      </td>
-      <td
-      //className={css(styles.td)}
-      >
-        {textSecondCell}
-      </td>
+      <td className={css(styles.td)}>{textFirstCell}</td>
+      <td className={css(styles.td)}>{textSecondCell}</td>
     </tr>
   );
 }
