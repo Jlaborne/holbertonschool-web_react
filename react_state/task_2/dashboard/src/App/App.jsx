@@ -9,6 +9,7 @@ import BodySection from "../BodySection/BodySection";
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
 import WithLogging from "../HOC/WithLogging";
 import { StyleSheet, css } from "aphrodite";
+import { newContext } from "../Context/context";
 
 class App extends Component {
   constructor(props) {
@@ -90,38 +91,42 @@ class App extends Component {
     const CourseListWithLogging = WithLogging(CourseList);
 
     return (
-      <>
-        <div className="root-notifications">
-          <Notifications
-            notifications={notificationsList}
-            displayDrawer={displayDrawer}
-            handleDisplayDrawer={this.handleDisplayDrawer}
-            handleHideDrawer={this.handleHideDrawer}
-          />
-        </div>
-        <Header />
-        <div className={css(styles.body)}>
-          {user.isLoggedIn ? (
-            <BodySectionWithMarginBottom>
-              <CourseListWithLogging courses={coursesList} />
-            </BodySectionWithMarginBottom>
-          ) : (
-            <BodySectionWithMarginBottom title="Log in to continue">
-              <LoginWithLogging
-                logIn={this.logIn}
-                email={user.email}
-                password={user.password}
-              />
-            </BodySectionWithMarginBottom>
-          )}
-          <BodySection title="News from the School">
-            <p>Holberton School News goes here</p>
-          </BodySection>
-        </div>
-        <footer className={css(styles.footer)}>
-          <p>Copyright 2025 - Holberton School</p>
-        </footer>
-      </>
+      <newContext.Provider
+        value={{ user: this.state.user, logOut: this.logOut }}
+      >
+        <>
+          <div className="root-notifications">
+            <Notifications
+              notifications={notificationsList}
+              displayDrawer={displayDrawer}
+              handleDisplayDrawer={this.handleDisplayDrawer}
+              handleHideDrawer={this.handleHideDrawer}
+            />
+          </div>
+          <Header />
+          <div className={css(styles.body)}>
+            {user.isLoggedIn ? (
+              <BodySectionWithMarginBottom>
+                <CourseListWithLogging courses={coursesList} />
+              </BodySectionWithMarginBottom>
+            ) : (
+              <BodySectionWithMarginBottom title="Log in to continue">
+                <LoginWithLogging
+                  logIn={this.logIn}
+                  email={user.email}
+                  password={user.password}
+                />
+              </BodySectionWithMarginBottom>
+            )}
+            <BodySection title="News from the School">
+              <p>Holberton School News goes here</p>
+            </BodySection>
+          </div>
+          <footer className={css(styles.footer)}>
+            <p>Copyright 2025 - Holberton School</p>
+          </footer>
+        </>
+      </newContext.Provider>
     );
   }
 }
