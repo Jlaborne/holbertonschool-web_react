@@ -66,7 +66,7 @@ class App extends Component {
     const { displayDrawer, user } = this.state;
 
     const contextValue = {
-      user: user,
+      user: this.state.user,
       logOut: this.logOut,
     };
 
@@ -104,11 +104,7 @@ class App extends Component {
               </BodySectionWithMarginBottom>
             ) : (
               <BodySectionWithMarginBottom title="Log in to continue">
-                <LoginWithLogging
-                  logIn={this.logIn}
-                  email={user.email}
-                  password={user.password}
-                />
+                <LoginWithLogging logIn={this.logIn} />
               </BodySectionWithMarginBottom>
             )}
             <BodySection title="News from the School">

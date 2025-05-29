@@ -80,8 +80,6 @@ class Login extends React.Component {
 
 Login.defaultProps = {
   logIn: () => {},
-  email: "",
-  password: "",
 };
 
 const styles = StyleSheet.create({
