@@ -11,6 +11,10 @@ class Login extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.updateSubmitState();
+  }
+
   handleChangeEmail = (e) => {
     const email = e.target.value;
     this.setState({ email }, this.updateSubmitState);
