@@ -25,11 +25,6 @@ class App extends Component {
     };
   }
 
-  static defaultProps = {
-    logOut: () => {},
-    isLoggedIn: false,
-  };
-
   handleDisplayDrawer = () => {
     this.setState({ displayDrawer: true });
   };
@@ -74,6 +69,10 @@ class App extends Component {
   }
 
   render() {
+    const contextValue = {
+      user,
+      logOut: this.logOut,
+    };
     const { displayDrawer, user } = this.state;
 
     const coursesList = [
@@ -92,9 +91,7 @@ class App extends Component {
     const CourseListWithLogging = WithLogging(CourseList);
 
     return (
-      <newContext.Provider
-        value={{ user: this.state.user, logOut: this.logOut }}
-      >
+      <newContext.Provider value={contextValue}>
         <>
           <div className="root-notifications">
             <Notifications
