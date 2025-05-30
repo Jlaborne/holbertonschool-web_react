@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import closeIcon from "../assets/close-icon.png";
 import NotificationItem from "./NotificationItem";
-import { StyleSheet, css } from "aphrodite";
+//import { StyleSheet, css } from "aphrodite";
 
 class Notifications extends React.Component {
   shouldComponentUpdate(nextProps) {
@@ -25,37 +25,58 @@ class Notifications extends React.Component {
     } = this.props;
 
     return (
-      <div className={css(styles.container)}>
+      <div
+      //className={css(styles.container)}
+      >
         {!displayDrawer && (
-          <div className={css(styles.menuItem)} onClick={handleDisplayDrawer}>
+          <div
+            //className={css(styles.menuItem)}
+            onClick={handleDisplayDrawer}
+          >
             Your notifications
           </div>
         )}
 
         {displayDrawer && (
-          <div className={css(styles.notifications)}>
-            <div className={css(styles.panelHeader)}>
+          <div
+          //className={css(styles.notifications)}
+          >
+            <div
+            //className={css(styles.panelHeader)}
+            >
               {notifications.length > 0 && (
-                <p className={css(styles.title)}>
+                <p
+                //className={css(styles.title)}
+                >
                   Here is the list of notifications
                 </p>
               )}
               <button
-                className={css(styles.closeButton)}
+                //className={css(styles.closeButton)}
                 aria-label="Close"
                 onClick={() => {
                   console.log("Close button has been clicked");
                   handleHideDrawer();
                 }}
               >
-                <img src={closeIcon} alt="Close" className={css(styles.icon)} />
+                <img
+                  src={closeIcon}
+                  alt="Close"
+                  //className={css(styles.icon)}
+                />
               </button>
             </div>
 
             {notifications.length === 0 ? (
-              <p className={css(styles.noNotif)}>No new notification for now</p>
+              <p
+              //className={css(styles.noNotif)}
+              >
+                No new notification for now
+              </p>
             ) : (
-              <ul className={css(styles.ul)}>
+              <ul
+              //className={css(styles.ul)}
+              >
                 {notifications.map((notif) => (
                   <NotificationItem
                     key={notif.id}
@@ -95,7 +116,7 @@ Notifications.defaultProps = {
   handleDisplayDrawer: () => {},
   handleHideDrawer: () => {},
 };
-
+/*
 const opacityAnim = {
   from: { opacity: 0.5 },
   to: { opacity: 1 },
@@ -190,6 +211,6 @@ const styles = StyleSheet.create({
   noNotif: {
     marginTop: "10px",
   },
-});
+});*/
 
 export default Notifications;

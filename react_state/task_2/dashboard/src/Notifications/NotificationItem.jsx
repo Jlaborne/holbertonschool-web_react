@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyleSheet } from "aphrodite";
+//import { StyleSheet } from "aphrodite";
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
   item: {
     width: "100%",
     fontSize: "20px",
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   urgent: {
     color: "red",
   },
-});
+});*/
 
 class NotificationItem extends React.PureComponent {
   render() {

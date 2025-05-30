@@ -8,8 +8,8 @@ import CourseList from "../CourseList/CourseList";
 import BodySection from "../BodySection/BodySection";
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
 import WithLogging from "../HOC/WithLogging";
-import { StyleSheet, css } from "aphrodite";
-import { newContext } from "../Context/context";
+//import { StyleSheet, css } from "aphrodite";
+import { newContext as NewContext } from "../Context/context";
 
 class App extends Component {
   constructor(props) {
@@ -86,7 +86,7 @@ class App extends Component {
     const CourseListWithLogging = WithLogging(CourseList);
 
     return (
-      <newContext.Provider value={contextValue}>
+      <NewContext.Provider value={contextValue}>
         <>
           <div className="root-notifications">
             <Notifications
@@ -97,7 +97,9 @@ class App extends Component {
             />
           </div>
           <Header />
-          <div className={css(styles.body)}>
+          <div
+          //className={css(styles.body)}
+          >
             {user.isLoggedIn ? (
               <BodySectionWithMarginBottom>
                 <CourseListWithLogging
@@ -118,16 +120,18 @@ class App extends Component {
               <p>Holberton School News goes here</p>
             </BodySection>
           </div>
-          <footer className={css(styles.footer)}>
+          <footer
+          //className={css(styles.footer)}
+          >
             <p>Copyright 2025 - Holberton School</p>
           </footer>
         </>
-      </newContext.Provider>
+      </NewContext.Provider>
     );
   }
 }
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
   body: {
     padding: "40px",
     minHeight: "300px",
@@ -140,6 +144,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     padding: "1rem 0",
   },
-});
+});*/
 
 export default App;
