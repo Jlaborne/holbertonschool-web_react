@@ -30,7 +30,7 @@ class Header extends React.Component {
           >
             Welcome {user.email}{" "}
             <a href="#" onClick={logOut}>
-              (logout)
+              logout
             </a>
           </section>
         )}
