@@ -11,6 +11,9 @@ import WithLogging from "../HOC/WithLogging";
 //import { StyleSheet, css } from "aphrodite";
 import { newContext as NewContext } from "../Context/context";
 
+const LoginWithLogging = WithLogging(Login);
+const CourseListWithLogging = WithLogging(CourseList);
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -88,9 +91,6 @@ class App extends Component {
       user: this.state.user,
       logOut: this.logOut,
     };
-
-    const LoginWithLogging = WithLogging(Login);
-    const CourseListWithLogging = WithLogging(CourseList);
 
     return (
       <NewContext.Provider value={contextValue}>
