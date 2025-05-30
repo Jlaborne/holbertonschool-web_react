@@ -9,7 +9,7 @@ import BodySection from "../BodySection/BodySection";
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
 import WithLogging from "../HOC/WithLogging";
 import { StyleSheet, css } from "aphrodite";
-import { newContext as NewContext } from "../Context/context";
+import { newContext } from "../Context/context";
 
 class App extends Component {
   constructor(props) {
@@ -86,7 +86,7 @@ class App extends Component {
     const CourseListWithLogging = WithLogging(CourseList);
 
     return (
-      <NewContext.Provider value={contextValue}>
+      <newContext.Provider value={contextValue}>
         <>
           <div className="root-notifications">
             <Notifications
@@ -100,7 +100,10 @@ class App extends Component {
           <div className={css(styles.body)}>
             {user.isLoggedIn ? (
               <BodySectionWithMarginBottom>
-                <CourseListWithLogging courses={coursesList} />
+                <CourseListWithLogging
+                  title="Course List"
+                  courses={coursesList}
+                />
               </BodySectionWithMarginBottom>
             ) : (
               <BodySectionWithMarginBottom title="Log in to continue">
@@ -119,7 +122,7 @@ class App extends Component {
             <p>Copyright 2025 - Holberton School</p>
           </footer>
         </>
-      </NewContext.Provider>
+      </newContext.Provider>
     );
   }
 }
