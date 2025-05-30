@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { getCurrentYear, getFooterCopy } from "../utils/utils";
 import { newContext } from "../Context/context";
 
