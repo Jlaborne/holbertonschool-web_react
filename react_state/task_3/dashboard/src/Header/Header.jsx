@@ -28,7 +28,7 @@ class Header extends React.Component {
             id="logoutSection"
             //className={css(styles.logout)}
           >
-            Welcome <strong>{user.email}</strong>{" "}
+            Welcome {user.email}{" "}
             <a href="#" onClick={logOut}>
               (logout)
             </a>
@@ -40,28 +40,28 @@ class Header extends React.Component {
 }
 
 /*const styles = StyleSheet.create({
-  header: {
-    backgroundColor: "white",
-    display: "flex",
-    alignItems: "center",
-    padding: "1rem",
-    borderBottom: "3px solid #e1003c",
-    position: "relative",
-  },
-  logo: {
-    height: "200px",
-  },
-  title: {
-    color: "#e1003c",
-    marginLeft: "1rem",
-  },
-  logout: {
-    position: "absolute",
-    right: "1rem",
-    top: "50%",
-    transform: "translateY(-50%)",
-    fontSize: "1rem",
-  },
-});*/
+    header: {
+      backgroundColor: "white",
+      display: "flex",
+      alignItems: "center",
+      padding: "1rem",
+      borderBottom: "3px solid #e1003c",
+      position: "relative",
+    },
+    logo: {
+      height: "200px",
+    },
+    title: {
+      color: "#e1003c",
+      marginLeft: "1rem",
+    },
+    logout: {
+      position: "absolute",
+      right: "1rem",
+      top: "50%",
+      transform: "translateY(-50%)",
+      fontSize: "1rem",
+    },
+  });*/
 
 export default Header;
