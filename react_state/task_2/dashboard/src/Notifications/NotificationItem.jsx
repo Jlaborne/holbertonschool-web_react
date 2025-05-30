@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyleSheet, css } from "aphrodite";
+import { StyleSheet } from "aphrodite";
 
 const styles = StyleSheet.create({
   item: {
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 class NotificationItem extends React.PureComponent {
   render() {
     const { type, value, html, id, markAsRead } = this.props;
-    const style = type === "urgent" ? styles.urgent : styles.default;
+    //const style = type === "urgent" ? styles.urgent : styles.default;
 
     return (
       <li

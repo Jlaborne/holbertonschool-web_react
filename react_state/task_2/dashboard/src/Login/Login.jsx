@@ -73,7 +73,7 @@ class Login extends React.Component {
           <input
             type="submit"
             className={css(styles.button)}
-            disabled={!this.state.enableSubmit}
+            disabled={!enableSubmit}
             value="OK"
           />
         </form>

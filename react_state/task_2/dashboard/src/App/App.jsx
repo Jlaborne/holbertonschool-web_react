@@ -9,15 +9,18 @@ import BodySection from "../BodySection/BodySection";
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
 import WithLogging from "../HOC/WithLogging";
 import { StyleSheet, css } from "aphrodite";
-import { newContext } from "../Context/context";
+import { newContext as NewContext } from "../Context/context";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: props.email || "",
-      password: props.password || "",
-      enableSubmit: false,
+      displayDrawer: false,
+      user: {
+        email: "",
+        password: "",
+        isLoggedIn: false,
+      },
     };
   }
 
@@ -83,7 +86,7 @@ class App extends Component {
     const CourseListWithLogging = WithLogging(CourseList);
 
     return (
-      <newContext.Provider value={contextValue}>
+      <NewContext.Provider value={contextValue}>
         <>
           <div className="root-notifications">
             <Notifications
@@ -116,7 +119,7 @@ class App extends Component {
             <p>Copyright 2025 - Holberton School</p>
           </footer>
         </>
-      </newContext.Provider>
+      </NewContext.Provider>
     );
   }
 }
