@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../assets/holberton-logo.jpg";
-import { StyleSheet, css } from "aphrodite";
+//import { StyleSheet, css } from "aphrodite";
 import { newContext } from "../Context/context";
 
 class Header extends React.Component {
@@ -39,7 +39,7 @@ class Header extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
   header: {
     backgroundColor: "white",
     display: "flex",
@@ -62,6 +62,6 @@ const styles = StyleSheet.create({
     transform: "translateY(-50%)",
     fontSize: "1rem",
   },
-});
+});*/
 
 export default Header;

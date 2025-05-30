@@ -2,22 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { StyleSheet } from "aphrodite";
 
-const styles = StyleSheet.create({
-  item: {
-    width: "100%",
-    fontSize: "20px",
-    padding: "10px 8px",
-    borderBottom: "1px solid black",
-    boxSizing: "border-box",
-  },
-  default: {
-    color: "blue",
-  },
-  urgent: {
-    color: "red",
-  },
-});
-
 class NotificationItem extends React.PureComponent {
   render() {
     const { type, value, html, id, markAsRead } = this.props;
@@ -50,5 +34,21 @@ NotificationItem.propTypes = {
 NotificationItem.defaultProps = {
   markAsRead: () => {},
 };
+
+/*const styles = StyleSheet.create({
+  item: {
+    width: "100%",
+    fontSize: "20px",
+    padding: "10px 8px",
+    borderBottom: "1px solid black",
+    boxSizing: "border-box",
+  },
+  default: {
+    color: "blue",
+  },
+  urgent: {
+    color: "red",
+  },
+});*/
 
 export default NotificationItem;
