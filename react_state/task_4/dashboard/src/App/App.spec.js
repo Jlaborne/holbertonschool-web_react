@@ -3,6 +3,7 @@ import App from "./App";
 import Notifications from "../Notifications/Notifications";
 import { getLatestNotification } from "../utils/utils";
 import { StyleSheetTestUtils } from "aphrodite";
+import { newContext } from "../Context/context";
 
 beforeEach(() => {
   StyleSheetTestUtils.suppressStyleInjection();
@@ -51,14 +52,13 @@ describe("App component", () => {
 
   test("displays CourseList after valid login", () => {
     render(<App />);
-
-    const emailInput = screen.getByLabelText(/email/i);
-    const passwordInput = screen.getByLabelText(/password/i);
-    const submitBtn = screen.getByRole("button", { name: /^OK$/i });
-
-    fireEvent.change(emailInput, { target: { value: "test@example.com" } });
-    fireEvent.change(passwordInput, { target: { value: "password123" } });
-    fireEvent.click(submitBtn);
+    fireEvent.change(screen.getByLabelText(/email/i), {
+      target: { value: "test@example.com" },
+    });
+    fireEvent.change(screen.getByLabelText(/password/i), {
+      target: { value: "password123" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: /^OK$/i }));
 
     expect(
       screen.getByRole("columnheader", { name: /available courses/i })
@@ -122,5 +122,35 @@ describe("App component", () => {
     const closeButton = screen.getByRole("button", { name: /close/i });
     fireEvent.click(closeButton);
     expect(handleHideDrawer).toHaveBeenCalled();
+  });
+
+  test("markNotificationAsRead removes notification and logs correctly", () => {
+    const logSpy = jest.spyOn(console, "log");
+
+    render(
+      <newContext.Provider
+        value={{
+          user: {
+            isLoggedIn: true,
+            email: "test@example.com",
+            password: "12345678",
+          },
+          logOut: () => {},
+        }}
+      >
+        <App />
+      </newContext.Provider>
+    );
+    fireEvent.click(screen.getByText(/Your notifications/i));
+
+    const notifText = screen.getByText(/New course available/i);
+    fireEvent.click(notifText);
+
+    expect(logSpy).toHaveBeenCalledWith(
+      "Notification 1 has been marked as read"
+    );
+    expect(screen.queryByText(/New course available/i)).not.toBeInTheDocument();
+
+    logSpy.mockRestore();
   });
 });

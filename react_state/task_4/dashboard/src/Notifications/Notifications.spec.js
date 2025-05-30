@@ -91,12 +91,19 @@ describe("Notifications component", () => {
   test("logs correct message when a notification is clicked", () => {
     const logSpy = jest.spyOn(console, "log").mockImplementation(() => {});
 
-    const notificationsList = [
+    const notifications = [
       { id: 1, type: "default", value: "New course available" },
     ];
 
+    const markNotificationAsRead = (id) =>
+      console.log(`Notification ${id} has been marked as read`);
+
     render(
-      <Notifications displayDrawer={true} notifications={notificationsList} />
+      <Notifications
+        displayDrawer={true}
+        notifications={notifications}
+        markNotificationAsRead={markNotificationAsRead}
+      />
     );
 
     const listItem = screen.getByText(/new course available/i);
@@ -168,5 +175,18 @@ describe("Notifications component", () => {
     fireEvent.click(closeBtn);
 
     expect(handleHideDrawer).toHaveBeenCalled();
+  });
+
+  test("calls markNotificationAsRead on click", () => {
+    const mockRead = jest.fn();
+    render(
+      <Notifications
+        displayDrawer={true}
+        notifications={[{ id: 1, type: "default", value: "Test" }]}
+        markNotificationAsRead={mockRead}
+      />
+    );
+    fireEvent.click(screen.getByText(/Test/i));
+    expect(mockRead).toHaveBeenCalledWith(1);
   });
 });

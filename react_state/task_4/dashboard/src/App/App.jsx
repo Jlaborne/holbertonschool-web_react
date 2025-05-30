@@ -112,7 +112,7 @@ class App extends Component {
               <BodySectionWithMarginBottom>
                 <CourseListWithLogging
                   title="Course List"
-                  courses={this.state.coursesList}
+                  courses={this.state.courses}
                 />
               </BodySectionWithMarginBottom>
             ) : (
