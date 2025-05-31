@@ -1,10 +1,9 @@
 import PropTypes from 'prop-types';
 import { memo } from 'react';
-//import { StyleSheet } from "aphrodite";
+// import { StyleSheet, css } from "aphrodite";
 
 function NotificationItem({ type, value, html, id, markAsRead }) {
   const style = { color: type === 'default' ? 'blue' : 'red' };
-  //const style = type === "urgent" ? styles.urgent : styles.default;
 
   return (
     <li
@@ -31,21 +30,5 @@ NotificationItem.propTypes = {
 NotificationItem.defaultProps = {
   markAsRead: () => {},
 };
-
-/*const styles = StyleSheet.create({
-  item: {
-    width: "100%",
-    fontSize: "20px",
-    padding: "10px 8px",
-    borderBottom: "1px solid black",
-    boxSizing: "border-box",
-  },
-  default: {
-    color: "blue",
-  },
-  urgent: {
-    color: "red",
-  },
-});*/
 
 export default memo(NotificationItem);

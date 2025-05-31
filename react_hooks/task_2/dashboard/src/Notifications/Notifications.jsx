@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import closeIcon from "../assets/close-icon.png";
-import NotificationItem from "./NotificationItem";
+import React from 'react';
+import PropTypes from 'prop-types';
+import closeIcon from '../assets/close-icon.png';
+import NotificationItem from './NotificationItem';
 //import { StyleSheet, css } from "aphrodite";
 
 class Notifications extends React.PureComponent {
@@ -44,7 +44,7 @@ class Notifications extends React.PureComponent {
                 //className={css(styles.closeButton)}
                 aria-label="Close"
                 onClick={() => {
-                  console.log("Close button has been clicked");
+                  console.log('Close button has been clicked');
                   handleHideDrawer();
                 }}
               >
