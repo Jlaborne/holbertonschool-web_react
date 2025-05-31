@@ -1,8 +1,8 @@
-import React from "react";
-import { render, screen } from "@testing-library/react";
-import CourseListRow from "./CourseListRow";
+/* eslint-disable no-undef */
+import { render, screen } from '@testing-library/react';
+import CourseListRow from './CourseListRow';
 
-import { StyleSheetTestUtils } from "aphrodite";
+import { StyleSheetTestUtils } from 'aphrodite';
 
 beforeEach(() => {
   StyleSheetTestUtils.suppressStyleInjection();
@@ -12,8 +12,8 @@ afterEach(() => {
   StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
 });
 
-describe("CourseListRow", () => {
-  test("renders one th with colSpan=2 when isHeader is true and textSecondCell is null", () => {
+describe('CourseListRow', () => {
+  test('renders one th with colSpan=2 when isHeader is true and textSecondCell is null', () => {
     render(
       <table>
         <thead>
@@ -21,13 +21,13 @@ describe("CourseListRow", () => {
         </thead>
       </table>
     );
-    const th = screen.getByRole("columnheader");
+    const th = screen.getByRole('columnheader');
     expect(th).toBeInTheDocument();
-    expect(th).toHaveAttribute("colspan", "2");
-    expect(th).toHaveTextContent("Header Only");
+    expect(th).toHaveAttribute('colspan', '2');
+    expect(th).toHaveTextContent('Header Only');
   });
 
-  test("renders two th when isHeader is true and textSecondCell is provided", () => {
+  test('renders two th when isHeader is true and textSecondCell is provided', () => {
     render(
       <table>
         <thead>
@@ -39,13 +39,13 @@ describe("CourseListRow", () => {
         </thead>
       </table>
     );
-    const ths = screen.getAllByRole("columnheader");
+    const ths = screen.getAllByRole('columnheader');
     expect(ths.length).toBe(2);
-    expect(ths[0]).toHaveTextContent("Course name");
-    expect(ths[1]).toHaveTextContent("Credit");
+    expect(ths[0]).toHaveTextContent('Course name');
+    expect(ths[1]).toHaveTextContent('Credit');
   });
 
-  test("renders two td when isHeader is false", () => {
+  test('renders two td when isHeader is false', () => {
     render(
       <table>
         <tbody>
@@ -57,9 +57,9 @@ describe("CourseListRow", () => {
         </tbody>
       </table>
     );
-    const tds = screen.getAllByRole("cell");
+    const tds = screen.getAllByRole('cell');
     expect(tds.length).toBe(2);
-    expect(tds[0]).toHaveTextContent("ES6");
-    expect(tds[1]).toHaveTextContent("60");
+    expect(tds[0]).toHaveTextContent('ES6');
+    expect(tds[1]).toHaveTextContent('60');
   });
 });

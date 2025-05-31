@@ -126,9 +126,7 @@ class App extends Component {
               <p>Holberton School News goes here</p>
             </BodySection>
           </div>
-          <Footer
-          //className={css(styles.footer)}
-          />
+          <Footer />
         </>
       </NewContext.Provider>
     );
@@ -139,14 +137,6 @@ const styles = StyleSheet.create({
   body: {
     padding: '40px',
     minHeight: '300px',
-  },
-  footer: {
-    position: 'fixed',
-    bottom: 0,
-    width: '100%',
-    borderTop: '3px solid #e1003c',
-    textAlign: 'center',
-    padding: '1rem 0',
   },
 });
 

@@ -1,7 +1,8 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import Header from "./Header";
-import { newContext } from "../Context/context";
-import { StyleSheetTestUtils } from "aphrodite";
+/* eslint-disable no-undef, no-unused-var */
+import { render, screen, fireEvent } from '@testing-library/react';
+import Header from './Header';
+import { newContext } from '../Context/context';
+import { StyleSheetTestUtils } from 'aphrodite';
 
 beforeEach(() => {
   StyleSheetTestUtils.suppressStyleInjection();
@@ -11,12 +12,12 @@ afterEach(() => {
   StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
 });
 
-describe("Header component", () => {
-  test("should not render logoutSection if user is not logged in", () => {
+describe('Header component', () => {
+  test('should not render logoutSection if user is not logged in', () => {
     render(
       <newContext.Provider
         value={{
-          user: { isLoggedIn: false, email: "", password: "" },
+          user: { isLoggedIn: false, email: '', password: '' },
           logOut: jest.fn(),
         }}
       >
@@ -26,14 +27,14 @@ describe("Header component", () => {
     expect(screen.queryByText(/logout/i)).toBeNull();
   });
 
-  test("should render logoutSection if user is logged in", () => {
+  test('should render logoutSection if user is logged in', () => {
     render(
       <newContext.Provider
         value={{
           user: {
             isLoggedIn: true,
-            email: "test@email.com",
-            password: "12345678",
+            email: 'test@email.com',
+            password: '12345678',
           },
           logOut: jest.fn(),
         }}
@@ -47,15 +48,15 @@ describe("Header component", () => {
     expect(screen.getByText(/logout/i)).toBeInTheDocument();
   });
 
-  test("should call logOut when clicking logout link", () => {
+  test('should call logOut when clicking logout link', () => {
     const mockLogOut = jest.fn();
     render(
       <newContext.Provider
         value={{
           user: {
             isLoggedIn: true,
-            email: "test@email.com",
-            password: "12345678",
+            email: 'test@email.com',
+            password: '12345678',
           },
           logOut: mockLogOut,
         }}

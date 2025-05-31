@@ -1,6 +1,7 @@
-import React from "react";
-import { render, screen, cleanup } from "@testing-library/react";
-import WithLogging from "./WithLogging";
+/* eslint-disable no-undef */
+import React from 'react';
+import { render, screen, cleanup } from '@testing-library/react';
+import WithLogging from './WithLogging';
 
 afterEach(cleanup);
 
@@ -10,27 +11,27 @@ class MockApp extends React.Component {
   }
 }
 
-describe("WithLogging HOC", () => {
-  test("renders wrapped component content", () => {
+describe('WithLogging HOC', () => {
+  test('renders wrapped component content', () => {
     const WrappedComponent = WithLogging(MockApp);
     render(<WrappedComponent />);
-    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      "Hello from Mock App Component"
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
+      'Hello from Mock App Component'
     );
   });
 
-  test("logs when mounted and unmounted", () => {
-    const logSpy = jest.spyOn(console, "log").mockImplementation(() => {});
+  test('logs when mounted and unmounted', () => {
+    const logSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
 
     const WrappedComponent = WithLogging(MockApp);
     const { unmount } = render(<WrappedComponent />);
 
-    expect(logSpy).toHaveBeenCalledWith("Component MockApp is mounted");
+    expect(logSpy).toHaveBeenCalledWith('Component MockApp is mounted');
 
     unmount();
 
     expect(logSpy).toHaveBeenCalledWith(
-      "Component MockApp is going to unmount"
+      'Component MockApp is going to unmount'
     );
 
     logSpy.mockRestore();
