@@ -48,4 +48,4 @@ NotificationItem.defaultProps = {
   },
 });*/
 
-export default NotificationItem;
+export default memo(NotificationItem);
