@@ -1,14 +1,12 @@
-import PropTypes from "prop-types";
-import CourseListRow from "./CourseListRow";
-//import { StyleSheet, css } from "aphrodite";
+import PropTypes from 'prop-types';
+import CourseListRow from './CourseListRow';
+import { StyleSheet, css } from 'aphrodite';
 
 function CourseList({ courses = [] }) {
   const isEmpty = courses.length === 0;
 
   return (
-    <table
-    //className={css(styles.courseList)}
-    >
+    <table className={css(styles.courseList)}>
       {!isEmpty && (
         <thead>
           <CourseListRow isHeader={true} textFirstCell="Available courses" />
@@ -50,13 +48,13 @@ CourseList.propTypes = {
   ),
 };
 
-/*const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   courseList: {
-    border: "1px solid #ddd",
-    borderCollapse: "collapse",
-    width: "90%",
-    margin: "40px auto",
+    border: '1px solid #ddd',
+    borderCollapse: 'collapse',
+    width: '90%',
+    margin: '40px auto',
   },
-});*/
+});
 
 export default CourseList;

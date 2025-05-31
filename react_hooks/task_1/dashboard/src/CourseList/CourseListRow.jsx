@@ -1,19 +1,16 @@
-import PropTypes from "prop-types";
-//import { StyleSheet, css } from "aphrodite";
+import PropTypes from 'prop-types';
+import { StyleSheet, css } from 'aphrodite';
 
 function CourseListRow({
   isHeader = false,
-  textFirstCell = "",
+  textFirstCell = '',
   textSecondCell = null,
 }) {
   if (isHeader) {
     if (textSecondCell === null) {
       return (
         <tr>
-          <th
-            colSpan="2"
-            //className={css(styles.th)}
-          >
+          <th colSpan="2" className={css(styles.th)}>
             {textFirstCell}
           </th>
         </tr>
@@ -21,16 +18,8 @@ function CourseListRow({
     } else {
       return (
         <tr>
-          <th
-          //className={css(styles.th)}
-          >
-            {textFirstCell}
-          </th>
-          <th
-          //className={css(styles.th)}
-          >
-            {textSecondCell}
-          </th>
+          <th className={css(styles.th)}>{textFirstCell}</th>
+          <th className={css(styles.th)}>{textSecondCell}</th>
         </tr>
       );
     }
@@ -38,16 +27,8 @@ function CourseListRow({
 
   return (
     <tr>
-      <td
-      //className={css(styles.td)}
-      >
-        {textFirstCell}
-      </td>
-      <td
-      //className={css(styles.td)}
-      >
-        {textSecondCell}
-      </td>
+      <td className={css(styles.td)}>{textFirstCell}</td>
+      <td className={css(styles.td)}>{textSecondCell}</td>
     </tr>
   );
 }
@@ -58,17 +39,17 @@ CourseListRow.propTypes = {
   textSecondCell: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
-/*const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   th: {
-    border: "1px solid #ddd",
-    padding: "10px",
-    fontWeight: "bold",
-    textAlign: "center",
+    border: '1px solid #ddd',
+    padding: '10px',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   td: {
-    border: "1px solid #ddd",
-    padding: "10px",
+    border: '1px solid #ddd',
+    padding: '10px',
   },
-});*/
+});
 
 export default CourseListRow;
