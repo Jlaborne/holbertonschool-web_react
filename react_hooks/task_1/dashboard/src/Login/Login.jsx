@@ -37,7 +37,7 @@ function Login({ logIn }) {
     >
       <p>Login to access the full dashboard</p>
       <form onSubmit={handleLoginSubmit}>
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email">Email :</label>
         <input
           type="email"
           id="email"
@@ -46,7 +46,7 @@ function Login({ logIn }) {
           // className={css(styles.input)}
           onChange={handleChangeEmail}
         />
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password">Password :</label>
         <input
           type="password"
           id="password"
