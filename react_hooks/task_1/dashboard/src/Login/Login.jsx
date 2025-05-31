@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-//import { StyleSheet, css } from "aphrodite";
+import { StyleSheet, css } from 'aphrodite';
 
 function Login({ logIn }) {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -32,9 +32,7 @@ function Login({ logIn }) {
   };
 
   return (
-    <div
-    // className={css(styles.login)}
-    >
+    <div className={css(styles.login)}>
       <p>Login to access the full dashboard</p>
       <form onSubmit={handleLoginSubmit}>
         <label htmlFor="email">Email :</label>
@@ -43,7 +41,7 @@ function Login({ logIn }) {
           id="email"
           name="email"
           value={formData.email}
-          // className={css(styles.input)}
+          className={css(styles.input)}
           onChange={handleChangeEmail}
         />
         <label htmlFor="password">Password :</label>
@@ -52,13 +50,13 @@ function Login({ logIn }) {
           id="password"
           name="password"
           value={formData.password}
-          // className={css(styles.input)}
+          className={css(styles.input)}
           onChange={handleChangePassword}
         />
         <input
           type="submit"
           value="OK"
-          // className={css(styles.button)}
+          className={css(styles.button)}
           disabled={!enableSubmit}
         />
       </form>
@@ -70,24 +68,24 @@ Login.defaultProps = {
   logIn: () => {},
 };
 
-/*const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   login: {
-    padding: "40px",
-    minHeight: "300px",
-    "@media (max-width: 900px)": {
-      display: "block",
-      padding: "10px",
+    padding: '40px',
+    minHeight: '300px',
+    '@media (max-width: 900px)': {
+      display: 'block',
+      padding: '10px',
     },
   },
   input: {
-    display: "block",
-    marginBottom: "10px",
-    marginTop: "5px",
+    display: 'block',
+    marginBottom: '10px',
+    marginTop: '5px',
   },
   button: {
-    display: "block",
-    marginTop: "10px",
+    display: 'block',
+    marginTop: '10px',
   },
-});*/
+});
 
 export default Login;
