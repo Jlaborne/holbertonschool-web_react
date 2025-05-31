@@ -1,4 +1,5 @@
-import path from "path";
+/* eslint-disable no-unused-vars */
+import path from 'path';
 
 export default {
   process(sourceText, sourcePath, options) {
