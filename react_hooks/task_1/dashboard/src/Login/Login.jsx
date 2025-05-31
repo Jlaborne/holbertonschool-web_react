@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 //import { StyleSheet, css } from "aphrodite";
 
 function Login({ logIn }) {
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({ email: '', password: '' });
   const [enableSubmit, setEnableSubmit] = useState(false);
 
   const isValidEmail = (email) => /\S+@\S+\.\S+/.test(email);
@@ -11,8 +11,8 @@ function Login({ logIn }) {
   useEffect(() => {
     const { email, password } = formData;
     const canSubmit =
-      email !== "" &&
-      password !== "" &&
+      email !== '' &&
+      password !== '' &&
       isValidEmail(email) &&
       isValidPassword(password);
     setEnableSubmit(canSubmit);
