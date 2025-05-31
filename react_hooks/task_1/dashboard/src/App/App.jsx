@@ -126,9 +126,9 @@ class App extends Component {
               <p>Holberton School News goes here</p>
             </BodySection>
           </div>
-          <Footer className={css(styles.footer)}>
-            <p>Copyright 2025 - Holberton School</p>
-          </Footer>
+          <Footer
+          //className={css(styles.footer)}
+          />
         </>
       </NewContext.Provider>
     );
