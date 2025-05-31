@@ -1,18 +1,27 @@
 import PropTypes from 'prop-types';
 import { memo } from 'react';
-// import { StyleSheet, css } from "aphrodite";
+import { StyleSheet, css } from 'aphrodite';
 
 function NotificationItem({ type, value, html, id, markAsRead }) {
-  const style = { color: type === 'default' ? 'blue' : 'red' };
+  const styleClass = css(
+    type === 'urgent' ? styles.urgent : styles.default,
+    styles.responsive
+  );
 
-  return (
+  return html && type === 'urgent' ? (
     <li
-      style={style}
       data-notification-type={type}
-      dangerouslySetInnerHTML={html && type === 'urgent' ? html : undefined}
+      className={styleClass}
+      dangerouslySetInnerHTML={html}
+      onClick={() => markAsRead(id)}
+    />
+  ) : (
+    <li
+      data-notification-type={type}
+      className={styleClass}
       onClick={() => markAsRead(id)}
     >
-      {html && type === 'urgent' ? null : value}
+      {value}
     </li>
   );
 }
@@ -30,5 +39,22 @@ NotificationItem.propTypes = {
 NotificationItem.defaultProps = {
   markAsRead: () => {},
 };
+
+const styles = StyleSheet.create({
+  default: {
+    color: 'blue',
+  },
+  urgent: {
+    color: 'red',
+  },
+  responsive: {
+    '@media (max-width: 900px)': {
+      width: '100%',
+      borderBottom: '1px solid black',
+      fontSize: '20px',
+      padding: '10px 8px',
+    },
+  },
+});
 
 export default memo(NotificationItem);
