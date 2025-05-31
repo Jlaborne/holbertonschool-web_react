@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import Notifications from "../Notifications/Notifications";
 import Header from "../Header/Header";
 import Login from "../Login/Login";
