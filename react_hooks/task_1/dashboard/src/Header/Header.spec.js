@@ -1,4 +1,4 @@
-/* eslint-disable no-undef, no-unused-var */
+/* eslint-disable no-undef, no-unused-vars */
 import { render, screen, fireEvent } from '@testing-library/react';
 import Header from './Header';
 import { newContext } from '../Context/context';

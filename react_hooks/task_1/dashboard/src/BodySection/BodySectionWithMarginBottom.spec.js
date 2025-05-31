@@ -1,4 +1,4 @@
-/* eslint-disable no-undef, no-unused-var */
+/* eslint-disable no-undef, no-unused-vars */
 import { render, screen } from '@testing-library/react';
 import BodySectionWithMarginBottom from './BodySectionWithMarginBottom';
 

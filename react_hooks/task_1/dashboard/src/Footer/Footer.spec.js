@@ -1,4 +1,4 @@
-/* eslint-disable no-undef, no-unused-var */
+/* eslint-disable no-undef, no-unused-vars */
 import { getCurrentYear, getFooterCopy } from '../utils/utils';
 import { render, screen } from '@testing-library/react';
 import Footer from './Footer';
