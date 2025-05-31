@@ -1,13 +1,15 @@
 import { useContext } from 'react';
 import { getCurrentYear, getFooterCopy } from '../utils/utils';
 import { newContext } from '../Context/context';
-import { StyleSheet, css } from 'aphrodite';
+//import { StyleSheet, css } from 'aphrodite';
 
 function Footer() {
   const { user } = useContext(newContext);
 
   return (
-    <div className={css(styles.footer)}>
+    <div
+    //className={css(styles.footer)}
+    >
       <p>
         Copyright {getCurrentYear()} - {getFooterCopy(true)}
       </p>
@@ -20,7 +22,7 @@ function Footer() {
   );
 }
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
   footer: {
     position: 'fixed',
     bottom: 0,
@@ -29,6 +31,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     padding: '1rem 0',
   },
-});
+});*/
 
 export default Footer;
