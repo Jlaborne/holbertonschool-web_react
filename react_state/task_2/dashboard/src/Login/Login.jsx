@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 //import { StyleSheet, css } from "aphrodite";
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: "",
+      email: this.props.email || '',
+      password: this.props.password || '',
       enableSubmit: false,
     };
   }
@@ -27,9 +27,9 @@ class Login extends React.Component {
 
   handleLoginSubmit = (e) => {
     e.preventDefault();
-    const { logIn } = this.props;
-    const { email, password } = this.state;
-    logIn(email, password);
+    if (this.props.logIn) {
+      this.props.logIn(this.state.email, this.state.password);
+    }
   };
 
   isValidEmail = (email) => /\S+@\S+\.\S+/.test(email);
@@ -38,8 +38,8 @@ class Login extends React.Component {
   updateSubmitState = () => {
     const { email, password } = this.state;
     const enableSubmit =
-      email !== "" &&
-      password !== "" &&
+      email !== '' &&
+      password !== '' &&
       this.isValidEmail(email) &&
       this.isValidPassword(password);
     this.setState({ enableSubmit });
