@@ -8,9 +8,7 @@ const user = {
 
 const logOut = () => {};
 
-const newContext = React.createContext({
+export const newContext = React.createContext({
   user,
-  logOut,
+  logOut: logOut,
 });
-
-export { newContext };
