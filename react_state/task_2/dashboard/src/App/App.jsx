@@ -51,6 +51,8 @@ class App extends Component {
   logOut = () => {
     this.setState({
       user: {
+        email: '',
+        password: '',
         isLoggedIn: false,
       },
     });
@@ -69,7 +71,7 @@ class App extends Component {
 
     const contextValue = {
       user: this.state.user,
-      logOut: this.state.logOut,
+      logOut: this.logOut,
     };
 
     const coursesList = [
