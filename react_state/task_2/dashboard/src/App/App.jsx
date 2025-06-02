@@ -1,15 +1,19 @@
-import React, { Component } from "react";
-import Notifications from "../Notifications/Notifications";
-import Header from "../Header/Header";
-import Login from "../Login/Login";
-import Footer from "../Footer/Footer";
-import { getLatestNotification } from "../utils/utils";
-import CourseList from "../CourseList/CourseList";
-import BodySection from "../BodySection/BodySection";
-import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
-import WithLogging from "../HOC/WithLogging";
+import React, { Component } from 'react';
+import Notifications from '../Notifications/Notifications';
+import Header from '../Header/Header';
+import Login from '../Login/Login';
+import Footer from '../Footer/Footer';
+import { getLatestNotification } from '../utils/utils';
+import CourseList from '../CourseList/CourseList';
+import BodySection from '../BodySection/BodySection';
+import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
+import WithLogging from '../HOC/WithLogging';
 //import { StyleSheet, css } from "aphrodite";
-import { newContext as NewContext } from "../Context/context";
+import {
+  newContext as NewContext,
+  user as contextUser,
+  logOut as contextLogOut,
+} from '../Context/context';
 
 const LoginWithLogging = WithLogging(Login);
 const CourseListWithLogging = WithLogging(CourseList);
@@ -19,11 +23,8 @@ class App extends Component {
     super(props);
     this.state = {
       displayDrawer: false,
-      user: {
-        email: "",
-        password: "",
-        isLoggedIn: false,
-      },
+      user: { ...contextUser },
+      logOut: contextLogOut,
     };
   }
 
@@ -31,8 +32,8 @@ class App extends Component {
   handleHideDrawer = () => this.setState({ displayDrawer: false });
 
   handleKeyDown = (e) => {
-    if (e.ctrlKey && e.key === "h") {
-      alert("Logging you out");
+    if (e.ctrlKey && e.key === 'h') {
+      alert('Logging you out');
       this.logOut();
     }
   };
@@ -49,20 +50,16 @@ class App extends Component {
 
   logOut = () => {
     this.setState({
-      user: {
-        email: "",
-        password: "",
-        isLoggedIn: false,
-      },
+      user: { ...contextUser },
     });
   };
 
   componentDidMount() {
-    document.addEventListener("keydown", this.handleKeyDown);
+    document.addEventListener('keydown', this.handleKeyDown);
   }
 
   componentWillUnmount() {
-    document.removeEventListener("keydown", this.handleKeyDown);
+    document.removeEventListener('keydown', this.handleKeyDown);
   }
 
   render() {
@@ -70,19 +67,19 @@ class App extends Component {
 
     const contextValue = {
       user: this.state.user,
-      logOut: this.logOut,
+      logOut: this.state.logOut,
     };
 
     const coursesList = [
-      { id: 1, name: "ES6", credit: 60 },
-      { id: 2, name: "Webpack", credit: 20 },
-      { id: 3, name: "React", credit: 40 },
+      { id: 1, name: 'ES6', credit: 60 },
+      { id: 2, name: 'Webpack', credit: 20 },
+      { id: 3, name: 'React', credit: 40 },
     ];
 
     const notificationsList = [
-      { id: 1, type: "default", value: "New course available" },
-      { id: 2, type: "urgent", value: "New resume available" },
-      { id: 3, type: "urgent", html: { __html: getLatestNotification() } },
+      { id: 1, type: 'default', value: 'New course available' },
+      { id: 2, type: 'urgent', value: 'New resume available' },
+      { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
     ];
 
     return (
