@@ -9,11 +9,7 @@ import BodySection from '../BodySection/BodySection';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 import WithLogging from '../HOC/WithLogging';
 //import { StyleSheet, css } from "aphrodite";
-import {
-  newContext as NewContext,
-  user as contextUser,
-  logOut as contextLogOut,
-} from '../Context/context';
+import { newContext } from '../Context/context';
 
 const LoginWithLogging = WithLogging(Login);
 const CourseListWithLogging = WithLogging(CourseList);
@@ -23,8 +19,12 @@ class App extends Component {
     super(props);
     this.state = {
       displayDrawer: false,
-      user: { ...contextUser },
-      logOut: contextLogOut,
+      user: {
+        email: '',
+        password: '',
+        isLoggedIn: false,
+      },
+      logout: newContext._currentValue.logOut,
     };
   }
 
@@ -83,7 +83,7 @@ class App extends Component {
     ];
 
     return (
-      <NewContext.Provider value={contextValue}>
+      <newContext.Provider value={contextValue}>
         <>
           <div className="root-notifications">
             <Notifications
@@ -123,7 +123,7 @@ class App extends Component {
             <p>Copyright 2025 - Holberton School</p>
           </Footer>
         </>
-      </NewContext.Provider>
+      </newContext.Provider>
     );
   }
 }
