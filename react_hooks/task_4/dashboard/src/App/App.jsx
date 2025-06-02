@@ -9,18 +9,17 @@ import BodySection from '../BodySection/BodySection';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 import WithLogging from '../HOC/WithLogging';
 import { StyleSheet, css } from 'aphrodite';
-import { newContext as NewContext } from '../Context/context';
+import {
+  newContext as NewContext,
+  user as defaultUser,
+} from '../Context/context';
 
 const LoginWithLogging = WithLogging(Login);
 const CourseListWithLogging = WithLogging(CourseList);
 
 function App() {
   const [displayDrawer, setDisplayDrawer] = useState(true);
-  const [user, setUser] = useState({
-    email: '',
-    password: '',
-    isLoggedIn: false,
-  });
+  const [user, setUser] = useState(defaultUser);
   const [notifications, setNotifications] = useState([
     { id: 1, type: 'default', value: 'New course available' },
     { id: 2, type: 'urgent', value: 'New resume available' },
@@ -37,7 +36,7 @@ function App() {
 
   const logIn = (email, password) =>
     setUser({ email, password, isLoggedIn: true });
-  const logOut = () => setUser({ email: '', password: '', isLoggedIn: false });
+  const logOut = () => setUser(defaultUser);
 
   const markNotificationAsRead = (id) => {
     console.log(`Notification ${id} has been marked as read`);
