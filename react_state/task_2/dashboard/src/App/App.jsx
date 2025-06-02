@@ -51,8 +51,6 @@ class App extends Component {
   logOut = () => {
     this.setState({
       user: {
-        email: '',
-        password: '',
         isLoggedIn: false,
       },
     });
