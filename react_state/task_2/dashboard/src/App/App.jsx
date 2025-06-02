@@ -69,10 +69,10 @@ class App extends Component {
   render() {
     const { displayDrawer, user } = this.state;
 
-    const contextValue = {
+    /*const contextValue = {
       user: this.state.user,
       logOut: this.logOut,
-    };
+    };*/
 
     const coursesList = [
       { id: 1, name: 'ES6', credit: 60 },
@@ -87,7 +87,9 @@ class App extends Component {
     ];
 
     return (
-      <newContext.Provider value={contextValue}>
+      <newContext.Provider
+        value={{ user: this.state.user, logOut: this.state.logout }}
+      >
         <>
           <div className="root-notifications">
             <Notifications
