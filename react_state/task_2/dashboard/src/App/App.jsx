@@ -24,7 +24,7 @@ class App extends Component {
         password: '',
         isLoggedIn: false,
       },
-      logout: () => {},
+      logout: newContext._currentValue.logOut,
     };
   }
 
