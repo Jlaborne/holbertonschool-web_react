@@ -50,7 +50,11 @@ class App extends Component {
 
   logOut = () => {
     this.setState({
-      user: { ...contextUser },
+      user: {
+        email: '',
+        password: '',
+        isLoggedIn: false,
+      },
     });
   };
 
@@ -97,7 +101,7 @@ class App extends Component {
           <div
           //className={css(styles.body)}
           >
-            {user.isLoggedIn ? (
+            {this.state.user.isLoggedIn ? (
               <BodySectionWithMarginBottom>
                 <CourseListWithLogging
                   title="Course List"
