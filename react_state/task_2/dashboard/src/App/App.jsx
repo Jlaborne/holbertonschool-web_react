@@ -81,7 +81,7 @@ class App extends Component {
   }
 
   render() {
-    let { displayDrawer, user, logOut, listNotifications } = this.state;
+    let { displayDrawer, user, logOut } = this.state;
 
     /*const contextValue = {
       user: this.state.user,
