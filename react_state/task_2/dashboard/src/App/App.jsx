@@ -133,7 +133,7 @@ class App extends Component {
           )}
           {user.isLoggedIn === true && (
             <BodySectionWithMarginBottom title="Course list">
-              <CourseList listCourses={listCourses} />
+              <CourseList title="Course List" courses={coursesList} />
             </BodySectionWithMarginBottom>
           )}
           <BodySection title="News from the school">
@@ -145,7 +145,6 @@ class App extends Component {
               deserunt ad est excepteur cillum laborum.
             </p>
           </BodySection>
-          <Footer />
           <Footer />
         </div>
       </newContext.Provider>
