@@ -25,18 +25,12 @@ class App extends Component {
         isLoggedIn: false,
       },
       logOut: () => this.logOut(),
-      notificationsList: [
-        { id: 1, type: 'default', value: 'New course available' },
-        { id: 2, type: 'urgent', value: 'New resume available' },
-        { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
-      ],
     };
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
     this.handleHideDrawer = this.handleHideDrawer.bind(this);
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
-    this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
   }
 
   handleDisplayDrawer() {
@@ -78,13 +72,6 @@ class App extends Component {
     });
   }
 
-  markNotificationAsRead(id) {
-    let updatedList = this.state.notificationsList.filter(
-      (notif) => notif.id !== id
-    );
-    this.setState({ notificationsList: updatedList });
-  }
-
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeyDown);
   }
@@ -94,7 +81,7 @@ class App extends Component {
   }
 
   render() {
-    let { displayDrawer, user, logOut, notificationsList } = this.state;
+    let { displayDrawer, user, logOut } = this.state;
 
     /*const contextValue = {
       user: this.state.user,
@@ -107,11 +94,11 @@ class App extends Component {
       { id: 3, name: 'React', credit: 40 },
     ];
 
-    /*const notificationsList = [
+    const notificationsList = [
       { id: 1, type: 'default', value: 'New course available' },
       { id: 2, type: 'urgent', value: 'New resume available' },
       { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
-    ];*/
+    ];
 
     return (
       <newContext.Provider value={{ user, logOut }}>
