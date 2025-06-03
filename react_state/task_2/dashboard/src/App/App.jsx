@@ -26,6 +26,10 @@ class App extends Component {
       },
       logOut: () => this.logOut(),
     };
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
+    this.handleHideDrawer = this.handleHideDrawer.bind(this);
+    this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
   }
 
