@@ -107,7 +107,7 @@ class App extends Component {
 
     return (
       <newContext.Provider value={{ user, logOut }}>
-        <>
+        <div className={css(styles.app)}>
           <div className="root-notifications">
             <Notifications
               notifications={notificationsList}
@@ -135,13 +135,17 @@ class App extends Component {
             </BodySection>
           </div>
           <Footer className={css(styles.footer)} />
-        </>
+        </div>
       </newContext.Provider>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  app: {
+    position: 'relative',
+    minHeight: '100vh',
+  },
   body: {
     padding: '40px',
     minHeight: '300px',
