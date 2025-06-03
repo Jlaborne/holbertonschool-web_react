@@ -25,7 +25,7 @@ class App extends Component {
         isLoggedIn: false,
       },
       logOut: () => this.logOut(),
-      notificationsList: [
+      listNotifications: [
         { id: 1, type: 'default', value: 'New course available' },
         { id: 2, type: 'urgent', value: 'New resume available' },
         { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
@@ -79,10 +79,10 @@ class App extends Component {
   }
 
   markNotificationAsRead(id) {
-    let updatedList = this.state.notificationsList.filter(
+    let updatedList = this.state.listNotifications.filter(
       (notif) => notif.id !== id
     );
-    this.setState({ notificationsList: updatedList });
+    this.setState({ listNotifications: updatedList });
   }
 
   componentDidMount() {
