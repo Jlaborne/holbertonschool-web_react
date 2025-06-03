@@ -25,6 +25,11 @@ class App extends Component {
         isLoggedIn: false,
       },
       logOut: () => this.logOut(),
+      notificationsList: [
+        { id: 1, type: 'default', value: 'New course available' },
+        { id: 2, type: 'urgent', value: 'New resume available' },
+        { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
+      ],
     };
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
@@ -81,7 +86,7 @@ class App extends Component {
   }
 
   render() {
-    let { displayDrawer, user, logOut } = this.state;
+    let { displayDrawer, user, logOut, notificationsList } = this.state;
 
     /*const contextValue = {
       user: this.state.user,
@@ -94,11 +99,11 @@ class App extends Component {
       { id: 3, name: 'React', credit: 40 },
     ];
 
-    const notificationsList = [
+    /*const notificationsList = [
       { id: 1, type: 'default', value: 'New course available' },
       { id: 2, type: 'urgent', value: 'New resume available' },
       { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
-    ];
+    ];*/
 
     return (
       <newContext.Provider value={{ user, logOut }}>
