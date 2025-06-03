@@ -35,7 +35,7 @@ class Login extends React.Component {
   }
 
   isValidEmail(email) {
-    return /\S+@\S+\.\S+/.test(email);
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
   isValidPassword(password) {
