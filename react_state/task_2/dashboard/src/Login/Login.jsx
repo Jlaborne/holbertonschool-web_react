@@ -9,39 +9,49 @@ class Login extends React.Component {
       password: '',
       enableSubmit: false,
     };
+    this.handleChangeEmail = this.handleChangeEmail.bind(this);
+    this.handleChangePassword = this.handleChangePassword.bind(this);
+    this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (
-      prevState.email !== this.state.email ||
-      prevState.password !== this.state.password
-    ) {
-      this.updateSubmitState();
-    }
+  componentDidMount() {
+    this.updateSubmitState();
   }
 
-  handleChangeEmail = (e) => {
-    this.setState({ email: e.target.value });
-  };
+  handleChangeEmail(e) {
+    const email = e.target.value;
+    this.setState({ email }, this.updateSubmitState);
+  }
 
-  handleChangePassword = (e) => {
-    this.setState({ password: e.target.value });
-  };
+  handleChangePassword(e) {
+    const password = e.target.value;
+    this.setState({ password }, this.updateSubmitState);
+  }
 
-  handleLoginSubmit = (e) => {
+  handleLoginSubmit(e) {
     e.preventDefault();
-    const { logIn } = this.props;
-    const { email, password } = this.state;
-    if (logIn) logIn(email, password);
-  };
-
-  updateSubmitState = () => {
-    const { email, password } = this.state;
-    const enableSubmit = email !== '' && password.length >= 8;
-    if (enableSubmit !== this.state.enableSubmit) {
-      this.setState({ enableSubmit });
+    if (this.props.logIn) {
+      this.props.logIn(this.state.email, this.state.password);
     }
-  };
+  }
+
+  isValidEmail(email) {
+    return /\S+@\S+\.\S+/.test(email);
+  }
+
+  isValidPassword(password) {
+    return password.length >= 8;
+  }
+
+  updateSubmitState() {
+    const { email, password } = this.state;
+    const enableSubmit =
+      email !== '' &&
+      password !== '' &&
+      this.isValidEmail(email) &&
+      this.isValidPassword(password);
+    this.setState({ enableSubmit });
+  }
 
   render() {
     const { email, password, enableSubmit } = this.state;
