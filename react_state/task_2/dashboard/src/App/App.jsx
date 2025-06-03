@@ -126,7 +126,7 @@ class App extends Component {
             />
           </div>
           <Header />
-          <div className={css(styles.body)}>
+          <div>
             {this.state.user.isLoggedIn ? (
               <BodySectionWithMarginBottom>
                 <CourseList title="Course List" courses={coursesList} />
