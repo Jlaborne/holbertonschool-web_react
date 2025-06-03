@@ -114,7 +114,7 @@ class App extends Component {
           </div>
           {user.isLoggedIn === false && (
             <BodySectionWithMarginBottom title="Log in to continue">
-              <Login logIn={this.logIn} />
+              <LoginWithLogging logIn={this.logIn} />
             </BodySectionWithMarginBottom>
           )}
           {user.isLoggedIn === true && (
