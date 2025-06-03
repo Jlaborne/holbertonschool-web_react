@@ -17,7 +17,6 @@ const CourseListWithLogging = WithLogging(CourseList);
 class App extends Component {
   constructor(props) {
     super(props);
-    this.logOut = this.logOut.bind(this);
     this.state = {
       displayDrawer: false,
       user: {
@@ -27,6 +26,7 @@ class App extends Component {
       },
       logOut: () => this.logOut(),
     };
+    this.logOut = this.logOut.bind(this);
   }
 
   handleDisplayDrawer = () => this.setState({ displayDrawer: true });
