@@ -1,14 +1,17 @@
 import React from 'react';
-//import { StyleSheet, css } from "aphrodite";
+import { StyleSheet, css } from 'aphrodite';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: this.props.email || '',
-      password: this.props.password || '',
+      email: '',
+      password: '',
       enableSubmit: false,
     };
+    this.handleChangeEmail = this.handleChangeEmail.bind(this);
+    this.handleChangePassword = this.handleChangePassword.bind(this);
+    this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -49,9 +52,7 @@ class Login extends React.Component {
     const { email, password, enableSubmit } = this.state;
 
     return (
-      <div
-      //className={css(styles.login)}
-      >
+      <div className={css(styles.login)}>
         <p>Login to access the full dashboard</p>
         <form onSubmit={this.handleLoginSubmit}>
           <label htmlFor="email">Email</label>
@@ -60,7 +61,7 @@ class Login extends React.Component {
             id="email"
             name="email"
             value={email}
-            //className={css(styles.input)}
+            className={css(styles.input)}
             onChange={this.handleChangeEmail}
           />
           <label htmlFor="password">Password</label>
@@ -69,12 +70,12 @@ class Login extends React.Component {
             id="password"
             name="password"
             value={password}
-            //className={css(styles.input)}
+            className={css(styles.input)}
             onChange={this.handleChangePassword}
           />
           <input
             type="submit"
-            //className={css(styles.button)}
+            className={css(styles.button)}
             disabled={!enableSubmit}
             value="OK"
           />
@@ -88,24 +89,24 @@ Login.defaultProps = {
   logIn: () => {},
 };
 
-/*const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   login: {
-    padding: "40px",
-    minHeight: "300px",
-    "@media (max-width: 900px)": {
-      display: "block",
-      padding: "10px",
+    padding: '40px',
+    minHeight: '300px',
+    '@media (max-width: 900px)': {
+      display: 'block',
+      padding: '10px',
     },
   },
   input: {
-    display: "block",
-    marginBottom: "10px",
-    marginTop: "5px",
+    display: 'block',
+    marginBottom: '10px',
+    marginTop: '5px',
   },
   button: {
-    display: "block",
-    marginTop: "10px",
+    display: 'block',
+    marginTop: '10px',
   },
-});*/
+});
 
 export default Login;
