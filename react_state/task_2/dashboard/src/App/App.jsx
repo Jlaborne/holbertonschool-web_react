@@ -88,13 +88,13 @@ class App extends Component {
       logOut: this.logOut,
     };*/
 
-    const coursesList = [
+    let coursesList = [
       { id: 1, name: 'ES6', credit: 60 },
       { id: 2, name: 'Webpack', credit: 20 },
       { id: 3, name: 'React', credit: 40 },
     ];
 
-    const notificationsList = [
+    let notificationsList = [
       { id: 1, type: 'default', value: 'New course available' },
       { id: 2, type: 'urgent', value: 'New resume available' },
       { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
@@ -105,11 +105,10 @@ class App extends Component {
         <div className={css(styles.app)}>
           <div className={css(styles.upperside)}>
             <Notifications
-              notificationsList={notificationsList}
+              notifications={notificationsList}
               displayDrawer={displayDrawer}
               handleDisplayDrawer={this.handleDisplayDrawer}
               handleHideDrawer={this.handleHideDrawer}
-              markNotificationAsRead={this.markNotificationAsRead}
             />
             <Header />
           </div>
