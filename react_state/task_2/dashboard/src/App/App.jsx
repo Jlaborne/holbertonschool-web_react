@@ -17,6 +17,7 @@ const CourseListWithLogging = WithLogging(CourseList);
 class App extends Component {
   constructor(props) {
     super(props);
+    this.logOut = this.logOut.bind(this);
     this.state = {
       displayDrawer: false,
       user: {
@@ -24,7 +25,7 @@ class App extends Component {
         password: '',
         isLoggedIn: false,
       },
-      logOut: () => this.logOut(),
+      logOut: this.logOut,
     };
   }
 
@@ -108,11 +109,7 @@ class App extends Component {
               </BodySectionWithMarginBottom>
             ) : (
               <BodySectionWithMarginBottom title="Log in to continue">
-                <LoginWithLogging
-                  logIn={this.logIn}
-                  email={user.email}
-                  password={user.password}
-                />
+                <LoginWithLogging logIn={this.logIn} />
               </BodySectionWithMarginBottom>
             )}
             <BodySection title="News from the School">
