@@ -79,7 +79,7 @@ class App extends Component {
   }
 
   markNotificationAsRead(id) {
-    const updatedList = this.state.notificationsList.filter(
+    let updatedList = this.state.notificationsList.filter(
       (notif) => notif.id !== id
     );
     this.setState({ notificationsList: updatedList });
