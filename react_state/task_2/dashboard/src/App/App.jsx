@@ -41,8 +41,8 @@ class App extends Component {
   logIn = (email, password) => {
     this.setState({
       user: {
-        email,
-        password,
+        email: email,
+        password: password,
         isLoggedIn: true,
       },
     });
@@ -67,7 +67,7 @@ class App extends Component {
   }
 
   render() {
-    const { displayDrawer, user } = this.state;
+    let { displayDrawer, user, logOut } = this.state;
 
     /*const contextValue = {
       user: this.state.user,
@@ -87,9 +87,7 @@ class App extends Component {
     ];
 
     return (
-      <newContext.Provider
-        value={{ user: this.state.user, logOut: this.state.logOut }}
-      >
+      <newContext.Provider value={{ user, logOut }}>
         <>
           <div className="root-notifications">
             <Notifications
@@ -121,9 +119,7 @@ class App extends Component {
               <p>Holberton School News goes here</p>
             </BodySection>
           </div>
-          <Footer className={css(styles.footer)}>
-            <p>Copyright 2025 - Holberton School</p>
-          </Footer>
+          <Footer className={css(styles.footer)} />
         </>
       </newContext.Provider>
     );
