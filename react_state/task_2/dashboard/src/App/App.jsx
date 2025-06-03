@@ -25,7 +25,7 @@ class App extends Component {
         password: '',
         isLoggedIn: false,
       },
-      logOut: this.logOut,
+      logOut: () => this.logOut(),
     };
   }
 
@@ -34,6 +34,7 @@ class App extends Component {
 
   handleKeyDown = (e) => {
     if (e.ctrlKey && e.key === 'h') {
+      e.preventDefault();
       alert('Logging you out');
       this.logOut();
     }
