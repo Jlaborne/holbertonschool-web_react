@@ -8,7 +8,7 @@ import CourseList from '../CourseList/CourseList';
 import BodySection from '../BodySection/BodySection';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 import WithLogging from '../HOC/WithLogging';
-//import { StyleSheet, css } from "aphrodite";
+import { StyleSheet, css } from 'aphrodite';
 import { newContext } from '../Context/context';
 
 const LoginWithLogging = WithLogging(Login);
@@ -100,9 +100,7 @@ class App extends Component {
             />
           </div>
           <Header />
-          <div
-          //className={css(styles.body)}
-          >
+          <div className={css(styles.body)}>
             {this.state.user.isLoggedIn ? (
               <BodySectionWithMarginBottom>
                 <CourseListWithLogging
@@ -123,9 +121,7 @@ class App extends Component {
               <p>Holberton School News goes here</p>
             </BodySection>
           </div>
-          <Footer
-          //className={css(styles.footer)}
-          >
+          <Footer className={css(styles.footer)}>
             <p>Copyright 2025 - Holberton School</p>
           </Footer>
         </>
@@ -134,19 +130,19 @@ class App extends Component {
   }
 }
 
-/*const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   body: {
-    padding: "40px",
-    minHeight: "300px",
+    padding: '40px',
+    minHeight: '300px',
   },
   footer: {
-    position: "fixed",
+    position: 'fixed',
     bottom: 0,
-    width: "100%",
-    borderTop: "3px solid #e1003c",
-    textAlign: "center",
-    padding: "1rem 0",
+    width: '100%',
+    borderTop: '3px solid #e1003c',
+    textAlign: 'center',
+    padding: '1rem 0',
   },
-});*/
+});
 
 export default App;
