@@ -9,43 +9,38 @@ class Login extends React.Component {
       password: '',
       enableSubmit: false,
     };
-    this.handleChangeEmail = this.handleChangeEmail.bind(this);
-    this.handleChangePassword = this.handleChangePassword.bind(this);
-    this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
   }
 
-  componentDidMount() {
-    this.updateSubmitState();
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      prevState.email !== this.state.email ||
+      prevState.password !== this.state.password
+    ) {
+      this.updateSubmitState();
+    }
   }
 
   handleChangeEmail = (e) => {
-    const email = e.target.value;
-    this.setState({ email }, this.updateSubmitState);
+    this.setState({ email: e.target.value });
   };
 
   handleChangePassword = (e) => {
-    const password = e.target.value;
-    this.setState({ password }, this.updateSubmitState);
+    this.setState({ password: e.target.value });
   };
 
   handleLoginSubmit = (e) => {
     e.preventDefault();
-    if (this.props.logIn) {
-      this.props.logIn(this.state.email, this.state.password);
-    }
+    const { logIn } = this.props;
+    const { email, password } = this.state;
+    if (logIn) logIn(email, password);
   };
-
-  isValidEmail = (email) => /\S+@\S+\.\S+/.test(email);
-  isValidPassword = (password) => password.length >= 8;
 
   updateSubmitState = () => {
     const { email, password } = this.state;
-    const enableSubmit =
-      email !== '' &&
-      password !== '' &&
-      this.isValidEmail(email) &&
-      this.isValidPassword(password);
-    this.setState({ enableSubmit });
+    const enableSubmit = email !== '' && password.length >= 8;
+    if (enableSubmit !== this.state.enableSubmit) {
+      this.setState({ enableSubmit });
+    }
   };
 
   render() {
