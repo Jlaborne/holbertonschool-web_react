@@ -33,8 +33,14 @@ class App extends Component {
     this.logOut = this.logOut.bind(this);
   }
 
-  handleDisplayDrawer = () => this.setState({ displayDrawer: true });
-  handleHideDrawer = () => this.setState({ displayDrawer: false });
+  handleDisplayDrawer() {
+    this.setState({ displayDrawer: true });
+  }
+  handleHideDrawer() {
+    this.setState({
+      displayDrawer: false,
+    });
+  }
 
   handleKeyDown = (e) => {
     if (e.ctrlKey && e.key === 'h') {
@@ -44,7 +50,7 @@ class App extends Component {
     }
   };
 
-  logIn = (email, password) => {
+  logIn(email, password) {
     this.setState({
       user: {
         email: email,
@@ -52,17 +58,18 @@ class App extends Component {
         isLoggedIn: true,
       },
     });
-  };
+  }
 
-  logOut = () => {
-    this.setState({
+  logOut() {
+    let self = this;
+    self.setState({
       user: {
         email: '',
         password: '',
         isLoggedIn: false,
       },
     });
-  };
+  }
 
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeyDown);
