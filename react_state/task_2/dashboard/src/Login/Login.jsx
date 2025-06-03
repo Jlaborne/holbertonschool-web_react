@@ -1,104 +1,112 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
-class Login extends Component {
+class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      enableSubmit: false,
       email: '',
       password: '',
+      enableSubmit: false,
     };
-    this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
     this.handleChangeEmail = this.handleChangeEmail.bind(this);
     this.handleChangePassword = this.handleChangePassword.bind(this);
+    this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
   }
 
-  handleLoginSubmit() {
+  componentDidMount() {
+    this.updateSubmitState();
+  }
+
+  handleChangeEmail = (e) => {
+    const email = e.target.value;
+    this.setState({ email }, this.updateSubmitState);
+  };
+
+  handleChangePassword = (e) => {
+    const password = e.target.value;
+    this.setState({ password }, this.updateSubmitState);
+  };
+
+  handleLoginSubmit = (e) => {
+    e.preventDefault();
+    if (this.props.logIn) {
+      this.props.logIn(this.state.email, this.state.password);
+    }
+  };
+
+  isValidEmail = (email) => /\S+@\S+\.\S+/.test(email);
+  isValidPassword = (password) => password.length >= 8;
+
+  updateSubmitState = () => {
     const { email, password } = this.state;
-    this.props.logIn(email, password);
-  }
-
-  handleChangeEmail(event) {
-    let pw = this.state.password;
-    this.setState({
-      [event.target.name]: event.target.value,
-      enableSubmit:
-        event.target.value.length > 0 && pw.length > 0 ? true : false,
-    });
-  }
-
-  handleChangePassword(event) {
-    let email = this.state.email;
-    this.setState({
-      [event.target.name]: event.target.value,
-      enableSubmit:
-        event.target.value.length > 0 && email.length > 0 ? true : false,
-    });
-  }
+    const enableSubmit =
+      email !== '' &&
+      password !== '' &&
+      this.isValidEmail(email) &&
+      this.isValidPassword(password);
+    this.setState({ enableSubmit });
+  };
 
   render() {
+    const { email, password, enableSubmit } = this.state;
+
     return (
-      <Fragment>
-        <div className={css(styles.loginBody)}>
-          <p>Login to access the full dashboard</p>
-          <form onSubmit={this.handleLoginSubmit}>
-            <div className={css(styles.inputContainer)}>
-              <label htmlFor="email">Email: </label>
-              <input
-                className={css(styles.input)}
-                type="email"
-                id="email"
-                name="email"
-                onChange={this.handleChangeEmail}
-              />
-            </div>
-            <div className={css(styles.inputContainer)}>
-              <label htmlFor="password">Password: </label>
-              <input
-                className={css(styles.input)}
-                type="password"
-                id="password"
-                name="password"
-                onChange={this.handleChangePassword}
-              />
-            </div>
-            <div className={css(styles.inputContainer)}>
-              <input
-                type="submit"
-                value="submit"
-                disabled={!this.state.enableSubmit}
-              />
-            </div>
-          </form>
-        </div>
-      </Fragment>
+      <div className={css(styles.login)}>
+        <p>Login to access the full dashboard</p>
+        <form onSubmit={this.handleLoginSubmit}>
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            className={css(styles.input)}
+            onChange={this.handleChangeEmail}
+          />
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            className={css(styles.input)}
+            onChange={this.handleChangePassword}
+          />
+          <input
+            type="submit"
+            className={css(styles.button)}
+            disabled={!enableSubmit}
+            value="OK"
+          />
+        </form>
+      </div>
     );
   }
 }
 
+Login.defaultProps = {
+  logIn: () => {},
+};
+
 const styles = StyleSheet.create({
-  loginBody: {
-    padding: '36px 24px',
-  },
-  input: {
-    margin: '0 16px 0 8px',
-  },
-  inputContainer: {
-    display: 'inline',
+  login: {
+    padding: '40px',
+    minHeight: '300px',
     '@media (max-width: 900px)': {
       display: 'block',
+      padding: '10px',
     },
   },
+  input: {
+    display: 'block',
+    marginBottom: '10px',
+    marginTop: '5px',
+  },
+  button: {
+    display: 'block',
+    marginTop: '10px',
+  },
 });
-
-// const styles = StyleSheet.create({
-// 	loginBody: {
-// 		padding: '36px 24px',
-// 	},
-// 	input: {
-// 		margin: '0 16px 0 8px',
-// 	},
-// });
 
 export default Login;
