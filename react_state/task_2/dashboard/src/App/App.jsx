@@ -11,8 +11,8 @@ import WithLogging from '../HOC/WithLogging';
 import { StyleSheet, css } from 'aphrodite';
 import { newContext } from '../Context/context';
 
-const LoginWithLogging = WithLogging(Login);
-const CourseListWithLogging = WithLogging(CourseList);
+//const LoginWithLogging = WithLogging(Login);
+//const CourseListWithLogging = WithLogging(CourseList);
 
 class App extends Component {
   constructor(props) {
@@ -120,14 +120,11 @@ class App extends Component {
           <div className={css(styles.body)}>
             {this.state.user.isLoggedIn ? (
               <BodySectionWithMarginBottom>
-                <CourseListWithLogging
-                  title="Course List"
-                  courses={coursesList}
-                />
+                <CourseList title="Course List" courses={coursesList} />
               </BodySectionWithMarginBottom>
             ) : (
               <BodySectionWithMarginBottom title="Log in to continue">
-                <LoginWithLogging logIn={this.logIn} />
+                <Login logIn={this.logIn} />
               </BodySectionWithMarginBottom>
             )}
             <BodySection title="News from the School">
