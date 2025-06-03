@@ -126,20 +126,26 @@ class App extends Component {
             />
           </div>
           <Header />
-          <div>
-            {this.state.user.isLoggedIn ? (
-              <BodySectionWithMarginBottom>
-                <CourseList title="Course List" courses={coursesList} />
-              </BodySectionWithMarginBottom>
-            ) : (
-              <BodySectionWithMarginBottom title="Log in to continue">
-                <Login logIn={this.logIn} />
-              </BodySectionWithMarginBottom>
-            )}
-            <BodySection title="News from the School">
-              <p>Holberton School News goes here</p>
-            </BodySection>
-          </div>
+          {user.isLoggedIn === false && (
+            <BodySectionWithMarginBottom title="Log in to continue">
+              <Login logIn={this.logIn} />
+            </BodySectionWithMarginBottom>
+          )}
+          {user.isLoggedIn === true && (
+            <BodySectionWithMarginBottom title="Course list">
+              <CourseList listCourses={listCourses} />
+            </BodySectionWithMarginBottom>
+          )}
+          <BodySection title="News from the school">
+            <p>
+              Labore ut consequat esse nostrud aute exercitation occaecat
+              consequat ad cillum enim et est ex. Qui proident veniam in aute
+              magna occaecat. Esse duis proident aliqua proident eu magna aliqua
+              est exercitation. Cupidatat ex eiusmod et commodo laborum veniam
+              deserunt ad est excepteur cillum laborum.
+            </p>
+          </BodySection>
+          <Footer />
           <Footer />
         </div>
       </newContext.Provider>
