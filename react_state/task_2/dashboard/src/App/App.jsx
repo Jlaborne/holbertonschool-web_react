@@ -36,19 +36,20 @@ class App extends Component {
   handleDisplayDrawer() {
     this.setState({ displayDrawer: true });
   }
+
   handleHideDrawer() {
     this.setState({
       displayDrawer: false,
     });
   }
 
-  handleKeyDown = (e) => {
+  handleKeyDown(e) {
     if (e.ctrlKey && e.key === 'h') {
       e.preventDefault();
       alert('Logging you out');
       this.logOut();
     }
-  };
+  }
 
   logIn(email, password) {
     this.setState({
@@ -80,7 +81,7 @@ class App extends Component {
   }
 
   render() {
-    let { displayDrawer, user, logOut } = this.state;
+    let { displayDrawer, user, logOut, listNotifications } = this.state;
 
     /*const contextValue = {
       user: this.state.user,
