@@ -11,8 +11,8 @@ import WithLogging from '../HOC/WithLogging';
 import { StyleSheet, css } from 'aphrodite';
 import { newContext } from '../Context/context';
 
-//const LoginWithLogging = WithLogging(Login);
-//const CourseListWithLogging = WithLogging(CourseList);
+const LoginWithLogging = WithLogging(Login);
+const CourseListWithLogging = WithLogging(CourseList);
 
 class App extends Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class App extends Component {
         isLoggedIn: false,
       },
       logOut: () => this.logOut(),
-      listNotifications: [
+      notificationsList: [
         { id: 1, type: 'default', value: 'New course available' },
         { id: 2, type: 'urgent', value: 'New resume available' },
         { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
@@ -79,10 +79,10 @@ class App extends Component {
   }
 
   markNotificationAsRead(id) {
-    let updatedList = this.state.listNotifications.filter(
+    let updatedList = this.state.notificationsList.filter(
       (notif) => notif.id !== id
     );
-    this.setState({ listNotifications: updatedList });
+    this.setState({ notificationsList: updatedList });
   }
 
   componentDidMount() {
@@ -94,7 +94,7 @@ class App extends Component {
   }
 
   render() {
-    let { displayDrawer, user, logOut, listNotifications } = this.state;
+    let { displayDrawer, user, logOut, notificationsList } = this.state;
 
     /*const contextValue = {
       user: this.state.user,
@@ -116,24 +116,24 @@ class App extends Component {
     return (
       <newContext.Provider value={{ user, logOut }}>
         <div className={css(styles.app)}>
-          <div className="root-notifications">
+          <div className={css(styles.upperside)}>
             <Notifications
-              listNotifications={listNotifications}
+              notificationsList={notificationsList}
               displayDrawer={displayDrawer}
               handleDisplayDrawer={this.handleDisplayDrawer}
               handleHideDrawer={this.handleHideDrawer}
               markNotificationAsRead={this.markNotificationAsRead}
             />
+            <Header />
           </div>
-          <Header />
           {user.isLoggedIn === false && (
             <BodySectionWithMarginBottom title="Log in to continue">
-              <Login logIn={this.logIn} />
+              <LoginWithLogging logIn={this.logIn} />
             </BodySectionWithMarginBottom>
           )}
           {user.isLoggedIn === true && (
             <BodySectionWithMarginBottom title="Course list">
-              <CourseList title="Course List" courses={coursesList} />
+              <CourseListWithLogging courses={coursesList} />
             </BodySectionWithMarginBottom>
           )}
           <BodySection title="News from the school">
@@ -157,17 +157,12 @@ const styles = StyleSheet.create({
     position: 'relative',
     minHeight: '100vh',
   },
-  body: {
-    padding: '40px',
-    minHeight: '300px',
-  },
-  footer: {
-    position: 'fixed',
-    bottom: 0,
+  upperside: {
+    display: 'flex',
+    flexDirection: 'row-reverse',
     width: '100%',
-    borderTop: '3px solid #e1003c',
-    textAlign: 'center',
-    padding: '1rem 0',
+    borderBottom: `3px solid var(--holberton-red)`,
+    justifyContent: 'space-between',
   },
 });
 
