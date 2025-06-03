@@ -94,7 +94,7 @@ class App extends Component {
   }
 
   render() {
-    let { displayDrawer, user, logOut, notificationsList } = this.state;
+    let { displayDrawer, user, logOut, listNotifications } = this.state;
 
     /*const contextValue = {
       user: this.state.user,
@@ -118,7 +118,7 @@ class App extends Component {
         <div className={css(styles.app)}>
           <div className="root-notifications">
             <Notifications
-              listNotifications={notificationsList}
+              listNotifications={listNotifications}
               displayDrawer={displayDrawer}
               handleDisplayDrawer={this.handleDisplayDrawer}
               handleHideDrawer={this.handleHideDrawer}
