@@ -100,7 +100,9 @@ class App extends Component {
     ];
 
     return (
-      <newContext.Provider value={{ user, logOut }}>
+      <newContext.Provider
+        value={{ user: this.state.user, logOut: this.logOut }}
+      >
         <div className={css(styles.app)}>
           <div className={css(styles.upperside)}>
             <Notifications
