@@ -24,7 +24,6 @@ class App extends Component {
         password: '',
         isLoggedIn: false,
       },
-      logOut: () => this.logOut(),
     };
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
