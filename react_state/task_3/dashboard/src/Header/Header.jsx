@@ -10,7 +10,7 @@ class Header extends React.Component {
     const { user, logOut } = this.context;
 
     return (
-      <div>
+      <>
         <div
         // className={css(styles.header)}
         >
@@ -34,7 +34,7 @@ class Header extends React.Component {
             </a>
           </div>
         )}
-      </div>
+      </>
     );
   }
 }
