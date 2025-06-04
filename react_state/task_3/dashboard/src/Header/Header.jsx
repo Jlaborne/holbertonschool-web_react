@@ -1,7 +1,7 @@
-import React from "react";
-import logo from "../assets/holberton-logo.jpg";
+import React from 'react';
+import logo from '../assets/holberton-logo.jpg';
 //import { StyleSheet, css } from "aphrodite";
-import { newContext } from "../Context/context";
+import { newContext } from '../Context/context';
 
 class Header extends React.Component {
   static contextType = newContext;
@@ -24,15 +24,15 @@ class Header extends React.Component {
           School dashboard
         </h1>
         {user?.isLoggedIn && (
-          <section
+          <div
             id="logoutSection"
             //className={css(styles.logout)}
           >
-            Welcome {user.email}{" "}
+            Welcome {user.email}{' '}
             <a href="#" onClick={logOut}>
               logout
             </a>
-          </section>
+          </div>
         )}
       </div>
     );
