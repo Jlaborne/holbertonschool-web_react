@@ -10,27 +10,27 @@ class Header extends React.Component {
     const { user, logOut } = this.context;
 
     return (
-      <div
-      //className={css(styles.header)}
-      >
-        <img
-          src={logo}
-          alt="holberton logo"
-          //className={css(styles.logo)}
-        />
-        <h1
-        //className={css(styles.title)}
+      <div>
+        <div
+        // className={css(styles.header)}
         >
-          School dashboard
-        </h1>
-        {user.isLoggedIn && (
-          <div
-            id="logoutSection"
-            //className={css(styles.logout)}
+          <img
+            src={logo}
+            alt="holberton logo"
+            // className={css(styles.logo)}
+          />
+          <h1
+          // className={css(styles.title)}
           >
+            School dashboard
+          </h1>
+        </div>
+
+        {user.isLoggedIn && (
+          <div id="logoutSection">
             Welcome {user.email}{' '}
             <a href="#" onClick={logOut}>
-              logout
+              (logout)
             </a>
           </div>
         )}
