@@ -23,7 +23,7 @@ class Header extends React.Component {
         >
           School dashboard
         </h1>
-        {user?.isLoggedIn && (
+        {user.isLoggedIn && (
           <div
             id="logoutSection"
             //className={css(styles.logout)}
