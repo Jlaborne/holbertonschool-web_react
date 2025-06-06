@@ -19,7 +19,7 @@ const fetchNotifications = createAsyncThunk(
       const res = await fetch(ENDPOINTS.notifications);
 
       const data = await res.json();
-      const notifications = data.notifications;
+      const notifications = [...data.notifications];
 
       const index = notifications.findIndex((notif) => notif.id === 3);
       if (index !== -1) {
