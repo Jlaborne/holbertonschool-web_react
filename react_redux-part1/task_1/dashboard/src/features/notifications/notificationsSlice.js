@@ -15,21 +15,26 @@ const ENDPOINTS = {
 const fetchNotifications = createAsyncThunk(
   "notifications/fetchNotifications",
   async () => {
-    const res = await fetch(ENDPOINTS.notifications);
+    try {
+      const res = await fetch(ENDPOINTS.notifications);
 
-    const data = await res.json();
-    const notifications = data.notifications;
+      const data = await res.json();
+      const notifications = data.notifications;
 
-    const index = notifications.findIndex((notif) => notif.id === 3);
-    if (index !== -1) {
-      notifications[index] = {
-        id: 3,
-        type: "urgent",
-        html: { __html: getLatestNotification() },
-      };
+      const index = notifications.findIndex((notif) => notif.id === 3);
+      if (index !== -1) {
+        notifications[index] = {
+          id: 3,
+          type: "urgent",
+          html: { __html: getLatestNotification() },
+        };
+      }
+
+      return notifications;
+    } catch (error) {
+      console.error("Failed to fetch notifications:", error);
+      return thunkAPI.rejectWithValue(error.message);
     }
-
-    return notifications;
   }
 );
 
