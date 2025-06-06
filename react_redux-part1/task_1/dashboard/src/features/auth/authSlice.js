@@ -16,12 +16,12 @@ const authSlice = createSlice({
       const { email, password } = action.payload;
       state.user.email = email;
       state.user.password = password;
-      state.user.isLoggedIn = true;
+      state.isLoggedIn = true;
     },
     logout: (state) => {
       state.user.email = "";
       state.user.password = "";
-      state.user.isLoggedIn = false;
+      state.isLoggedIn = false;
     },
   },
 });
