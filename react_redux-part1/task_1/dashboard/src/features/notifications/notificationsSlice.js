@@ -13,28 +13,28 @@ const ENDPOINTS = {
   notifications: `${API_BASE_URL}/notifications.json`,
 };
 
-const fetchNotifications = createAsyncThunk(
+export const fetchNotifications = createAsyncThunk(
   "notifications/fetchNotifications",
   async () => {
-    try {
-      const res = await axios.get(ENDPOINTS.notifications);
+    const res = await fetch(ENDPOINTS.notifications);
+    const data = await res.json();
 
-      const notifications = [...res.data.notifications];
+    const notifications = data.notifications;
 
-      const index = notifications.findIndex((notif) => notif.id === 3);
-      if (index !== -1) {
-        notifications[index] = {
-          id: 3,
-          type: "urgent",
-          html: { __html: getLatestNotification() },
-        };
-      }
+    const updatedNotification = {
+      id: 3,
+      type: "urgent",
+      html: { __html: getLatestNotification() },
+    };
 
-      return notifications;
-    } catch (error) {
-      console.error("Failed to fetch notifications:", error);
-      throw error;
+    const index = notifications.findIndex((notif) => notif.id === 3);
+    if (index !== -1) {
+      notifications[index] = updatedNotification;
+    } else {
+      notifications.push(updatedNotification);
     }
+
+    return notifications;
   }
 );
 
