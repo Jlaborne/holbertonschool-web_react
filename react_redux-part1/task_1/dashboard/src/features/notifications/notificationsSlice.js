@@ -19,8 +19,7 @@ const fetchNotifications = createAsyncThunk(
     try {
       const res = await axios.get(ENDPOINTS.notifications);
 
-      const data = await res.json();
-      const notifications = [...data.notifications];
+      const notifications = [...res.data.notifications];
 
       const index = notifications.findIndex((notif) => notif.id === 3);
       if (index !== -1) {
