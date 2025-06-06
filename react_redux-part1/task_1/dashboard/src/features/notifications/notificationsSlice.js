@@ -33,7 +33,7 @@ const fetchNotifications = createAsyncThunk(
       return notifications;
     } catch (error) {
       console.error("Failed to fetch notifications:", error);
-      return thunkAPI.rejectWithValue(error.message);
+      throw error;
     }
   }
 );
