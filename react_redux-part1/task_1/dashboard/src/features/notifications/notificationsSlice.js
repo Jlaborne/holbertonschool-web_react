@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getLatestNotification } from "../../utils/utils";
+import axios from "axios";
 
 const initialState = {
   notifications: [],
@@ -16,7 +17,7 @@ const fetchNotifications = createAsyncThunk(
   "notifications/fetchNotifications",
   async () => {
     try {
-      const res = await fetch(ENDPOINTS.notifications);
+      const res = await axios.get(ENDPOINTS.notifications);
 
       const data = await res.json();
       const notifications = [...data.notifications];
