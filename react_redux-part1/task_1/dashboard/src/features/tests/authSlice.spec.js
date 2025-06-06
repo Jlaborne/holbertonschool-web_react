@@ -5,8 +5,8 @@ describe("authSlice", () => {
     user: {
       email: "",
       password: "",
-      isLoggedIn: false,
     },
+    isLoggedIn: false,
   };
 
   it("should return the initial state by default", () => {
@@ -23,8 +23,8 @@ describe("authSlice", () => {
       user: {
         email: "test@example.com",
         password: "password123",
-        isLoggedIn: true,
       },
+      isLoggedIn: true,
     };
 
     const newState = authReducer(initialState, login(mockPayload));
@@ -36,16 +36,16 @@ describe("authSlice", () => {
       user: {
         email: "test@example.com",
         password: "password123",
-        isLoggedIn: true,
       },
+      isLoggedIn: false,
     };
 
     const expectedState = {
       user: {
         email: "",
         password: "",
-        isLoggedIn: false,
       },
+      isLoggedIn: false,
     };
 
     const newState = authReducer(loggedInState, logout());
