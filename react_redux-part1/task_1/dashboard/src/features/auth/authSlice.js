@@ -4,8 +4,8 @@ const initialState = {
   user: {
     email: "",
     password: "",
-    isLoggedIn: false,
   },
+  isLoggedIn: false,
 };
 
 const authSlice = createSlice({
