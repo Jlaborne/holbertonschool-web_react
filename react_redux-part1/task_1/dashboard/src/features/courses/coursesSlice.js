@@ -11,12 +11,12 @@ const initialState = {
   courses: [],
 };
 
-export const fetchCourses = createAsyncThunk(
+const fetchCourses = createAsyncThunk(
   'courses/fetchCourses',
   async (_, thunkAPI) => {
     try {
       const response = await axios.get(ENDPOINTS.courses);
-      return response.data;
+      return response.data.courses;
     } catch (error) {
       return thunkAPI.rejectWithValue('Error fetching courses');
     }
