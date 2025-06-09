@@ -1,7 +1,7 @@
 import { StyleSheet, css } from 'aphrodite';
 import logo from '../../assets/holberton-logo.jpg';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../../features/auth/authSlice'; // Adjust path if needed
+import { logout } from '../../features/auth/authSlice';
 
 const styles = StyleSheet.create({
   header: {
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 export default function Header() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.auth.user.isLoggedIn);
 
   const handleLogout = (e) => {
     e.preventDefault();
