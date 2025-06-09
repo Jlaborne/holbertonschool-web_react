@@ -36,4 +36,5 @@ const coursesSlice = createSlice({
   },
 });
 
+export { fetchCourses };
 export default coursesSlice.reducer;
