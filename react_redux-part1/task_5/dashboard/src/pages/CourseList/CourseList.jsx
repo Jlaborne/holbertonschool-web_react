@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, css } from "aphrodite";
 import CourseListRow from "./CourseListRow/CourseListRow";
 import WithLogging from "../../components/HOC/WithLogging";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchCourses } from "../../features/courses/coursesSlice";
 
 const styles = StyleSheet.create({
   courses: {
@@ -21,6 +22,12 @@ const styles = StyleSheet.create({
 });
 
 function CourseList() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCourses());
+  }, [dispatch]);
+
   const courses = useSelector((state) => state.courses.courses);
 
   return (
