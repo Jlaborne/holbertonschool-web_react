@@ -27,13 +27,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Header({ user, logOut }) {
+export default function Header() {
   const dispatch = useDispatch();
   const reduxUser = useSelector((state) => state.auth.user);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-
-  console.log("Header user:", user);
-  console.log("Header isLoggedIn:", isLoggedIn);
 
   const handleLogout = (e) => {
     e.preventDefault();
