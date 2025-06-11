@@ -4,8 +4,8 @@ const initialState = {
   user: {
     email: "",
     password: "",
+    isLoggedIn: false,
   },
-  isLoggedIn: false,
 };
 
 const authSlice = createSlice({
@@ -16,12 +16,12 @@ const authSlice = createSlice({
       const { email, password } = action.payload;
       state.user.email = email;
       state.user.password = password;
-      state.isLoggedIn = true;
+      state.user.isLoggedIn = true;
     },
     logout: (state) => {
       state.user.email = "";
       state.user.password = "";
-      state.isLoggedIn = false;
+      state.user.isLoggedIn = false;
     },
   },
 });
