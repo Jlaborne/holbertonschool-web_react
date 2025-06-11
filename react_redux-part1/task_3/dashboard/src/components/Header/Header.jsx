@@ -27,10 +27,13 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Header() {
+export default function Header({ user, logOut }) {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user);
+  const reduxUser = useSelector((state) => state.auth.user);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
+  console.log("Header user:", user);
+  console.log("Header isLoggedIn:", isLoggedIn);
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -38,12 +41,25 @@ export default function Header() {
   };
 
   return (
-    <div className={css(styles.header)}>
-      <img src={logo} className={css(styles.logo)} alt="holberton logo" />
-      <h1 className={css(styles.title)}>School Dashboard</h1>
+    <div
+    //className={css(styles.header)}
+    >
+      <img
+        src={logo}
+        //className={css(styles.logo)}
+        alt="holberton logo"
+      />
+      <h1
+      //className={css(styles.title)}
+      >
+        School Dashboard
+      </h1>
       {isLoggedIn && (
-        <div className={css(styles.logoutSection)} id="logoutSection">
-          Welcome <b>{user.email}</b>{" "}
+        <div
+          //className={css(styles.logoutSection)}
+          id="logoutSection"
+        >
+          Welcome <b>{reduxUser.email}</b>{" "}
           <a href="#" onClick={handleLogout}>
             (logout)
           </a>
