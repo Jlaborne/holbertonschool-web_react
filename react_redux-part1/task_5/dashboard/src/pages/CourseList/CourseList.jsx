@@ -37,7 +37,7 @@ function CourseList() {
               <CourseListRow
                 textFirstCell="Available courses"
                 isHeader={true}
-                style={styles.thtd}
+                //style={styles.thtd}
               />
               <CourseListRow
                 textFirstCell="Course name"
