@@ -2,7 +2,6 @@ import { StyleSheet, css } from "aphrodite";
 import logo from "../../assets/holberton-logo.jpg";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../features/auth/authSlice";
-import store from "../../app/store";
 
 const styles = StyleSheet.create({
   header: {
@@ -28,7 +27,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function HeaderContent() {
+export default function Header() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
 
@@ -50,13 +49,5 @@ function HeaderContent() {
         </div>
       )}
     </div>
-  );
-}
-
-export default function Header() {
-  return (
-    <Provider store={store}>
-      <HeaderContent />
-    </Provider>
   );
 }
