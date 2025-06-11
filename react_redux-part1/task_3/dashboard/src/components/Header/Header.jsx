@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
 function HeaderContent() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -42,7 +41,7 @@ function HeaderContent() {
     <div className={css(styles.header)}>
       <img src={logo} className={css(styles.logo)} alt="holberton logo" />
       <h1 className={css(styles.title)}>School Dashboard</h1>
-      {isLoggedIn && (
+      {user.isLoggedIn && (
         <div className={css(styles.logoutSection)} id="logoutSection">
           Welcome <b>{user.email}</b>{" "}
           <a href="#" onClick={handleLogout}>
