@@ -43,14 +43,14 @@ function CourseList() {
                 textFirstCell="Course name"
                 textSecondCell="Credit"
                 isHeader={true}
-                style={styles.thtd}
+                //style={styles.thtd}
               />
             </>
           ) : (
             <CourseListRow
               isHeader={true}
               textFirstCell="No course available yet"
-              style={styles.thtd}
+              //style={styles.thtd}
             />
           )}
         </thead>
@@ -61,7 +61,7 @@ function CourseList() {
                 key={course.id}
                 textFirstCell={course.name}
                 textSecondCell={course.credit}
-                style={styles.thtd}
+                //style={styles.thtd}
               />
             ))}
           </tbody>
