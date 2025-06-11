@@ -32,6 +32,9 @@ export default function Header() {
   const reduxUser = useSelector((state) => state.auth.user);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
+  console.log("reduxUser:", reduxUser);
+  console.log("isLoggedIn:", isLoggedIn);
+
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
