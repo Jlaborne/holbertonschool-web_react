@@ -11,9 +11,30 @@ import {
 } from "../../features/notifications/notificationsSlice";
 
 const styles = StyleSheet.create({
-  notificationTitle: {},
-  notifications: {},
-  notificationsButton: {},
+  notificationTitle: {
+    float: "right",
+    position: "absolute",
+    right: "10px",
+    top: "2px",
+    cursor: "pointer",
+  },
+  notifications: {
+    border: "dotted",
+    borderColor: "crimson",
+    marginTop: "1%",
+    paddingLeft: "1rem",
+    marginBottom: "1rem",
+    width: "40%",
+    marginLeft: "59%",
+  },
+  notificationsButton: {
+    position: "absolute",
+    cursor: "pointer",
+    right: "5px",
+    top: "20px",
+    background: "transparent",
+    border: "none",
+  },
   notificationTypeDefault: {
     color: "blue",
   },
@@ -46,20 +67,22 @@ const Notifications = memo(function Notifications() {
   return (
     <>
       <div
-        className={css(styles.notificationTitle)}
+        //className={css(styles.notificationTitle)}
         onClick={handleDisplayDrawer}
       >
         Your notifications
       </div>
       {displayDrawer && (
-        <div className={css(styles.notifications)}>
+        <div
+        //className={css(styles.notifications)}
+        >
           {notifications.length > 0 ? (
             <>
               <p>Here is the list of notifications</p>
               <button
                 onClick={handleHideDrawer}
                 aria-label="Close"
-                className={css(styles.notificationsButton)}
+                //className={css(styles.notificationsButton)}
               >
                 <img src={closeIcon} alt="close icon" />
               </button>
@@ -72,11 +95,11 @@ const Notifications = memo(function Notifications() {
                     value={notification.value}
                     html={notification.html}
                     markAsRead={() => handleMarkAsRead(notification.id)}
-                    className={
+                    /*className={
                       notification.type === "urgent"
                         ? css(styles.notificationTypeUrgent)
                         : css(styles.notificationTypeDefault)
-                    }
+                    }*/
                   />
                 ))}
               </ul>
