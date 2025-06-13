@@ -18,6 +18,7 @@ const ENDPOINTS = {
 
 export default function App() {
   const [state, dispatch] = useReducer(appReducer, initialState);
+
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
@@ -47,6 +48,7 @@ export default function App() {
     };
     fetchNotifications();
   }, []);
+
   useEffect(() => {
     const fetchCourses = async () => {
       try {
@@ -67,15 +69,18 @@ export default function App() {
   const handleHideDrawer = useCallback(() => {
     dispatch({ type: APP_ACTIONS.TOGGLE_DRAWER });
   }, []);
+
   const logIn = (email, password) => {
     dispatch({
       type: APP_ACTIONS.LOGIN,
       payload: { email, password },
     });
   };
+
   const logOut = () => {
     dispatch({ type: APP_ACTIONS.LOGOUT });
   };
+
   const markNotificationAsRead = useCallback((id) => {
     dispatch({
       type: APP_ACTIONS.MARK_NOTIFICATION_READ,
@@ -85,13 +90,7 @@ export default function App() {
   }, []);
   return (
     <>
-      <Notifications
-        notifications={state.notifications}
-        handleHideDrawer={handleHideDrawer}
-        handleDisplayDrawer={handleDisplayDrawer}
-        displayDrawer={state.displayDrawer}
-        markNotificationAsRead={markNotificationAsRead}
-      />
+      <Notifications />
       <>
         <Header user={state.user} logOut={logOut} />
         {!state.user.isLoggedIn ? (
