@@ -96,11 +96,11 @@ const Notifications = memo(function Notifications() {
                     value={notification.value}
                     html={notification.html}
                     markAsRead={() => handleMarkAsRead(notification.id)}
-                    className={
+                    /*className={
                       notification.type === "urgent"
                         ? css(styles.notificationTypeUrgent)
                         : css(styles.notificationTypeDefault)
-                    }
+                    }*/
                   />
                 ))}
               </ul>
