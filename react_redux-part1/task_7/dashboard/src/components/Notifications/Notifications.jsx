@@ -64,8 +64,6 @@ const Notifications = memo(function Notifications() {
   const handleHideDrawer = () => dispatch(hideDrawer());
   const handleMarkAsRead = (id) => dispatch(markNotificationAsRead(id));
 
-  console.log("Redux notifications:", notifications);
-
   return (
     <>
       <div
