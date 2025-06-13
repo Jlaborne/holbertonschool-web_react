@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
 
 const Notifications = memo(function Notifications() {
   const dispatch = useDispatch();
+
   const displayDrawer = useSelector(
     (state) => state.notifications.displayDrawer
   );
