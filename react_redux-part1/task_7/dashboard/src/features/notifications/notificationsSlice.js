@@ -1,57 +1,70 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getLatestNotification } from "../../utils/utils";
-import axios from "axios";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { getLatestNotification } from '../../utils/utils';
+import axios from 'axios';
 
 const initialState = {
   notifications: [],
   displayDrawer: true,
 };
 
-const API_BASE_URL = "http://localhost:5173";
-
+const API_BASE_URL = 'http://localhost:5173';
 const ENDPOINTS = {
   notifications: `${API_BASE_URL}/notifications.json`,
 };
 
 export const fetchNotifications = createAsyncThunk(
-  "notifications/fetchNotifications",
+  'notifications/fetchNotifications',
   async () => {
-    const response = await axios.get(ENDPOINTS.notifications);
-    const notifications = response.data.notifications;
+    try {
+      const response = await axios.get(ENDPOINTS.notifications);
+      const currentNotifications = response.data.notifications;
 
-    const updatedNotification = {
-      id: 3,
-      type: "urgent",
-      html: { __html: getLatestNotification() },
-    };
+      const latestNotif = {
+        id: 3,
+        type: 'urgent',
+        html: { __html: getLatestNotification() },
+      };
 
-    const index = notifications.findIndex((notif) => notif.id === 3);
-    if (index !== -1) {
-      notifications[index] = updatedNotification;
-    } else {
-      notifications.push(updatedNotification);
+      const indexToReplace = currentNotifications.findIndex(
+        (notification) => notification.id === 3
+      );
+
+      const updatedNotifications = [...currentNotifications];
+
+      if (indexToReplace !== -1) {
+        updatedNotifications[indexToReplace] = latestNotif;
+      } else {
+        updatedNotifications.push(latestNotif);
+      }
+
+      return updatedNotifications;
+    } catch (error) {
+      console.error('Error fetching notifications:', error);
+      throw error;
     }
-
-    return notifications;
   }
 );
 
-const notificationsSlice = createSlice({
-  name: "notifications",
+export const notificationsSlice = createSlice({
+  name: 'notifications',
   initialState,
   reducers: {
     markNotificationAsRead: (state, action) => {
-      const idToRemove = action.payload;
+      const id = action.payload || null;
+
+      if (typeof id !== 'number') return;
+
       state.notifications = state.notifications.filter(
-        (notif) => notif.id !== idToRemove
+        (notification) => notification.id !== id
       );
-      console.log(`Notification ${idToRemove} has been marked as read`);
-    },
-    showDrawer: (state) => {
-      state.displayDrawer = true;
+
+      console.log(`Notification ${id} has been marked as read`);
     },
     hideDrawer: (state) => {
       state.displayDrawer = false;
+    },
+    showDrawer: (state) => {
+      state.displayDrawer = true;
     },
   },
   extraReducers: (builder) => {
@@ -61,7 +74,7 @@ const notificationsSlice = createSlice({
   },
 });
 
-export const { markNotificationAsRead, showDrawer, hideDrawer } =
+export const { markNotificationAsRead, hideDrawer, showDrawer } =
   notificationsSlice.actions;
 
 export default notificationsSlice.reducer;
