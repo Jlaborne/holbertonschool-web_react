@@ -1,9 +1,13 @@
+import React from 'react';
 import BodySection from '../BodySection/BodySection';
 
-export default function BodySectionWithMarginBottom(props) {
+export default function BodySectionWithMarginBottom({ title, children }) {
   return (
-    <div style={{ marginBottom: 40 }} data-testid="body-section-with-margin">
-      <BodySection {...props} />
+    <div
+      style={{ marginBottom: '40px' }}
+      data-testid="body-section-with-margin"
+    >
+      <BodySection title={title}>{children}</BodySection>
     </div>
   );
 }
