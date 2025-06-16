@@ -1,5 +1,5 @@
 import { memo, useEffect } from 'react';
-import { StyleSheet, css } from 'aphrodite';
+// import { StyleSheet, css } from 'aphrodite';
 import closeIcon from '../../assets/close-icon.png';
 import NotificationItem from '../NotificationItem/NotificationItem';
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,41 +10,41 @@ import {
   hideDrawer,
 } from '../../features/notifications/notificationsSlice';
 
-const styles = StyleSheet.create({
-  notificationTitle: {
-    float: 'right',
-    position: 'absolute',
-    right: '10px',
-    top: '2px',
-    cursor: 'pointer',
-  },
-  notifications: {
-    border: 'dotted',
-    borderColor: 'crimson',
-    marginTop: '1%',
-    paddingLeft: '1rem',
-    marginBottom: '1rem',
-    width: '40%',
-    marginLeft: '59%',
-  },
-  notificationsButton: {
-    position: 'absolute',
-    cursor: 'pointer',
-    right: '5px',
-    top: '20px',
-    background: 'transparent',
-    border: 'none',
-  },
-  notificationTypeDefault: {
-    color: 'blue',
-  },
-  notificationTypeUrgent: {
-    color: 'red',
-  },
-  menuItem: {
-    textAlign: 'right',
-  },
-});
+// const styles = StyleSheet.create({
+//   notificationTitle: {
+//     float: 'right',
+//     position: 'absolute',
+//     right: '10px',
+//     top: '2px',
+//     cursor: 'pointer',
+//   },
+//   notifications: {
+//     border: 'dotted',
+//     borderColor: 'crimson',
+//     marginTop: '1%',
+//     paddingLeft: '1rem',
+//     marginBottom: '1rem',
+//     width: '40%',
+//     marginLeft: '59%',
+//   },
+//   notificationsButton: {
+//     position: 'absolute',
+//     cursor: 'pointer',
+//     right: '5px',
+//     top: '20px',
+//     background: 'transparent',
+//     border: 'none',
+//   },
+//   notificationTypeDefault: {
+//     color: 'blue',
+//   },
+//   notificationTypeUrgent: {
+//     color: 'red',
+//   },
+//   menuItem: {
+//     textAlign: 'right',
+//   },
+// });
 
 const Notifications = memo(function Notifications() {
   const dispatch = useDispatch();
@@ -67,20 +67,22 @@ const Notifications = memo(function Notifications() {
   return (
     <>
       <div
-        className={css(styles.notificationTitle)}
+        // className={css(styles.notificationTitle)}
         onClick={handleDisplayDrawer}
       >
         Your notifications
       </div>
       {displayDrawer && (
-        <div className={css(styles.notifications)}>
+        <div
+        // className={css(styles.notifications)}
+        >
           {notifications.length > 0 ? (
             <>
               <p>Here is the list of notifications</p>
               <button
                 onClick={handleHideDrawer}
                 aria-label="Close"
-                className={css(styles.notificationsButton)}
+                // className={css(styles.notificationsButton)}
               >
                 <img src={closeIcon} alt="close icon" />
               </button>
@@ -93,11 +95,11 @@ const Notifications = memo(function Notifications() {
                     value={notification.value}
                     html={notification.html}
                     markAsRead={() => handleMarkAsRead(notification.id)}
-                    className={
-                      notification.type === 'urgent'
-                        ? css(styles.notificationTypeUrgent)
-                        : css(styles.notificationTypeDefault)
-                    }
+                    // className={
+                    //   notification.type === 'urgent'
+                    //     ? css(styles.notificationTypeUrgent)
+                    //     : css(styles.notificationTypeDefault)
+                    // }
                   />
                 ))}
               </ul>
