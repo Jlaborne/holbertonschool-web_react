@@ -1,13 +1,13 @@
 import { memo, useEffect } from 'react';
 // import { StyleSheet, css } from 'aphrodite';
+import { useSelector, useDispatch } from 'react-redux';
 import closeIcon from '../../assets/close-icon.png';
 import NotificationItem from '../NotificationItem/NotificationItem';
-import { useSelector, useDispatch } from 'react-redux';
 import {
   fetchNotifications,
   markNotificationAsRead,
-  showDrawer,
   hideDrawer,
+  showDrawer,
 } from '../../features/notifications/notificationsSlice';
 
 // const styles = StyleSheet.create({
@@ -66,24 +66,15 @@ const Notifications = memo(function Notifications() {
 
   return (
     <>
-      <div
-        // className={css(styles.notificationTitle)}
-        onClick={handleDisplayDrawer}
-      >
+      <div onClick={handleDisplayDrawer} style={{ cursor: 'pointer' }}>
         Your notifications
       </div>
       {displayDrawer && (
-        <div
-        // className={css(styles.notifications)}
-        >
+        <div>
           {notifications.length > 0 ? (
             <>
               <p>Here is the list of notifications</p>
-              <button
-                onClick={handleHideDrawer}
-                aria-label="Close"
-                // className={css(styles.notificationsButton)}
-              >
+              <button onClick={handleHideDrawer} aria-label="Close">
                 <img src={closeIcon} alt="close icon" />
               </button>
               <ul>
@@ -95,11 +86,6 @@ const Notifications = memo(function Notifications() {
                     value={notification.value}
                     html={notification.html}
                     markAsRead={() => handleMarkAsRead(notification.id)}
-                    // className={
-                    //   notification.type === 'urgent'
-                    //     ? css(styles.notificationTypeUrgent)
-                    //     : css(styles.notificationTypeDefault)
-                    // }
                   />
                 ))}
               </ul>
