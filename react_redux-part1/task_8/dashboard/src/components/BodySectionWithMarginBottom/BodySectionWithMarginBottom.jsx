@@ -4,7 +4,10 @@ import BodySection from '../BodySection/BodySection';
 
 export default function BodySectionWithMarginBottom(props) {
   return (
-    <div className={css(styles.bodySectionWithMargin)} data-testid="body-section-with-margin">
+    <div
+      //className={css(styles.bodySectionWithMargin)}
+      data-testid="body-section-with-margin"
+    >
       <BodySection {...props} />
     </div>
   );
