@@ -1,16 +1,16 @@
-import { useEffect, useCallback, useReducer } from "react";
-import axios from "axios";
-import Notifications from "./components/Notifications/Notifications";
-import Footer from "./components/Footer/Footer";
-import Header from "./components/Header/Header";
-import Login from "./pages/Login/Login";
-import CourseList from "./pages/CourseList/CourseList";
-import { getLatestNotification } from "./utils/utils";
-import BodySectionWithMarginBottom from "./components/BodySectionWithMarginBottom/BodySectionWithMarginBottom";
-import BodySection from "./components/BodySection/BodySection";
-import { appReducer, APP_ACTIONS, initialState } from "./appReducer";
+import { useEffect, useCallback, useReducer } from 'react';
+import axios from 'axios';
+import Notifications from './components/Notifications/Notifications';
+import Footer from './components/Footer/Footer';
+import Header from './components/Header/Header';
+import Login from './pages/Login/Login';
+import CourseList from './pages/CourseList/CourseList';
+import { getLatestNotification } from './utils/utils';
+import BodySectionWithMarginBottom from './components/BodySectionWithMarginBottom/BodySectionWithMarginBottom';
+import BodySection from './components/BodySection/BodySection';
+import { appReducer, APP_ACTIONS, initialState } from './appReducer';
 
-const API_BASE_URL = "http://localhost:5173";
+const API_BASE_URL = 'http://localhost:5173';
 const ENDPOINTS = {
   courses: `${API_BASE_URL}/courses.json`,
   notifications: `${API_BASE_URL}/notifications.json`,
@@ -19,7 +19,7 @@ const ENDPOINTS = {
 export default function App() {
   const [state, dispatch] = useReducer(appReducer, initialState);
 
-  useEffect(() => {
+  /*useEffect(() => {
     const fetchNotifications = async () => {
       try {
         const response = await axios.get(ENDPOINTS.notifications);
@@ -47,7 +47,7 @@ export default function App() {
       }
     };
     fetchNotifications();
-  }, []);
+  }, []);*/
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -58,7 +58,7 @@ export default function App() {
           payload: response.data.courses,
         });
       } catch (error) {
-        console.error("Error fetching notifications:", error);
+        console.error('Error fetching notifications:', error);
       }
     };
     fetchCourses();
