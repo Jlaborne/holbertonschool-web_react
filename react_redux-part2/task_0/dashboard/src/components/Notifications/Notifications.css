@@ -1,0 +1,10 @@
+.Notifications {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.Notifications.visible {
+  opacity: 1;
+  visibility: visible;
+}
