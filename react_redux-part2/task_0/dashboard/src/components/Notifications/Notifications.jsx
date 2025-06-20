@@ -1,19 +1,18 @@
 import { memo, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { StyleSheet, css } from "aphrodite";
 import closeIcon from "../../assets/close-icon.png";
 import NotificationItem from "../NotificationItem/NotificationItem";
 import {
   fetchNotifications,
   markNotificationAsRead,
 } from "../../features/notifications/notificationsSlice";
+import "./Notifications.css"; // traditional CSS
 
 const Notifications = memo(function Notifications() {
   const dispatch = useDispatch();
   const notifications = useSelector(
     (state) => state.notifications.notifications
   );
-
   const drawerRef = useRef(null);
 
   useEffect(() => {
@@ -21,8 +20,10 @@ const Notifications = memo(function Notifications() {
   }, [dispatch]);
 
   const handleToggleDrawer = () => {
-    if (drawerRef.current) {
-      drawerRef.current.classList.toggle(css(styles.visible));
+    if (drawerRef.current.classList.contains("visible")) {
+      drawerRef.current.classList.remove("visible");
+    } else {
+      drawerRef.current.classList.add("visible");
     }
   };
 
@@ -35,7 +36,7 @@ const Notifications = memo(function Notifications() {
       </div>
       <div
         ref={drawerRef}
-        className={css(styles.notifications)}
+        className="Notifications"
         data-testid="notifications-container"
       >
         {notifications.length > 0 ? (
@@ -63,47 +64,6 @@ const Notifications = memo(function Notifications() {
       </div>
     </>
   );
-});
-
-const styles = StyleSheet.create({
-  notifications: {
-    border: "1px dashed crimson",
-    padding: "1rem",
-    width: "40%",
-    marginLeft: "59%",
-    marginBottom: "1rem",
-    opacity: 0,
-    visibility: "hidden",
-    transition: "opacity 0.3s ease, visibility 0.3s ease",
-  },
-  visible: {
-    opacity: 1,
-    visibility: "visible",
-  },
-  notificationTitle: {
-    float: "right",
-    position: "absolute",
-    right: "10px",
-    top: "2px",
-    cursor: "pointer",
-  },
-  notificationsButton: {
-    position: "absolute",
-    cursor: "pointer",
-    right: "5px",
-    top: "20px",
-    background: "transparent",
-    border: "none",
-  },
-  notificationTypeDefault: {
-    color: "blue",
-  },
-  notificationTypeUrgent: {
-    color: "red",
-  },
-  menuItem: {
-    textAlign: "right",
-  },
 });
 
 export default Notifications;
