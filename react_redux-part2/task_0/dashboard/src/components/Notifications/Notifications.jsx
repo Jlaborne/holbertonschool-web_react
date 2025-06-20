@@ -1,28 +1,28 @@
-import { memo, useEffect, useRef } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { StyleSheet, css } from "aphrodite";
 import closeIcon from "../../assets/close-icon.png";
 import NotificationItem from "../NotificationItem/NotificationItem";
 import {
   fetchNotifications,
   markNotificationAsRead,
 } from "../../features/notifications/notificationsSlice";
-import "./Notifications.css";
 
 const Notifications = memo(function Notifications() {
   const dispatch = useDispatch();
   const notifications = useSelector(
     (state) => state.notifications.notifications
   );
+
   const drawerRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false); // Local UI state
 
   useEffect(() => {
     dispatch(fetchNotifications());
   }, [dispatch]);
 
   const handleToggleDrawer = () => {
-    if (drawerRef.current) {
-      drawerRef.current.classList.toggle("visible");
-    }
+    setIsVisible((prev) => !prev);
   };
 
   const handleMarkAsRead = (id) => dispatch(markNotificationAsRead(id));
@@ -32,7 +32,11 @@ const Notifications = memo(function Notifications() {
       <div onClick={handleToggleDrawer} style={{ cursor: "pointer" }}>
         Your notifications
       </div>
-      <div className="Notifications" ref={drawerRef}>
+      <div
+        ref={drawerRef}
+        className={css(styles.notifications, isVisible && styles.visible)}
+        data-testid="notifications-container"
+      >
         {notifications.length > 0 ? (
           <>
             <p>Here is the list of notifications</p>
@@ -58,6 +62,23 @@ const Notifications = memo(function Notifications() {
       </div>
     </>
   );
+});
+
+const styles = StyleSheet.create({
+  notifications: {
+    opacity: 0,
+    visibility: "hidden",
+    transition: "opacity 0.3s ease-in-out, visibility 0.3s ease-in-out",
+    border: "1px dashed crimson",
+    padding: "1rem",
+    width: "40%",
+    marginLeft: "59%",
+    marginBottom: "1rem",
+  },
+  visible: {
+    opacity: 1,
+    visibility: "visible",
+  },
 });
 
 export default Notifications;
