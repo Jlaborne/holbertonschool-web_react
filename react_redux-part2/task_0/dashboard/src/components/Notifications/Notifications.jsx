@@ -1,12 +1,9 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useCallback, useRef, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import closeIcon from "../../assets/close-icon.png";
+import { markNotificationAsRead } from "../../features/notifications/notificationsSlice";
 import NotificationItem from "../NotificationItem/NotificationItem";
-import {
-  fetchNotifications,
-  markNotificationAsRead,
-} from "../../features/notifications/notificationsSlice";
 import "./Notifications.css";
+import closeIcon from "../../assets/close-icon.png";
 
 const Notifications = memo(function Notifications() {
   const dispatch = useDispatch();
@@ -14,27 +11,27 @@ const Notifications = memo(function Notifications() {
     (state) => state.notifications.notifications
   );
 
-  const [visible, setVisible] = useState(false);
+  console.log("Get re render once again!");
 
-  useEffect(() => {
-    dispatch(fetchNotifications());
-  }, [dispatch]);
+  const DrawerRef = useRef(null);
 
-  const handleToggleDrawer = () => {
-    setVisible((prev) => !prev);
-  };
+  const handleToggleDrawer = useCallback(() => {
+    DrawerRef.current.classList.toggle("visible");
+  }, []);
 
-  const handleMarkAsRead = (id) => dispatch(markNotificationAsRead(id));
+  const handleMarkNotificationAsRead = useCallback(
+    (id) => {
+      dispatch(markNotificationAsRead(id));
+    },
+    [dispatch]
+  );
 
   return (
     <>
-      <div onClick={handleToggleDrawer} style={{ cursor: "pointer" }}>
+      <div className="notification-title" onClick={handleToggleDrawer}>
         Your notifications
       </div>
-      <div
-        className={`Notifications ${visible ? "visible" : ""}`}
-        data-testid="notifications-container"
-      >
+      <div className="Notifications visible" ref={DrawerRef}>
         {notifications.length > 0 ? (
           <>
             <p>Here is the list of notifications</p>
@@ -49,7 +46,7 @@ const Notifications = memo(function Notifications() {
                   type={notification.type}
                   value={notification.value}
                   html={notification.html}
-                  markAsRead={() => handleMarkAsRead(notification.id)}
+                  markAsRead={handleMarkNotificationAsRead}
                 />
               ))}
             </ul>
