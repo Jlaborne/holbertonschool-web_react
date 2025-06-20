@@ -1,37 +1,34 @@
-import { memo, useCallback, useRef, useEffect, useState } from "react";
+import { memo, useEffect, useRef, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { markNotificationAsRead } from "../../features/notifications/notificationsSlice";
 import NotificationItem from "../NotificationItem/NotificationItem";
-import "./Notifications.css";
 import closeIcon from "../../assets/close-icon.png";
+import "./Notifications.css";
 
 const Notifications = memo(function Notifications() {
   const dispatch = useDispatch();
   const notifications = useSelector(
     (state) => state.notifications.notifications
   );
-
-  console.log("Get re render once again!");
-
-  const DrawerRef = useRef(null);
+  const drawerRef = useRef(null);
 
   const handleToggleDrawer = useCallback(() => {
-    DrawerRef.current.classList.toggle("visible");
+    drawerRef.current.classList.toggle("visible");
   }, []);
 
-  const handleMarkNotificationAsRead = useCallback(
-    (id) => {
-      dispatch(markNotificationAsRead(id));
-    },
-    [dispatch]
-  );
+  const handleMarkNotificationAsRead = (id) =>
+    dispatch(markNotificationAsRead(id));
 
   return (
     <>
       <div className="notification-title" onClick={handleToggleDrawer}>
         Your notifications
       </div>
-      <div className="Notifications visible" ref={DrawerRef}>
+      <div
+        className="Notifications"
+        ref={drawerRef}
+        data-testid="notifications-container"
+      >
         {notifications.length > 0 ? (
           <>
             <p>Here is the list of notifications</p>
@@ -46,7 +43,9 @@ const Notifications = memo(function Notifications() {
                   type={notification.type}
                   value={notification.value}
                   html={notification.html}
-                  markAsRead={handleMarkNotificationAsRead}
+                  markAsRead={() =>
+                    handleMarkNotificationAsRead(notification.id)
+                  }
                 />
               ))}
             </ul>
