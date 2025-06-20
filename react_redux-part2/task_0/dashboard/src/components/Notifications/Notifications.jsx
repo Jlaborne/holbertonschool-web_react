@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef } from "react";
+import { memo, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import closeIcon from "../../assets/close-icon.png";
 import NotificationItem from "../NotificationItem/NotificationItem";
@@ -6,25 +6,22 @@ import {
   fetchNotifications,
   markNotificationAsRead,
 } from "../../features/notifications/notificationsSlice";
-import "./Notifications.css"; // traditional CSS
+import "./Notifications.css";
 
 const Notifications = memo(function Notifications() {
   const dispatch = useDispatch();
   const notifications = useSelector(
     (state) => state.notifications.notifications
   );
-  const drawerRef = useRef(null);
+
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     dispatch(fetchNotifications());
   }, [dispatch]);
 
   const handleToggleDrawer = () => {
-    if (drawerRef.current.classList.contains("visible")) {
-      drawerRef.current.classList.remove("visible");
-    } else {
-      drawerRef.current.classList.add("visible");
-    }
+    setVisible((prev) => !prev);
   };
 
   const handleMarkAsRead = (id) => dispatch(markNotificationAsRead(id));
@@ -35,8 +32,7 @@ const Notifications = memo(function Notifications() {
         Your notifications
       </div>
       <div
-        ref={drawerRef}
-        className="Notifications"
+        className={`Notifications ${visible ? "visible" : ""}`}
         data-testid="notifications-container"
       >
         {notifications.length > 0 ? (
