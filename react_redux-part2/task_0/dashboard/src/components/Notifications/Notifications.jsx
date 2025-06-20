@@ -1,87 +1,38 @@
-import { memo, useEffect, useRef, useState } from "react";
-// import { StyleSheet, css } from 'aphrodite';
+import { memo, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import closeIcon from "../../assets/close-icon.png";
 import NotificationItem from "../NotificationItem/NotificationItem";
 import {
   fetchNotifications,
   markNotificationAsRead,
-  //hideDrawer,
-  //showDrawer,
 } from "../../features/notifications/notificationsSlice";
 import "./Notifications.css";
 
-// const styles = StyleSheet.create({
-//   notificationTitle: {
-//     float: 'right',
-//     position: 'absolute',
-//     right: '10px',
-//     top: '2px',
-//     cursor: 'pointer',
-//   },
-//   notifications: {
-//     border: 'dotted',
-//     borderColor: 'crimson',
-//     marginTop: '1%',
-//     paddingLeft: '1rem',
-//     marginBottom: '1rem',
-//     width: '40%',
-//     marginLeft: '59%',
-//   },
-//   notificationsButton: {
-//     position: 'absolute',
-//     cursor: 'pointer',
-//     right: '5px',
-//     top: '20px',
-//     background: 'transparent',
-//     border: 'none',
-//   },
-//   notificationTypeDefault: {
-//     color: 'blue',
-//   },
-//   notificationTypeUrgent: {
-//     color: 'red',
-//   },
-//   menuItem: {
-//     textAlign: 'right',
-//   },
-// });
-
 const Notifications = memo(function Notifications() {
   const dispatch = useDispatch();
-
   const notifications = useSelector(
     (state) => state.notifications.notifications
   );
-
-  /*const displayDrawer = useSelector(
-    (state) => state.notifications.displayDrawer
-  );*/
+  const drawerRef = useRef(null);
 
   useEffect(() => {
     dispatch(fetchNotifications());
   }, [dispatch]);
 
-  //const handleDisplayDrawer = () => dispatch(showDrawer());
-  //const handleHideDrawer = () => dispatch(hideDrawer());
-  const handleMarkAsRead = (id) => dispatch(markNotificationAsRead(id));
-
-  const [visible, setVisible] = useState(false);
-  const drawerRef = useRef(null);
-
   const handleToggleDrawer = () => {
-    setVisible(!visible);
+    if (drawerRef.current) {
+      drawerRef.current.classList.toggle("visible");
+    }
   };
+
+  const handleMarkAsRead = (id) => dispatch(markNotificationAsRead(id));
 
   return (
     <>
       <div onClick={handleToggleDrawer} style={{ cursor: "pointer" }}>
         Your notifications
       </div>
-      <div
-        className={`Notifications ${visible ? "visible" : ""}`}
-        ref={drawerRef}
-      >
+      <div className="Notifications" ref={drawerRef}>
         {notifications.length > 0 ? (
           <>
             <p>Here is the list of notifications</p>
