@@ -1,83 +1,95 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getLatestNotification } from "../../utils/utils";
-import axios from "axios";
+import { memo, useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { StyleSheet, css } from "aphrodite";
+import closeIcon from "../../assets/close-icon.png";
+import NotificationItem from "../NotificationItem/NotificationItem";
+import {
+  fetchNotifications,
+  markNotificationAsRead,
+} from "../../features/notifications/notificationsSlice";
 
-const initialState = {
-  notifications: [],
-  //displayDrawer: true,
-};
+const Notifications = memo(function Notifications() {
+  const dispatch = useDispatch();
+  const notifications = useSelector(
+    (state) => state.notifications.notifications
+  );
 
-const API_BASE_URL = "http://localhost:5173";
-const ENDPOINTS = {
-  notifications: `${API_BASE_URL}/notifications.json`,
-};
+  const [displayDrawer, setDisplayDrawer] = useState(false);
 
-export const fetchNotifications = createAsyncThunk(
-  "notifications/fetchNotifications",
-  async () => {
-    try {
-      const response = await axios.get(ENDPOINTS.notifications);
-      const currentNotifications = response.data.notifications;
+  useEffect(() => {
+    dispatch(fetchNotifications());
+  }, [dispatch]);
 
-      const latestNotif = {
-        id: 3,
-        type: "urgent",
-        html: { __html: getLatestNotification() },
-      };
+  const handleToggleDrawer = () => setDisplayDrawer(!displayDrawer);
+  const handleMarkAsRead = (id) => dispatch(markNotificationAsRead(id));
 
-      const indexToReplace = currentNotifications.findIndex(
-        (notification) => notification.id === 3
-      );
+  return (
+    <>
+      <div className={css(styles.menuItem)} onClick={handleToggleDrawer}>
+        Your notifications
+      </div>
 
-      const updatedNotifications = [...currentNotifications];
+      {displayDrawer && (
+        <div
+          className={css(styles.notifications, styles.visible)}
+          data-testid="notifications-container"
+        >
+          {notifications.length > 0 ? (
+            <>
+              <p>Here is the list of notifications</p>
+              <button
+                onClick={handleToggleDrawer}
+                aria-label="Close"
+                className={css(styles.closeButton)}
+              >
+                <img src={closeIcon} alt="close icon" />
+              </button>
+              <ul>
+                {notifications.map((notification) => (
+                  <NotificationItem
+                    key={notification.id}
+                    id={notification.id}
+                    type={notification.type}
+                    value={notification.value}
+                    html={notification.html}
+                    markAsRead={() => handleMarkAsRead(notification.id)}
+                  />
+                ))}
+              </ul>
+            </>
+          ) : (
+            <p>No new notifications for now</p>
+          )}
+        </div>
+      )}
+    </>
+  );
+});
 
-      if (indexToReplace !== -1) {
-        updatedNotifications[indexToReplace] = latestNotif;
-      } else {
-        updatedNotifications.push(latestNotif);
-      }
-
-      return updatedNotifications;
-    } catch (error) {
-      console.error("Error fetching notifications:", error);
-      throw error;
-    }
-  }
-);
-
-export const notificationsSlice = createSlice({
-  name: "notifications",
-  initialState,
-  reducers: {
-    markNotificationAsRead: (state, action) => {
-      const id = action.payload || null;
-
-      if (typeof id !== "number") return;
-
-      state.notifications = state.notifications.filter(
-        (notification) => notification.id !== id
-      );
-
-      console.log(`Notification ${id} has been marked as read`);
-    },
-    /*hideDrawer: (state) => {
-      state.displayDrawer = false;
-    },
-    showDrawer: (state) => {
-      state.displayDrawer = true;
-    },*/
+const styles = StyleSheet.create({
+  notifications: {
+    border: "1px dashed crimson",
+    padding: "1rem",
+    width: "40%",
+    marginLeft: "59%",
+    marginBottom: "1rem",
+    transition: "all 0.3s ease-in-out",
   },
-  extraReducers: (builder) => {
-    builder.addCase(fetchNotifications.fulfilled, (state, action) => {
-      state.notifications = action.payload;
-    });
+  visible: {
+    opacity: 1,
+    visibility: "visible",
+  },
+  menuItem: {
+    cursor: "pointer",
+    textAlign: "right",
+    marginBottom: "10px",
+  },
+  closeButton: {
+    background: "transparent",
+    border: "none",
+    cursor: "pointer",
+    float: "right",
   },
 });
 
-export const {
-  markNotificationAsRead,
-  //hideDrawer,
-  //showDrawer
-} = notificationsSlice.actions;
-
-export default notificationsSlice.reducer;
+export default Notifications;
