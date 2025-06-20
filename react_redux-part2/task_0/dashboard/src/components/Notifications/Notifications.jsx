@@ -24,11 +24,7 @@ const Notifications = memo(function Notifications() {
       <div className="notification-title" onClick={handleToggleDrawer}>
         Your notifications
       </div>
-      <div
-        className="Notifications"
-        ref={drawerRef}
-        data-testid="notifications-container"
-      >
+      <div className="Notifications visible" ref={drawerRef}>
         {notifications.length > 0 ? (
           <>
             <p>Here is the list of notifications</p>
