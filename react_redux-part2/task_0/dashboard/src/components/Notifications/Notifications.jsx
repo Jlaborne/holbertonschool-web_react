@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 // import { StyleSheet, css } from 'aphrodite';
 import { useSelector, useDispatch } from "react-redux";
 import closeIcon from "../../assets/close-icon.png";
@@ -66,10 +66,11 @@ const Notifications = memo(function Notifications() {
   //const handleHideDrawer = () => dispatch(hideDrawer());
   const handleMarkAsRead = (id) => dispatch(markNotificationAsRead(id));
 
+  const [visible, setVisible] = useState(false);
   const drawerRef = useRef(null);
 
   const handleToggleDrawer = () => {
-    drawerRef.current.classList.toggle("visible");
+    setVisible(!visible);
   };
 
   return (
@@ -77,7 +78,10 @@ const Notifications = memo(function Notifications() {
       <div onClick={handleToggleDrawer} style={{ cursor: "pointer" }}>
         Your notifications
       </div>
-      <div className="Notifications" ref={drawerRef}>
+      <div
+        className={`Notifications ${visible ? "visible" : ""}`}
+        ref={drawerRef}
+      >
         {notifications.length > 0 ? (
           <>
             <p>Here is the list of notifications</p>
