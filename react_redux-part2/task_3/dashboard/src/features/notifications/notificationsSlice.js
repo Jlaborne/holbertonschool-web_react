@@ -1,0 +1,83 @@
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { getLatestNotification } from '../../utils/utils';
+import axios from 'axios';
+
+const initialState = {
+  notifications: [],
+  //displayDrawer: true,
+  loading: false,
+};
+
+const API_BASE_URL = 'http://localhost:5173';
+const ENDPOINTS = {
+  notifications: `${API_BASE_URL}/notifications.json`,
+};
+
+export const fetchNotifications = createAsyncThunk(
+  'notifications/fetchNotifications',
+  async () => {
+    try {
+      const response = await axios.get(ENDPOINTS.notifications);
+      const rawNotifications = response.data.notifications;
+
+      const unreadNotifications = rawNotifications
+        .filter((notif) => notif.context?.isRead === false)
+        .map((notif) => ({
+          id: notif.id,
+          type: notif.type,
+          isRead: false,
+          value: notif.value,
+        }));
+
+      return unreadNotifications;
+    } catch (error) {
+      console.error('Error fetching notifications:', error);
+      throw error;
+    }
+  }
+);
+
+export const notificationsSlice = createSlice({
+  name: 'notifications',
+  initialState,
+  reducers: {
+    markNotificationAsRead: (state, action) => {
+      const id = action.payload || null;
+
+      if (typeof id !== 'number') return;
+
+      state.notifications = state.notifications.filter(
+        (notification) => notification.id !== id
+      );
+
+      console.log(`Notification ${id} has been marked as read`);
+    },
+    /*hideDrawer: (state) => {
+      state.displayDrawer = false;
+    },
+    showDrawer: (state) => {
+      state.displayDrawer = true;
+    },*/
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchNotifications.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchNotifications.fulfilled, (state, action) => {
+        state.loading = false;
+        state.notifications = action.payload;
+      })
+      .addCase(fetchNotifications.rejected, (state) => {
+        state.loading = false;
+      });
+  },
+});
+
+export const {
+  markNotificationAsRead,
+  //hideDrawer,
+  showDrawer,
+} = notificationsSlice.actions;
+
+export default notificationsSlice.reducer;
