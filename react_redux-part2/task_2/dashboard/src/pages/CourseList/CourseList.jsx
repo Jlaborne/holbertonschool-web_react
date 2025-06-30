@@ -83,7 +83,7 @@ function CourseList() {
                 textFirstCell={course.name}
                 textSecondCell={course.credit}
                 isChecked={course.isSelected}
-                onChangeRow={onChangeRow}
+                onChange={onChangeRow}
                 //style={styles.thtd}
               />
             ))}
