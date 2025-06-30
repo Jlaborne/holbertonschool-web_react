@@ -44,6 +44,7 @@ function CourseListRow({
           />
           {textFirstCell}
         </td>
+        <td className={css(style)}>{textFirstCell}</td>
         <td className={css(style)}>{textSecondCell}</td>
       </tr>
     );
