@@ -33,7 +33,6 @@ function CourseListRow({
         <td className={css(style)}>
           <input
             type="checkbox"
-            checked={isChecked}
             onChange={(e) => onChangeRow(id, e.target.checked)}
           />
           {textFirstCell}
