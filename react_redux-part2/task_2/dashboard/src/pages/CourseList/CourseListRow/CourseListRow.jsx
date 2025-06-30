@@ -11,9 +11,7 @@ function CourseListRow({
   onChangeRow,
 }) {
   const handleCheckboxChange = (e) => {
-    if (onChangeRow) {
-      onChangeRow(id, e.target.checked);
-    }
+    onChangeRow(id, e.target.checked);
   };
 
   if (isHeader) {

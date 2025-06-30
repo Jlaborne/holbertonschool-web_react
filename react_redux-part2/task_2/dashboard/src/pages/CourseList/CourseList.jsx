@@ -34,6 +34,7 @@ function CourseList() {
   }, [dispatch]);
 
   const onChangeRow = (id, checked) => {
+    console.log(`Course ${id} has been ${checked ? 'selected' : 'unselected'}`);
     if (checked) {
       dispatch(selectCourse(id));
     } else {
