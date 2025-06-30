@@ -8,7 +8,7 @@ import './Notifications.css';
 const Notifications = memo(function Notifications() {
   const dispatch = useDispatch();
   const { notifications, loading } = useSelector(
-    (state) => state.notifications.notifications
+    (state) => state.notifications
   );
   const drawerRef = useRef(null);
 
