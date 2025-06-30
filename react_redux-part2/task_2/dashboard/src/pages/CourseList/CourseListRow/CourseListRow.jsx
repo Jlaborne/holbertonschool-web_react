@@ -8,7 +8,7 @@ function CourseListRow({
   style,
   id,
   isChecked,
-  onChangeRow,
+  onChangeRow = () => {},
 }) {
   const handleCheckboxChange = (e) => {
     onChangeRow(id, e.target.checked);
@@ -37,10 +37,10 @@ function CourseListRow({
           <input
             type="checkbox"
             checked={isChecked}
-            onChange={handleCheckboxChange}
+            onChange={(e) => onChangeRow(id, e.target.checked)}
           />
+          {textFirstCell}
         </td>
-        <td>{textFirstCell}</td>
         <td>{textSecondCell}</td>
       </tr>
     );
