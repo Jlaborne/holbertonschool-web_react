@@ -10,6 +10,9 @@ function CourseListRow({
   isChecked,
   onChangeRow,
 }) {
+  const handleCheckboxChange = (e) => {
+    onChangeRow(id, e.target.checked);
+  };
   if (isHeader) {
     if (textSecondCell === null || textSecondCell === undefined) {
       return (
@@ -30,14 +33,15 @@ function CourseListRow({
   } else {
     return (
       <tr>
-        <td className={css(style)}>
+        <td>
           <input
             type="checkbox"
-            onChange={(e) => onChangeRow(id, e.target.checked)}
+            checked={isChecked}
+            onChange={handleCheckboxChange}
           />
-          {textFirstCell}
         </td>
-        <td className={css(style)}>{textSecondCell}</td>
+        <td>{textFirstCell}</td>
+        <td>{textSecondCell}</td>
       </tr>
     );
   }
