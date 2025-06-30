@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getLatestNotification } from '../../utils/utils';
 import axios from 'axios';
+import notificationsData from '../../../public/notifications.json';
 
 const initialState = {
   notifications: [],
@@ -17,8 +18,8 @@ export const fetchNotifications = createAsyncThunk(
   'notifications/fetchNotifications',
   async () => {
     try {
-      const response = await axios.get(ENDPOINTS.notifications);
-      const rawData = response.data.notifications;
+      //const response = await axios.get(ENDPOINTS.notifications);
+      const rawData = notificationsData;
 
       const transformed = rawData
         .filter((notif) => notif.context && notif.context.isRead === false)

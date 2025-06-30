@@ -25,11 +25,11 @@ const Notifications = memo(function Notifications() {
   };
 
   const handleSetFilterUrgent = () => {
-    setCurrentFilter('urgent');
+    setCurrentFilter(currentFilter === 'urgent' ? 'all' : 'urgent');
   };
 
   const handleSetFilterDefault = () => {
-    setCurrentFilter('default');
+    setCurrentFilter(currentFilter === 'default' ? 'all' : 'default');
   };
 
   return (
