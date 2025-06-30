@@ -45,7 +45,7 @@ export const notificationsSlice = createSlice({
     markNotificationAsRead: (state, action) => {
       const id = action.payload || null;
 
-      if (typeof id !== 'number') return;
+      if (!id) return;
 
       state.notifications = state.notifications.filter(
         (notification) => notification.id !== id
