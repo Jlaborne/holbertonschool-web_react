@@ -18,7 +18,7 @@ export const fetchNotifications = createAsyncThunk(
   async () => {
     try {
       const response = await axios.get(ENDPOINTS.notifications);
-      const rawData = response.data;
+      const rawData = response.data.notifications;
 
       const transformed = rawData
         .filter((notif) => notif.context && notif.context.isRead === false)
