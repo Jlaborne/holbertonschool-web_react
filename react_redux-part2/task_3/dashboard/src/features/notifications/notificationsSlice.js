@@ -18,18 +18,18 @@ export const fetchNotifications = createAsyncThunk(
   async () => {
     try {
       const response = await axios.get(ENDPOINTS.notifications);
-      const rawNotifications = response.data.notifications;
+      const rawData = response.data;
 
-      const unreadNotifications = rawNotifications
-        .filter((notif) => notif.context?.isRead === false)
+      const transformed = rawData
+        .filter((notif) => notif.context && notif.context.isRead === false)
         .map((notif) => ({
           id: notif.id,
-          type: notif.type,
-          isRead: false,
-          value: notif.value,
+          type: notif.context.type,
+          value: notif.context.value,
+          isRead: notif.context.isRead,
         }));
 
-      return unreadNotifications;
+      return transformed;
     } catch (error) {
       console.error('Error fetching notifications:', error);
       throw error;
