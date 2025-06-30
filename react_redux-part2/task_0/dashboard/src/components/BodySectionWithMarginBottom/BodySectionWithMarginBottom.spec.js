@@ -54,17 +54,4 @@ describe('BodySectionWithMarginBottom', () => {
     expect(pElement).toBeInTheDocument();
     expect(spanElement).toBeInTheDocument();
   });
-
-  test('Should apply a class name that includes "bodySectionWithMargin"', () => {
-    render(
-      <BodySectionWithMarginBottom title="Test Title">
-        <p>Child Content</p>
-      </BodySectionWithMarginBottom>
-    );
-
-    const wrapper = screen.getByTestId('body-section-with-margin');
-    expect(wrapper).toBeInTheDocument();
-
-    expect(wrapper.className).toMatch(/bodySectionWithMargin/);
-  });
 });

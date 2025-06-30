@@ -1,66 +1,53 @@
-
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
+import { screen, fireEvent } from '@testing-library/react';
+import { renderWithProvider } from '../../tests/test-utils';
 import Notifications from './Notifications';
-import * as notificationSlice from '../../features/notifications/notificationsSlice';
-import { getLatestNotification } from '../../utils/utils';
+import * as notificationsSlice from '../../features/notifications/notificationsSlice';
 
-const middlewares = [thunk];
-const mockStore = configureStore(middlewares);
+jest.mock('../../assets/close-icon.png', () => 'close-icon.png');
 
-describe('Notifications component (refactored with visible toggle)', () => {
-  let store;
+describe('Notifications component', () => {
+  const mockNotifications = [
+    { id: 1, type: 'default', value: 'New course available' },
+    { id: 2, type: 'urgent', value: 'New resume available' },
+    { id: 3, type: 'urgent', html: { __html: '<strong>Alert</strong>' } },
+  ];
 
-  beforeEach(() => {
-    store = mockStore({
-      notifications: {
-        notifications: [
-          { id: 1, type: 'default', value: 'New course available' },
-          { id: 2, type: 'urgent', value: 'New resume available' },
-          { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
-        ],
-      },
+  it('renders notification title and empty message when no notifications', () => {
+    renderWithProvider(<Notifications />, {
+      preloadedState: { notifications: { notifications: [] } },
     });
-    jest.spyOn(notificationSlice, 'fetchNotifications').mockReturnValue(() => Promise.resolve());
+
+    expect(screen.getByText(/your notifications/i)).toBeInTheDocument();
+    expect(screen.getByText(/no new notifications/i)).toBeInTheDocument();
   });
 
-  it('does not show the notification list by default', () => {
-    render(
-      <Provider store={store}>
-        <Notifications />
-      </Provider>
-    );
-    const drawer = screen.getByTestId('notification-container');
-    expect(drawer.className.includes('visible')).toBe(false);
+  it('renders list of notifications', () => {
+    renderWithProvider(<Notifications />, {
+      preloadedState: { notifications: { notifications: mockNotifications } },
+    });
+
+    expect(
+      screen.getByText(/here is the list of notifications/i)
+    ).toBeInTheDocument();
+    expect(screen.getAllByRole('listitem')).toHaveLength(3);
   });
 
-  it('toggles visible class when clicking the notification text and close button', () => {
-    render(
-      <Provider store={store}>
-        <Notifications />
-      </Provider>
-    );
-    const drawer = screen.getByTestId('notification-container');
-    const toggleText = screen.getByText(/your notifications/i);
-    fireEvent.click(toggleText);
-    expect(drawer.className.includes('visible')).toBe(true);
+  it('closes and opens drawer with toggle', () => {
+    renderWithProvider(<Notifications />, {
+      preloadedState: { notifications: { notifications: mockNotifications } },
+    });
 
-    const closeBtn = screen.getByRole('button', { name: /close/i });
-    fireEvent.click(closeBtn);
-    expect(drawer.className.includes('visible')).toBe(false);
-  });
+    const drawer = document.querySelector('.Notifications');
+    const toggle = screen.getByText(/your notifications/i);
+    const closeButton = screen.getByRole('button', { name: /close/i });
 
-  it('renders all notification items', () => {
-    render(
-      <Provider store={store}>
-        <Notifications />
-      </Provider>
-    );
-    const toggleText = screen.getByText(/your notifications/i);
-    fireEvent.click(toggleText);
-    expect(screen.getAllByRole('listitem').length).toBe(3);
+    expect(drawer.classList.contains('visible')).toBe(true);
+
+    fireEvent.click(closeButton);
+    expect(drawer.classList.contains('visible')).toBe(false);
+
+    fireEvent.click(toggle);
+    expect(drawer.classList.contains('visible')).toBe(true);
   });
 });

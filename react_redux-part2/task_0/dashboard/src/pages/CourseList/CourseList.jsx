@@ -1,23 +1,23 @@
-import React, { useEffect } from "react";
-import { StyleSheet, css } from "aphrodite";
-import CourseListRow from "./CourseListRow/CourseListRow";
-import WithLogging from "../../components/HOC/WithLogging";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchCourses } from "../../features/courses/coursesSlice";
+import React, { useEffect } from 'react';
+import { StyleSheet, css } from 'aphrodite';
+import CourseListRow from './CourseListRow/CourseListRow';
+import WithLogging from '../../components/HOC/WithLogging';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchCourses } from '../../features/courses/coursesSlice';
 
 const styles = StyleSheet.create({
   courses: {
-    margin: "130px auto",
-    width: "90%",
-    height: "33vh",
+    margin: '130px auto',
+    width: '90%',
+    height: '33vh',
   },
   table: {
-    width: "100%",
-    borderCollapse: "collapse",
-    border: "2px solid rgb(161, 161, 161)",
+    width: '100%',
+    borderCollapse: 'collapse',
+    border: '2px solid rgb(161, 161, 161)',
   },
   thtd: {
-    border: "2px solid rgb(161, 161, 161)",
+    border: '2px solid rgb(161, 161, 161)',
   },
 });
 
@@ -39,7 +39,7 @@ function CourseList() {
         // className={css(styles.table)}
       >
         <thead>
-          {courses.length > 0 ? (
+          {courses?.length > 0 ? (
             <>
               <CourseListRow
                 textFirstCell="Available courses"
@@ -61,7 +61,7 @@ function CourseList() {
             />
           )}
         </thead>
-        {courses.length > 0 && (
+        {courses?.length > 0 && (
           <tbody>
             {courses.map((course) => (
               <CourseListRow

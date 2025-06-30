@@ -1,53 +1,86 @@
-import notificationsReducer, {
+// src/features/notifications/notificationsSlice.spec.js
+import reducer, {
+  fetchNotifications,
   markNotificationAsRead,
-  showDrawer,
-  hideDrawer,
-} from "../notifications/notificationsSlice";
+} from '../notifications/notificationsSlice';
+import { getLatestNotification } from '../../utils/utils';
+import axios from 'axios';
+import { configureStore } from '@reduxjs/toolkit';
 
-describe("notificationsSlice", () => {
-  const initialState = {
+jest.mock('axios');
+jest.mock('../../utils/utils');
+
+describe('notificationsSlice', () => {
+  const mockInitialState = {
     notifications: [],
-    displayDrawer: true,
   };
 
-  it("should return the initial state by default", () => {
-    expect(notificationsReducer(undefined, { type: undefined })).toEqual(
-      initialState
-    );
+  beforeEach(() => {
+    jest.clearAllMocks();
   });
 
-  it("should handle markNotificationAsRead and remove notification by ID", () => {
-    const prevState = {
+  it('should return the initial state by default', () => {
+    const state = reducer(undefined, { type: '@@INIT' });
+    expect(state).toEqual(mockInitialState);
+  });
+
+  it('should handle fetchNotifications fulfilled with replacement logic', async () => {
+    // Arrange
+    const mockServerNotifications = [
+      { id: 1, type: 'default', value: 'New course available' },
+      { id: 3, type: 'urgent', value: 'Old resume available' }, // This one will be replaced
+    ];
+    const mockHtml = '<strong>Urgent requirement</strong>';
+
+    axios.get.mockResolvedValueOnce({
+      data: { notifications: mockServerNotifications },
+    });
+    getLatestNotification.mockReturnValue(mockHtml);
+
+    const store = configureStore({
+      reducer: {
+        notifications: reducer,
+      },
+    });
+
+    // Act
+    await store.dispatch(fetchNotifications());
+
+    // Assert
+    const { notifications } = store.getState().notifications;
+    expect(notifications).toHaveLength(2);
+    expect(notifications.find((n) => n.id === 3)).toEqual({
+      id: 3,
+      type: 'urgent',
+      html: { __html: mockHtml },
+    });
+  });
+
+  it('should handle markNotificationAsRead by removing correct ID', () => {
+    const stateBefore = {
       notifications: [
-        { id: 1, type: "default", value: "Test 1" },
-        { id: 2, type: "urgent", value: "Test 2" },
+        { id: 1, type: 'default', value: 'Note 1' },
+        { id: 2, type: 'urgent', value: 'Note 2' },
       ],
-      displayDrawer: true,
     };
 
-    const newState = notificationsReducer(prevState, markNotificationAsRead(2));
+    const stateAfter = reducer(stateBefore, markNotificationAsRead(2));
 
-    expect(newState.notifications).toHaveLength(1);
-    expect(newState.notifications[0].id).toBe(1);
+    expect(stateAfter.notifications).toEqual([
+      { id: 1, type: 'default', value: 'Note 1' },
+    ]);
   });
 
-  it("should handle showDrawer and set displayDrawer to true", () => {
-    const prevState = {
-      notifications: [],
-      displayDrawer: false,
+  it('should not change state if markNotificationAsRead is called with invalid ID', () => {
+    const stateBefore = {
+      notifications: [{ id: 1, type: 'default', value: 'Note 1' }],
     };
 
-    const newState = notificationsReducer(prevState, showDrawer());
-    expect(newState.displayDrawer).toBe(true);
-  });
+    const stateAfter = reducer(
+      stateBefore,
+      markNotificationAsRead('not-a-number')
+    );
 
-  it("should handle hideDrawer and set displayDrawer to false", () => {
-    const prevState = {
-      notifications: [],
-      displayDrawer: true,
-    };
-
-    const newState = notificationsReducer(prevState, hideDrawer());
-    expect(newState.displayDrawer).toBe(false);
+    expect(stateAfter).toEqual(stateBefore);
   });
 });
