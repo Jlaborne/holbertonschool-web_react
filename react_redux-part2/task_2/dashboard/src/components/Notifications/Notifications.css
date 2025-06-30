@@ -1,0 +1,45 @@
+.notification-title {
+  float: right;
+  position: absolute;
+  right: 10px;
+  top: 2px;
+  cursor: pointer;
+}
+
+.Notifications {
+  border: 2px dotted crimson;
+  margin-top: 1%;
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+  width: 40%;
+  margin-left: 59%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.Notifications.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.notifications-button {
+  position: absolute;
+  cursor: pointer;
+  right: 5px;
+  top: 20px;
+  background: transparent;
+  border: none;
+}
+
+.notification-default {
+  color: blue;
+}
+
+.notification-urgent {
+  color: red;
+}
+
+.menu-item {
+  text-align: right;
+}
